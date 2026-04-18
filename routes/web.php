@@ -23,6 +23,7 @@ use App\Http\Controllers\User\MemberController;
 use App\Http\Controllers\User\MemberProductPurchaseController;
 use App\Http\Controllers\User\MemberstpschedulesController;
 use App\Http\Controllers\User\MemberPaymentController;
+use App\Http\Controllers\User\MemberSmartWalletController;
 
 
 // ─── Root: redirect to login ──────────────────────────────────────────────────
@@ -161,5 +162,14 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     // ── Payment Details ───────────────────────────────────────────────────────────
     Route::post('/payment-details/store',  [MemberPaymentController::class, 'store'])->name('payment.details.store');
     Route::get('/payment-details',         [MemberPaymentController::class, 'show'])->name('payment.details.show');
+
+    // ── Smart Wallet ───────────────────────────────────────────────────────────
+    Route::get('/smart-wallet/sender',      [MemberSmartWalletController::class, 'sender'])->name('smartwallet.sender');
+    Route::get('/smart-wallet/members',     [MemberSmartWalletController::class, 'getMembers'])->name('smartwallet.member');
+
+    Route::get('/smart-wallet/receiver',    [MemberSmartWalletController::class, 'receiver'])->name('smartwallet.receiver');
+    Route::post('/smart-wallet/store',      [MemberSmartWalletController::class, 'store'])->name('smartwallet.store');
+    Route::post('/smart-wallet/update/{id}', [MemberSmartWalletController::class, 'update'])->name('smartwallet.update');
+    Route::post('/smart-wallet/delete/{id}', [MemberSmartWalletController::class, 'delete'])->name('smartwallet.delete');
 
 });

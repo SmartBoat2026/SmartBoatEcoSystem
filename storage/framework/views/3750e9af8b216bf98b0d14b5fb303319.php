@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Panel — SmartBoatEcosystem</title>
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="<?php echo e(asset('admin/assets/images/favicon.ico')); ?>">
 
-    {{-- Bootstrap 5 --}}
-    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/css/user/styles.css') }}" rel="stylesheet">
+    
+    <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
 
-    {{-- Bootstrap Icons (local) --}}
-    <link href="{{ asset('admin/assets/css/admin/bootstrap-icons.css') }}" rel="stylesheet">
+    
+    <link href="<?php echo e(asset('admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
 
-    {{-- DataTables CSS --}}
-    <link href="{{ asset('admin/assets/css/admin/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/css/admin/buttons.dataTables.min.css') }}" rel="stylesheet">
+    
+    <link href="<?php echo e(asset('admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 
-    {{-- Toastr CSS --}}
-    <link rel="stylesheet" href="{{ asset('admin/assets/toastr/toastr.min.css') }}">
+    
+    <link rel="stylesheet" href="<?php echo e(asset('admin/assets/toastr/toastr.min.css')); ?>">
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
@@ -478,7 +478,7 @@
 
 <body>
 
-{{-- ════ TOPBAR ════ --}}
+
 <header class="sb-topbar">
     <div class="sb-topbar-left">
         <button class="sb-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
@@ -494,27 +494,29 @@
     </div>
 
     <div class="sb-topbar-right">
-        @if(session('member_memberID'))
+        <?php if(session('member_memberID')): ?>
         <span class="sb-member-badge hideinmobile">
-            <i class="bi bi-person-badge me-1"></i>{{ session('member_memberID') }}
+            <i class="bi bi-person-badge me-1"></i><?php echo e(session('member_memberID')); ?>
+
         </span>
-        @endif
+        <?php endif; ?>
 
 
-        @if(isset($smartWalletBalance))
+        <?php if(isset($smartWalletBalance)): ?>
         <span class="sb-member-badge" style="
             background: rgba(44,95,46,.35);
             border-color: rgba(77,214,156,.4);
             color: #4dd69c;">
             <i class="bi bi-wallet2 me-1"></i>
-            ₹{{ number_format($smartWalletBalance, 2) }}
+            ₹<?php echo e(number_format($smartWalletBalance, 2)); ?>
+
         </span>
-        @endif
+        <?php endif; ?>
 
 
-        <span class="sb-member-name">{{ session('member_name') }}</span>
-        <form action="{{ route('member.logout') }}" method="POST" class="m-0">
-            @csrf
+        <span class="sb-member-name"><?php echo e(session('member_name')); ?></span>
+        <form action="<?php echo e(route('member.logout')); ?>" method="POST" class="m-0">
+            <?php echo csrf_field(); ?>
             <button type="submit" class="sb-logout-btn" title="Logout">
                 <i class="bi bi-box-arrow-right"></i>
             </button>
@@ -522,23 +524,23 @@
     </div>
 </header>
 
-{{-- ════ SIDEBAR OVERLAY (mobile) ════ --}}
+
 <div class="sb-overlay" id="sidebarOverlay"></div>
 
-{{-- ════ SIDEBAR ════ --}}
+
 <nav class="sb-sidebar" id="sidebar">
 
     <div class="sb-section-title">Main</div>
 
-    <a href="{{ route('member.dashboard') }}"
-       class="nav-link {{ request()->routeIs('member.dashboard') ? 'active' : '' }}"
+    <a href="<?php echo e(route('member.dashboard')); ?>"
+       class="nav-link <?php echo e(request()->routeIs('member.dashboard') ? 'active' : ''); ?>"
        data-bs-title="Dashboard">
         <i class="bi bi-speedometer2"></i>
         <span class="nav-label">Dashboard</span>
     </a>
 
-    <a href="{{ route('member.profile') }}"
-       class="nav-link {{ request()->routeIs('member.profile') ? 'active' : '' }}"
+    <a href="<?php echo e(route('member.profile')); ?>"
+       class="nav-link <?php echo e(request()->routeIs('member.profile') ? 'active' : ''); ?>"
        data-bs-title="Profile">
         <i class="bi bi-person-circle"></i>
         <span class="nav-label">Profile</span>
@@ -551,25 +553,25 @@
 
     <div class="sb-section-title">Purchases</div>
 
-    {{-- Purchase List Dropdown --}}
+    
     <a href="#purchaselistDropdown"
-       class="nav-link {{ request()->routeIs('member.productpurchase*') ? 'active' : '' }}"
+       class="nav-link <?php echo e(request()->routeIs('member.productpurchase*') ? 'active' : ''); ?>"
        data-bs-toggle="collapse"
-       aria-expanded="{{ request()->routeIs('member.productpurchase*') ? 'true' : 'false' }}"
+       aria-expanded="<?php echo e(request()->routeIs('member.productpurchase*') ? 'true' : 'false'); ?>"
        data-bs-title="Purchase List">
         <i class="bi bi-bag-fill"></i>
         <span class="nav-label">Purchase List</span>
         <i class="bi bi-chevron-down nav-arrow"></i>
     </a>
-    <div class="collapse sub-menu {{ request()->routeIs('member.productpurchase*') ? 'show' : '' }}"
+    <div class="collapse sub-menu <?php echo e(request()->routeIs('member.productpurchase*') ? 'show' : ''); ?>"
          id="purchaselistDropdown">
-        <a href="{{ route('member.productpurchase.purchaseList', 'self') }}"
-           class="nav-link {{ request()->is('*self*') ? 'active' : '' }}">
+        <a href="<?php echo e(route('member.productpurchase.purchaseList', 'self')); ?>"
+           class="nav-link <?php echo e(request()->is('*self*') ? 'active' : ''); ?>">
             <i class="bi bi-person-check-fill"></i>
             <span class="nav-label">Self Purchases</span>
         </a>
-        <a href="{{ route('member.productpurchase.purchaseList', 'other') }}"
-           class="nav-link {{ request()->is('*other*') ? 'active' : '' }}">
+        <a href="<?php echo e(route('member.productpurchase.purchaseList', 'other')); ?>"
+           class="nav-link <?php echo e(request()->is('*other*') ? 'active' : ''); ?>">
             <i class="bi bi-people-fill"></i>
             <span class="nav-label">Other Purchases</span>
         </a>
@@ -577,38 +579,38 @@
 
     <div class="sb-section-title">Finance</div>
 
-    <a href="{{ route('member.passivebonus') }}"
-       class="nav-link {{ request()->routeIs('member.passivebonus') ? 'active' : '' }}"
+    <a href="<?php echo e(route('member.passivebonus')); ?>"
+       class="nav-link <?php echo e(request()->routeIs('member.passivebonus') ? 'active' : ''); ?>"
        data-bs-title="Passive Bonus">
         <i class="bi bi-cash-stack"></i>
         <span class="nav-label">Passive Bonus</span>
     </a>
 
-    <a href="{{ route('member.memberstpschedules.index') }}"
-       class="nav-link {{ request()->routeIs('member.memberstpschedules*') ? 'active' : '' }}"
+    <a href="<?php echo e(route('member.memberstpschedules.index')); ?>"
+       class="nav-link <?php echo e(request()->routeIs('member.memberstpschedules*') ? 'active' : ''); ?>"
        data-bs-title="STP Schedules">
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
     <!-- Smart Wallet START -->
      <a href="#smartWalletDropdown"
-       class="nav-link {{ request()->routeIs('member.smartwallet*') ? 'active' : '' }}"
+       class="nav-link <?php echo e(request()->routeIs('member.smartwallet*') ? 'active' : ''); ?>"
        data-bs-toggle="collapse"
-       aria-expanded="{{ request()->routeIs('member.smartwallet*') ? 'true' : 'false' }}"
+       aria-expanded="<?php echo e(request()->routeIs('member.smartwallet*') ? 'true' : 'false'); ?>"
        data-bs-title="Smart Wallet">
         <i class="bi bi-wallet2"></i>
         <span class="nav-label">Smart Wallet</span>
         <i class="bi bi-chevron-down nav-arrow"></i>
     </a>
-    <div class="collapse sub-menu {{ request()->routeIs('member.smartwallet*') ? 'show' : '' }}"
+    <div class="collapse sub-menu <?php echo e(request()->routeIs('member.smartwallet*') ? 'show' : ''); ?>"
          id="smartWalletDropdown">
-        <a href="{{ route('member.smartwallet.sender') }}"
-           class="nav-link {{ request()->is('*sender*') ? 'active' : '' }}">
+        <a href="<?php echo e(route('member.smartwallet.sender')); ?>"
+           class="nav-link <?php echo e(request()->is('*sender*') ? 'active' : ''); ?>">
             <i class="bi bi-people-fill"></i>
             <span class="nav-label">Sender</span>
         </a>
-        <a href="{{ route('member.smartwallet.receiver') }}"
-           class="nav-link {{ request()->is('*receiver*') ? 'active' : '' }}">
+        <a href="<?php echo e(route('member.smartwallet.receiver')); ?>"
+           class="nav-link <?php echo e(request()->is('*receiver*') ? 'active' : ''); ?>">
             <i class="bi bi-people-fill"></i>
             <span class="nav-label">Receiver</span>
         </a>
@@ -617,8 +619,8 @@
 
 </nav>
 
-{{-- ════ APPROVAL PENDING MODAL ════ --}}
-@if(isset($status) && $status == 2)
+
+<?php if(isset($status) && $status == 2): ?>
 <div class="modal fade" id="approvalModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -636,58 +638,60 @@
         </div>
     </div>
 </div>
-@endif
+<?php endif; ?>
 
-{{-- ════ MAIN CONTENT ════ --}}
+
 <main class="sb-main" id="sbMain">
 
-    {{-- Flash Messages --}}
-    @if(session('success'))
+    
+    <?php if(session('success')): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <i class="bi bi-check-circle-fill"></i>
-        {{ session('success') }}
+        <?php echo e(session('success')); ?>
+
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    @endif
+    <?php endif; ?>
 
-    @if(session('error'))
+    <?php if(session('error')): ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="bi bi-exclamation-circle-fill"></i>
-        {{ session('error') }}
+        <?php echo e(session('error')); ?>
+
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-    @endif
+    <?php endif; ?>
 
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
 
 </main>
 
-{{-- ════ SCRIPTS ════ --}}
-<script src="{{ asset('admin/assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
 
-{{-- DataTables --}}
-<script src="{{ asset('admin/assets/js/admin/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/dataTables.bootstrap5.min.js') }}"></script>
+<script src="<?php echo e(asset('admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
 
-{{-- Export --}}
-<script src="{{ asset('admin/assets/js/admin/jszip.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/pdfmake.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/vfs_fonts.js') }}"></script>
 
-{{-- Buttons --}}
-<script src="{{ asset('admin/assets/js/admin/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/buttons.print.min.js') }}"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/dataTables.bootstrap5.min.js')); ?>"></script>
 
-{{-- SweetAlert2 --}}
-<script src="{{ asset('admin/assets/js/admin/sweetalert2@11.js') }}"></script>
 
-{{-- Toastr --}}
-<script src="{{ asset('admin/assets/toastr/toastr.min.js') }}"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/jszip.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/pdfmake.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/vfs_fonts.js')); ?>"></script>
 
-{{-- sweetAlert --}}
-<script src="{{ asset('admin/assets/js/sweetalert2.min.js') }}"></script>
+
+<script src="<?php echo e(asset('admin/assets/js/admin/dataTables.buttons.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/buttons.html5.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/admin/buttons.print.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('admin/assets/js/admin/sweetalert2@11.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('admin/assets/toastr/toastr.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('admin/assets/js/sweetalert2.min.js')); ?>"></script>
 
 <script>
 (function () {
@@ -736,17 +740,18 @@
     });
 
     // Approval modal
-    @if(isset($status) && $status == 2)
+    <?php if(isset($status) && $status == 2): ?>
     document.addEventListener('DOMContentLoaded', function () {
         new bootstrap.Modal(document.getElementById('approvalModal'), {
             backdrop: 'static', keyboard: false
         }).show();
     });
-    @endif
+    <?php endif; ?>
 })();
 </script>
 
-@stack('scripts')
+<?php echo $__env->yieldPushContent('scripts'); ?>
 
 </body>
 </html>
+<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\resources\views/member/layouts/app.blade.php ENDPATH**/ ?>
