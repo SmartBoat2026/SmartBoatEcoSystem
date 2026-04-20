@@ -748,8 +748,12 @@
     // Approval modal
     @if(isset($status) && $status == 2)
     document.addEventListener('DOMContentLoaded', function () {
-        new bootstrap.Modal(document.getElementById('approvalModal'), {
-            backdrop: 'static', keyboard: false
+        // new bootstrap.Modal(document.getElementById('approvalModal'), {
+        //     backdrop: 'static', keyboard: false
+        // }).show();
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('approvalModal'), {
+            backdrop: 'static',
+            keyboard: false
         }).show();
     });
     @endif

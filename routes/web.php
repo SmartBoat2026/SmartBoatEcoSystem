@@ -24,6 +24,7 @@ use App\Http\Controllers\User\MemberProductPurchaseController;
 use App\Http\Controllers\User\MemberstpschedulesController;
 use App\Http\Controllers\User\MemberPaymentController;
 use App\Http\Controllers\User\SmartWallet\UserToUsersController;
+use App\Http\Controllers\User\ChatController;
 
 
 // ─── Root: redirect to login ──────────────────────────────────────────────────
@@ -171,9 +172,11 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     Route::post('/member/smart-wallet/bulk-delete', [UserToUsersController::class, 'bulkDelete'])->name('smartwallet.bulkDelete');
     Route::post('/smart-wallet/store',      [UserToUsersController::class, 'store'])->name('smartwallet.store');
     
-    
+
     Route::get('/smart-wallet/receiver',    [UserToUsersController::class, 'receiver'])->name('smartwallet.receiver');
     Route::get('/smart-wallet/receiverList', [UserToUsersController::class, 'receiverList'])->name('smartwallet.receiverList');
-    Route::post('/smart-wallet/update/{id}', [UserToUsersController::class, 'update'])->name('smartwallet.update');
-
+   
+    Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
+    Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
 });

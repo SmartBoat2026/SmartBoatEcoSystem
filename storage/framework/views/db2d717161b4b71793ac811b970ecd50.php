@@ -144,7 +144,8 @@
     
 
 <?php $__env->stopSection(); ?>
-
+<?php echo $__env->make('member.smartwallet.chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('member.smartwallet.chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->startPush('scripts'); ?>
 
 <script>
@@ -301,7 +302,8 @@ $(document).ready(function () {
     $('#submitSendWalletBalanceBtn').on('click', function () {
 
         $('#transactionPasswordInput').val('');
-        $('#transactionPasswordModal').modal('show');
+        let tpModal = new bootstrap.Modal(document.getElementById('transactionPasswordModal'));
+        tpModal.show();
 
     });
 
@@ -317,7 +319,7 @@ $(document).ready(function () {
         let form = $('#sendWalletBalanceRequestForm');
         let btn  = $('#submitSendWalletBalanceBtn');
 
-        $('#transactionPasswordModal').modal('hide');
+        bootstrap.Modal.getInstance(document.getElementById('transactionPasswordModal')).hide();
 
         btn.prop('disabled', true).html('Processing...');
 

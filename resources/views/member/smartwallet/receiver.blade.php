@@ -52,9 +52,10 @@
         </div>
     </div>
     
-
+    
 @endsection
-
+@include('member.smartwallet.chatbox')
+@include('member.smartwallet.chat-script')
 @push('scripts')
 
 <script>

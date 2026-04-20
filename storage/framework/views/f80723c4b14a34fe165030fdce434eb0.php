@@ -50,9 +50,10 @@
         </div>
     </div>
     
-
+    
 <?php $__env->stopSection(); ?>
-
+<?php echo $__env->make('member.smartwallet.chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('member.smartwallet.chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->startPush('scripts'); ?>
 
 <script>

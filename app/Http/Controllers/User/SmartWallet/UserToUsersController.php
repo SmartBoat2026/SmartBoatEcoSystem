@@ -69,7 +69,7 @@ class UserToUsersController extends Controller
 
                 'status' => $this->formatStatusForSenderList($row->status),
 
-                'actions' => $this->formatActions($row),
+                'actions' => $this->formatActionsForSenderList($row),
             ];
         });
 
@@ -95,9 +95,12 @@ class UserToUsersController extends Controller
 
         return '<span class="badge '.$s[1].'">'.$s[0].'</span>';
     }
-    private function formatActions($row)
+    private function formatActionsForSenderList($row)
     {
-            return '<button class="btn btn-sm btn-info message-btn" data-id="'.$row->id.'">
+        return '<button class="btn btn-sm btn-info message-btn"
+                    data-sender="'.$row->sender_member_id.'"
+                    data-receiver="'.$row->receiver_member_id.'"
+                    data-id="'.$row->id.'">
                     <i class="bi bi-chat-dots"></i>
                 </button>';
     }
@@ -349,7 +352,7 @@ class UserToUsersController extends Controller
 
                 'status' => $this->formatStatusForReceiverList($row->status),
 
-                'actions' => $this->formatActions($row),
+                'actions' => $this->formatActionsForReceiverList($row),
             ];
         });
 
@@ -375,6 +378,15 @@ class UserToUsersController extends Controller
 
         return '<span class="badge '.$s[1].'">'.$s[0].'</span>';
     }   
+    private function formatActionsForReceiverList($row)
+    {
+        return '<button class="btn btn-sm btn-info message-btn"
+                    data-sender="'.$row->receiver_member_id.'"
+                    data-receiver="'.$row->sender_member_id.'"
+                    data-id="'.$row->id.'">
+                    <i class="bi bi-chat-dots"></i>
+                </button>';
+    }
     //---------------------------------------------------END RECEIVER TABLE DATA SHOW-----------------------------------------------------------------
     // ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
     

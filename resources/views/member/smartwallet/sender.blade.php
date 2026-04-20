@@ -146,7 +146,8 @@
     
 
 @endsection
-
+@include('member.smartwallet.chatbox')
+@include('member.smartwallet.chat-script')
 @push('scripts')
 
 <script>
@@ -303,7 +304,8 @@ $(document).ready(function () {
     $('#submitSendWalletBalanceBtn').on('click', function () {
 
         $('#transactionPasswordInput').val('');
-        $('#transactionPasswordModal').modal('show');
+        let tpModal = new bootstrap.Modal(document.getElementById('transactionPasswordModal'));
+        tpModal.show();
 
     });
 
@@ -319,7 +321,7 @@ $(document).ready(function () {
         let form = $('#sendWalletBalanceRequestForm');
         let btn  = $('#submitSendWalletBalanceBtn');
 
-        $('#transactionPasswordModal').modal('hide');
+        bootstrap.Modal.getInstance(document.getElementById('transactionPasswordModal')).hide();
 
         btn.prop('disabled', true).html('Processing...');
 
