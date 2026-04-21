@@ -4,14 +4,13 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;   // ← ADD THIS LINE
+use Illuminate\Support\Facades\DB;
 use App\Models\ManageReport;
 use App\Models\Transaction;
+use App\Models\MemberPaymentDetail;  // ← ADD THIS
 
 class MemberController extends Controller
 {
-    // ─── Member Dashboard ─────────────────────────────────────────────────────
     public function dashboard()
     {
         $member = ManageReport::find(session('member_id'));
@@ -34,35 +33,42 @@ class MemberController extends Controller
             ->with('status', $member->status);
     }
 
-    public function profile()
-    {
-        $member = ManageReport::find(session('member_id'));
+   public function profile()
+{
+    $memberId = session('member_id');
+    $member   = ManageReport::find($memberId);
 
-        if (!$member) {
-            return redirect('/login')->with('status', 'Session expired. Please login again.');
-        }
-
-        $transactions = Transaction::where('member_id', $member->memberID)
-            ->orWhere('added_by_id', $member->member_id)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $creditTotal = DB::table('transactions')
-            ->where('member_id', $member->memberID)
-            ->where('type', 'Credit')
-            ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
-
-        $debitTotal = DB::table('transactions')
-            ->where('member_id', $member->memberID)
-            ->where('type', 'Debit')
-            ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
-
-        $smartWalletBalance = $creditTotal - $debitTotal;
-
-        return view('member.profile', compact('member', 'smartWalletBalance', 'transactions'));
+    if (!$member) {
+        return redirect('/login')->with('status', 'Session expired. Please login again.');
     }
 
-    // ─── Member Logout ────────────────────────────────────────────────────────
+    $transactions = Transaction::where('member_id', $member->memberID)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    $creditTotal = DB::table('transaction')
+        ->where('member_id', $member->memberID)
+        ->where('type', 'Credit')
+        ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
+
+    $debitTotal = DB::table('transaction')
+        ->where('member_id', $member->memberID)
+        ->where('type', 'Debit')
+        ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
+
+    $smartWalletBalance = $creditTotal - $debitTotal;
+
+    // ← Uses session member_id directly, same as store()
+    $memberPayment = MemberPaymentDetail::where('member_id', $memberId)->first();
+
+    return view('member.profile', compact(
+        'member',
+        'smartWalletBalance',
+        'transactions',
+        'memberPayment'
+    ));
+}
+
     public function logout(Request $request)
     {
         $request->session()->forget([
@@ -73,7 +79,6 @@ class MemberController extends Controller
         return redirect('/login')->with('status', 'You have been logged out.');
     }
 
-    // ─── Member Invoice View ──────────────────────────────────────────────────
     public function invoice($invoiceNo)
     {
         $member = ManageReport::find(session('member_id'));

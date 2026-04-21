@@ -43,6 +43,7 @@
                 <span class="label">Manage Member</span>
             </a>
         </li>
+
         <!-- Smart Wallet -->
         <li class="menu-item" role="none">
             <a href="{{ route('smartwallet') }}"
@@ -50,28 +51,13 @@
                role="menuitem" title="Smart Wallet">
 
                 <svg viewBox="0 0 24 24" fill="none">
-                <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
-                <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
-                <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
-                <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-                </svg>
+                    <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
+                    <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
 
                 <span class="label">Smart Wallet</span>
-            </a>
-        </li>
-        <li class="menu-item" role="none">
-            <a href="{{ route('smartwallet.memberRequest.index') }}"
-               class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
-               role="menuitem" title="Smart Wallet">
-
-                <svg viewBox="0 0 24 24" fill="none">
-                <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
-                <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
-                <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
-                <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-                </svg>
-
-                <span class="label">Smart Wallet Member Requests</span>
             </a>
         </li>
 
@@ -150,6 +136,7 @@
                 <span class="label">STP Schedule</span>
             </a>
         </li>
+
          <!-- Bonus -->
         <li class="menu-item has-submenu" role="none">
 

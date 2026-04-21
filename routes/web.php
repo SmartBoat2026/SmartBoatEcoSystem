@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\SmartWalletMemberRequestController;
 use App\Http\Controllers\User\MemberController;
 use App\Http\Controllers\User\MemberProductPurchaseController;
 use App\Http\Controllers\User\MemberstpschedulesController;
+
 use App\Http\Controllers\User\MemberPaymentController;
 use App\Http\Controllers\User\SmartWallet\UserToUsersController;
 use App\Http\Controllers\User\SmartWallet\CompanyPaymentController;
@@ -150,6 +151,13 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
 
     // Profile
     Route::get('/profile',                              [MemberController::class, 'profile'])->name('profile');
+
+    // ── Payment Details (CRUD) ────────────────────────────────────────────────
+
+
+    Route::post('/payment/store',    [MemberController::class, 'paymentStore'])->name('payment.details.store');
+    Route::post('/payment/destroy',  [MemberController::class, 'paymentDestroy'])->name('payment.details.destroy');
+    Route::get('/payment',           [MemberController::class, 'paymentShow'])->name('payment.details.show');
 
     // Invoice
     Route::get('/invoice/{invoiceNo}',                  [MemberController::class, 'invoice'])->name('invoice');

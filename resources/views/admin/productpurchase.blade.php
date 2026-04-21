@@ -505,7 +505,6 @@
 
 
 
-@endsection
 
 @push('scripts')
 
@@ -1083,3 +1082,4 @@ $(document).ready(function () {
 });
 </script>
 @endpush
+@endsection

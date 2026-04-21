@@ -196,7 +196,11 @@
 
 
 
+<<<<<<< HEAD
+
+=======
 <?php $__env->stopSection(); ?>
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
 
 <?php $__env->startPush('scripts'); ?>
 
@@ -324,5 +328,9 @@ $(document).ready(function () {
 });
 </script>
 <?php $__env->stopPush(); ?>
+<<<<<<< HEAD
+<?php $__env->stopSection(); ?>
+=======
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
 
 <?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\xampp\htdocs\16-04-2026\resources\views/admin/adminpassivebonus.blade.php ENDPATH**/ ?>

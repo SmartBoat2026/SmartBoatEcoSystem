@@ -189,7 +189,6 @@
 {{-- ===== STYLES ===== --}}
 
 
-@endsection
 
 @push('scripts')
 {{-- DataTables Buttons dependencies --}}
@@ -317,3 +316,4 @@ $(document).ready(function () {
 });
 </script>
 @endpush
+@endsection

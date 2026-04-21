@@ -226,7 +226,7 @@ class ManageReportController extends Controller
         $result = '';
 
         for ($i = 0; $i < $length; $i++) {
-            $result += $chars.charAt(Math.floor(Math.random() * $chars.length));
+           $result .= $chars[rand(0, strlen($chars) - 1)];
         }
 
         return $result;

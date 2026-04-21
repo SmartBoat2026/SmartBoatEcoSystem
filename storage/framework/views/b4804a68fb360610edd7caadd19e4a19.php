@@ -206,6 +206,11 @@ $(document).ready(function () {
 
 });
 </script>
+<<<<<<< HEAD
+
+<?php $__env->stopPush(); ?>
+=======
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\xampp\htdocs\16-04-2026\resources\views/admin/memberactive.blade.php ENDPATH**/ ?>
