@@ -34,16 +34,28 @@
                role="menuitem" title="Manage Report">
 
                 <svg viewBox="0 0 24 24" fill="none">
+<<<<<<< HEAD
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                 <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                 </svg>
+=======
+  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
 
                 <span class="label">Manage Member</span>
             </a>
         </li>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
         <!-- Smart Wallet -->
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('smartwallet')); ?>"
@@ -51,26 +63,45 @@
                role="menuitem" title="Smart Wallet">
 
                 <svg viewBox="0 0 24 24" fill="none">
+<<<<<<< HEAD
                     <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
                     <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
                     <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
                     <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
                     </svg>
+=======
+  <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
+  <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg>
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
 
                 <span class="label">Smart Wallet</span>
             </a>
         </li>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('managereport.memberactive')); ?>"
                class="<?php echo e(request()->routeIs('managereport.memberactive') ? 'active' : ''); ?>"
                role="menuitem" title="Member Activate">
 
                 <svg viewBox="0 0 24 24" fill="none">
+<<<<<<< HEAD
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                 <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
                 <polyline points="16 11 18 13 22 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+=======
+  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
+  <polyline points="16 11 18 13 22 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
 
                 <span class="label">Member Activation Requests</span>
             </a>
@@ -136,7 +167,11 @@
                 <span class="label">STP Schedule</span>
             </a>
         </li>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb
          <!-- Bonus -->
         <li class="menu-item has-submenu" role="none">
 
@@ -173,5 +208,9 @@ document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
         this.parentElement.classList.toggle('open');
     });
 });
+<<<<<<< HEAD
 </script>
 <?php /**PATH E:\xampp\htdocs\16-04-2026\resources\views/admin/layouts/sidebar.blade.php ENDPATH**/ ?>
+=======
+</script><?php /**PATH E:\xampp\htdocs\16-04-2026\resources\views/admin/layouts/sidebar.blade.php ENDPATH**/ ?>
+>>>>>>> ea0b9309bf6ae5b6949086016e6f76da479a9adb

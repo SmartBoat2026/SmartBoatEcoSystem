@@ -23,6 +23,7 @@ use App\Http\Controllers\User\MemberController;
 use App\Http\Controllers\User\MemberProductPurchaseController;
 use App\Http\Controllers\User\MemberstpschedulesController;
 
+use App\Http\Controllers\User\MemberPaymentController;
 
 
 // ─── Root: redirect to login ──────────────────────────────────────────────────
@@ -165,6 +166,8 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     Route::post('/memberstpschedules/bulk-delete',         [MemberstpschedulesController::class, 'bulkDelete'])->name('memberstpschedules.bulkDelete');
 
 
-
+    // ── Payment Details ───────────────────────────────────────────────────────────
+    Route::post('/payment-details/store',  [MemberPaymentController::class, 'store'])->name('payment.details.store');
+    Route::get('/payment-details',         [MemberPaymentController::class, 'show'])->name('payment.details.show');
 
 });

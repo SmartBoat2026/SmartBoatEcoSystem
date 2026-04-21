@@ -14,8 +14,8 @@
 
         <!-- Dashboard -->
         <li class="menu-item" role="none">
-            <a href="{{ route('admin.index') }}"
-               class="{{ request()->routeIs('admin.index') ? 'active' : '' }}"
+            <a href="<?php echo e(route('admin.index')); ?>"
+               class="<?php echo e(request()->routeIs('admin.index') ? 'active' : ''); ?>"
                role="menuitem" title="Dashboard">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -29,46 +29,48 @@
 
         <!-- Manage Member -->
         <li class="menu-item" role="none">
-            <a href="{{ route('managereport') }}"
-               class="{{ request()->routeIs('managereport') ? 'active' : '' }}"
+            <a href="<?php echo e(route('managereport')); ?>"
+               class="<?php echo e(request()->routeIs('managereport') ? 'active' : ''); ?>"
                role="menuitem" title="Manage Report">
 
                 <svg viewBox="0 0 24 24" fill="none">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
+  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
 
                 <span class="label">Manage Member</span>
             </a>
         </li>
+        
         <!-- Smart Wallet -->
         <li class="menu-item" role="none">
-            <a href="{{ route('smartwallet') }}"
-               class="{{ request()->routeIs('smartwallet') ? 'active' : '' }}"
+            <a href="<?php echo e(route('smartwallet')); ?>"
+               class="<?php echo e(request()->routeIs('smartwallet') ? 'active' : ''); ?>"
                role="menuitem" title="Smart Wallet">
 
                 <svg viewBox="0 0 24 24" fill="none">
-                    <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
-                    <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-                    </svg>
+  <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M16 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor"/>
+  <path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/>
+  <path d="M6 4l2-1h8l2 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg>
 
                 <span class="label">Smart Wallet</span>
             </a>
         </li>
+        
         <li class="menu-item" role="none">
-            <a href="{{ route('managereport.memberactive') }}"
-               class="{{ request()->routeIs('managereport.memberactive') ? 'active' : '' }}"
+            <a href="<?php echo e(route('managereport.memberactive')); ?>"
+               class="<?php echo e(request()->routeIs('managereport.memberactive') ? 'active' : ''); ?>"
                role="menuitem" title="Member Activate">
 
                 <svg viewBox="0 0 24 24" fill="none">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
-                <polyline points="16 11 18 13 22 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
+  <polyline points="16 11 18 13 22 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
 
                 <span class="label">Member Activation Requests</span>
             </a>
@@ -76,8 +78,8 @@
 
         <!-- Category -->
         <li class="menu-item" role="none">
-            <a href="{{ route('category') }}"
-               class="{{ request()->routeIs('category') ? 'active' : '' }}"
+            <a href="<?php echo e(route('category')); ?>"
+               class="<?php echo e(request()->routeIs('category') ? 'active' : ''); ?>"
                role="menuitem" title="Manage Category">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -90,8 +92,8 @@
 
         <!-- Product -->
         <li class="menu-item" role="none">
-            <a href="{{ route('product') }}"
-               class="{{ request()->routeIs('product') ? 'active' : '' }}"
+            <a href="<?php echo e(route('product')); ?>"
+               class="<?php echo e(request()->routeIs('product') ? 'active' : ''); ?>"
                role="menuitem" title="Product">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -106,8 +108,8 @@
 
         <!-- Product Purchase -->
         <li class="menu-item" role="none">
-            <a href="{{ route('productpurchase.index') }}"
-               class="{{ request()->routeIs('productpurchase.*') ? 'active' : '' }}"
+            <a href="<?php echo e(route('productpurchase.index')); ?>"
+               class="<?php echo e(request()->routeIs('productpurchase.*') ? 'active' : ''); ?>"
                role="menuitem" title="Product Purchase">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -121,8 +123,8 @@
         </li>
 
         <li class="menu-item" role="none">
-            <a href="{{ route('stpschedule.index') }}"
-               class="{{ request()->routeIs('stpschedule.*') ? 'active' : '' }}"
+            <a href="<?php echo e(route('stpschedule.index')); ?>"
+               class="<?php echo e(request()->routeIs('stpschedule.*') ? 'active' : ''); ?>"
                role="menuitem" title="STP Schedule">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -134,6 +136,7 @@
                 <span class="label">STP Schedule</span>
             </a>
         </li>
+        
          <!-- Bonus -->
         <li class="menu-item has-submenu" role="none">
 
@@ -152,7 +155,7 @@
             <!-- Sub Menu -->
             <ul class="submenu" role="menu">
                 <li role="none">
-                    <a href="{{ route('adminpassivebonus') }}" role="menuitem" title="Passive Bonus">
+                    <a href="<?php echo e(route('adminpassivebonus')); ?>" role="menuitem" title="Passive Bonus">
                         Passive Bonus
                     </a>
                 </li>
@@ -170,4 +173,4 @@ document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
         this.parentElement.classList.toggle('open');
     });
 });
-</script>
+</script><?php /**PATH F:\xampp\htdocs\smartboatTourProject\resources\views/admin/layouts/sidebar.blade.php ENDPATH**/ ?>

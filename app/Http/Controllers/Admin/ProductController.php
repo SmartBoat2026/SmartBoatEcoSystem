@@ -140,5 +140,4 @@ class ProductController extends Controller
 
         return redirect()->route('product')->with('success', count($ids) . ' product(s) deleted successfully.');
     }
-    
 }

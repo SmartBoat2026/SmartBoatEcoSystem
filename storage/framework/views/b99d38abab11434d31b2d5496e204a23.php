@@ -1,9 +1,8 @@
-@extends('admin.layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <main class="main" id="main" role="main">
 
-    {{-- ===== PAGE HEADER ===== --}}
+    
     <div class="page-header">
         <div class="page-title">
             <h1>My Passive Bonus</h1>
@@ -11,13 +10,14 @@
         </div>
     </div>
 
-    {{-- ===== SUMMARY CARDS ===== --}}
+    
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
             <div class="pb-stat-card" style="border-top:3px solid #1a3a6b;">
                 <div class="pb-stat-label">Total Records</div>
                 <div class="pb-stat-value" style="color:#1a3a6b;">
-                    {{ $bonuses->total() }}
+                    <?php echo e($bonuses->total()); ?>
+
                 </div>
             </div>
         </div>
@@ -25,7 +25,8 @@
             <div class="pb-stat-card" style="border-top:3px solid #27500a;">
                 <div class="pb-stat-label">Total Bonus</div>
                 <div class="pb-stat-value" style="color:#27500a;font-size:18px;">
-                    ₹{{ number_format($bonuses->sum('bonus_amount'), 2) }}
+                    ₹<?php echo e(number_format($bonuses->sum('bonus_amount'), 2)); ?>
+
                 </div>
             </div>
         </div>
@@ -33,7 +34,8 @@
             <div class="pb-stat-card" style="border-top:3px solid #3c3489;">
                 <div class="pb-stat-label">Active Bonuses</div>
                 <div class="pb-stat-value" style="color:#3c3489;">
-                    {{ $bonuses->where('status', 1)->count() }}
+                    <?php echo e($bonuses->where('status', 1)->count()); ?>
+
                 </div>
             </div>
         </div>
@@ -41,17 +43,18 @@
             <div class="pb-stat-card" style="border-top:3px solid #6c757d;">
                 <div class="pb-stat-label">Inactive Bonuses</div>
                 <div class="pb-stat-value" style="color:#6c757d;">
-                    {{ $bonuses->where('status', 0)->count() }}
+                    <?php echo e($bonuses->where('status', 0)->count()); ?>
+
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- ===== BONUS TABLE CARD ===== --}}
+    
     <div class="card shadow-sm">
         <div class="card-body table-responsive">
 
-            {{-- ── BULK DELETE BAR (hidden until rows selected) ── --}}
+            
             <div id="bulkActionBar"
                  style="display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;
                         padding:10px 16px;margin-bottom:12px;align-items:center;gap:12px;">
@@ -80,62 +83,66 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($bonuses as $bonus)
+                    <?php $__empty_1 = true; $__currentLoopData = $bonuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bonus): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr class="bonus-row" style="cursor:pointer;"
-                        data-type="{{ $bonus->bonus_type }}"
-                        data-qty="{{ $bonus->total_quantity }}"
-                        data-rate="{{ $bonus->rate }}"
-                        data-amount="{{ number_format($bonus->bonus_amount, 2) }}"
-                        data-status="{{ $bonus->status }}"
-                        data-date="{{ \Carbon\Carbon::parse($bonus->created_at)->format('d M Y, h:i A') }}">
+                        data-type="<?php echo e($bonus->bonus_type); ?>"
+                        data-qty="<?php echo e($bonus->total_quantity); ?>"
+                        data-rate="<?php echo e($bonus->rate); ?>"
+                        data-amount="<?php echo e(number_format($bonus->bonus_amount, 2)); ?>"
+                        data-status="<?php echo e($bonus->status); ?>"
+                        data-date="<?php echo e(\Carbon\Carbon::parse($bonus->created_at)->format('d M Y, h:i A')); ?>">
                         <td class="text-center">
-                            <input type="checkbox" class="row-checkbox" value="{{ $bonus->id }}"
+                            <input type="checkbox" class="row-checkbox" value="<?php echo e($bonus->id); ?>"
                                    style="cursor:pointer;width:15px;height:15px;"
                                    onclick="event.stopPropagation();">
                         </td>
-                        <td class="text-center text-muted" style="font-size:12px;">{{ $loop->iteration }}</td>
+                        <td class="text-center text-muted" style="font-size:12px;"><?php echo e($loop->iteration); ?></td>
                         <td>
                             <span class="badge"
                                   style="background:#e6f1fb;color:#0c447c;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600;">
-                                {{ $bonus->bonus_type }}
+                                <?php echo e($bonus->bonus_type); ?>
+
                             </span>
                         </td>
-                        <td style="font-weight:500;color:#495057;">{{ $bonus->total_quantity }}</td>
-                        <td style="font-weight:600;color:#1a3a6b;">{{ $bonus->rate }}</td>
+                        <td style="font-weight:500;color:#495057;"><?php echo e($bonus->total_quantity); ?></td>
+                        <td style="font-weight:600;color:#1a3a6b;"><?php echo e($bonus->rate); ?></td>
                         <td style="font-weight:700;color:#27500a;white-space:nowrap;">
-                            ₹{{ number_format($bonus->bonus_amount, 2) }}
+                            ₹<?php echo e(number_format($bonus->bonus_amount, 2)); ?>
+
                         </td>
                         <td>
-                            @if($bonus->status == 1)
+                            <?php if($bonus->status == 1): ?>
                                 <span class="badge bg-success" style="font-size:11px;padding:4px 10px;">Active</span>
-                            @else
+                            <?php else: ?>
                                 <span class="badge bg-secondary" style="font-size:11px;padding:4px 10px;">Inactive</span>
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td style="white-space:nowrap;">
                             <div style="font-weight:500;color:#333;font-size:12px;">
-                                {{ \Carbon\Carbon::parse($bonus->created_at)->format('d M Y') }}
+                                <?php echo e(\Carbon\Carbon::parse($bonus->created_at)->format('d M Y')); ?>
+
                             </div>
                             <div style="font-size:11px;color:#adb5bd;">
-                                {{ \Carbon\Carbon::parse($bonus->created_at)->format('h:i A') }}
+                                <?php echo e(\Carbon\Carbon::parse($bonus->created_at)->format('h:i A')); ?>
+
                             </div>
                         </td>
                     </tr>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
                         <td colspan="8" class="text-center py-5" style="color:#6c757d;font-size:13px;">
                             <i class="bi bi-cash-coin" style="font-size:30px;display:block;margin-bottom:10px;color:#dee2e6;"></i>
                             No bonus records found.
                         </td>
                     </tr>
-                    @endforelse
+                    <?php endif; ?>
                 </tbody>
             </table>
 
         </div>
     </div>
 
-    {{-- ===== DETAIL MODAL ===== --}}
+    
     <div class="modal fade" id="bonusDetailModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -186,12 +193,13 @@
 
 </main>
 
-{{-- ===== STYLES ===== --}}
 
 
 
-@push('scripts')
-{{-- DataTables Buttons dependencies --}}
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+
 
 
 <script>
@@ -200,7 +208,7 @@ $(document).ready(function () {
     // ════════════════════════════════════════
     // 1. DATATABLES
     // ════════════════════════════════════════
-    @if($bonuses->count())
+    <?php if($bonuses->count()): ?>
     $('#passiveBonusTable').DataTable({
         order: [[1, 'asc']],
         pageLength: 25,
@@ -251,7 +259,7 @@ $(document).ready(function () {
              "<'row'<'col-sm-12'tr>>" +
              "<'row mt-2'<'col-sm-5'i><'col-sm-7 d-flex justify-content-end'p>>",
     });
-    @endif
+    <?php endif; ?>
 
     // ════════════════════════════════════════
     // 2. CHECKBOX — BULK SELECT LOGIC
@@ -315,5 +323,6 @@ $(document).ready(function () {
 
 });
 </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH F:\xampp\htdocs\smartboatTourProject\resources\views/admin/adminpassivebonus.blade.php ENDPATH**/ ?>
