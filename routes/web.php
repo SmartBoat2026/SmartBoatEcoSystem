@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ProductPurchaseController;
 use App\Http\Controllers\Admin\SmartwalletController;
 use App\Http\Controllers\Admin\StpscheduleController;
 use App\Http\Controllers\Admin\SmartWalletMemberRequestController;
+use App\Http\Controllers\Admin\StaffManageController;
 
 // ── User Folder Controllers ───────────────────────────────────────────────────
 use App\Http\Controllers\User\MemberController;
@@ -56,8 +57,22 @@ Route::get('/sponsor/check-referral-verification',     [RegistrationController::
 // ════════════════════════════════════════════════════════════════════════════════
 Route::middleware('admin.auth')->group(function () {
 
-    // Logout
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    Route::get('/admin/no-access', function () {
+        return view('admin.errors.no-access');
+    })->name('admin.no-access');
+
+    Route::middleware('admin.super')->prefix('admin/staff')->name('admin.staff.')->group(function () {
+        Route::get('/', [StaffManageController::class, 'index'])->name('index');
+        Route::get('/create', [StaffManageController::class, 'create'])->name('create');
+        Route::post('/', [StaffManageController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [StaffManageController::class, 'edit'])->name('edit')->whereNumber('id');
+        Route::put('/{id}', [StaffManageController::class, 'update'])->name('update')->whereNumber('id');
+        Route::delete('/{id}', [StaffManageController::class, 'destroy'])->name('destroy')->whereNumber('id');
+    });
+
+    Route::middleware('admin.panel')->group(function () {
 
     // Dashboard & Tasks
     Route::get('/admin-page', [AdminPanelController::class, 'index'])->name('admin.index');
@@ -126,6 +141,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+
+    });
 });
 
 

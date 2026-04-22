@@ -80,10 +80,6 @@
                                 <div style="font-size:12px;color:#333;margin-top:2px;">
                                     {{ $memberInfos[$schedule->member_id]->name }}
                                 </div>
-                                <div style="font-size:11px;color:#6c757d;margin-top:1px;">
-                                    <i class="bi bi-telephone-fill me-1" style="font-size:10px;color:#1a3a6b;"></i>
-                                    {{ $memberInfos[$schedule->member_id]->phone }}
-                                </div>
                                 @endif
                             </td>
                             <td style="font-size:12px;white-space:nowrap;">{{ $schedule->start_date }}</td>
@@ -168,7 +164,7 @@
                             {{-- Member ID --}}
                             <div class="col-12 col-md-6">
                                 <label class="form-label fw-semibold" style="font-size:12px;color:#1a3a6b;">
-                                    Member ID <small class="text-muted fw-normal">(search by ID / Name / Phone)</small>
+                                    Member ID <small class="text-muted fw-normal">(search by ID / Name)</small>
                                 </label>
                                 <div class="member-search-wrapper position-relative">
                                     <input type="text"
@@ -189,7 +185,7 @@
                                 required tabindex="-1">
                                 <small id="edit_member_info_{{ $schedule->id }}" class="text-success" style="font-size:11px;">
                                     @if(isset($memberInfos[$schedule->member_id]))
-                                        ✅ {{ $memberInfos[$schedule->member_id]->name }} | 📞 {{ $memberInfos[$schedule->member_id]->phone }}
+                                        ✅ {{ $memberInfos[$schedule->member_id]->name }}
                                     @endif
                                 </small>
                             </div>
@@ -338,7 +334,7 @@
                             {{-- Member ID --}}
                             <div class="col-12 col-md-6">
                                 <label class="form-label fw-semibold" style="font-size:12px;color:#1a3a6b;">
-                                    Member ID <small class="text-muted fw-normal">(search by ID / Name / Phone)</small>
+                                    Member ID <small class="text-muted fw-normal">(search by ID / Name)</small>
                                 </label>
                                 <div class="member-search-wrapper position-relative">
                                     <input type="text"
@@ -619,11 +615,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             item.style.fontSize = '12px';
                             item.innerHTML = '<span class="fw-bold text-primary">' + escHtml(m.memberID) + '</span>'
                                 + ' — ' + escHtml(m.name)
-                                + ' <span class="text-muted">(' + escHtml(m.phone) + ')</span>';
+                                ;
                             item.addEventListener('click', function () {
                                 inputEl.value            = m.memberID;
                                 hiddenEl.value           = m.memberID;
-                                infoEl.textContent       = '✅ ' + m.name + ' | ' + m.phone;
+                                infoEl.textContent       = '✅ ' + m.name;
                                 infoEl.className         = 'text-success';
                                 dropdownEl.style.display = 'none';
                             });

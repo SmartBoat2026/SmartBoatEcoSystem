@@ -115,7 +115,7 @@ class ProductPurchaseController extends Controller
         // ── Determine who is adding ───────────────────────────────────
         $addedById = null;
         if (session('type') == 'Admin') {
-            $addedById = session('admin_id');
+            $addedById = \App\Support\AdminPanelAccess::actorId();
         } elseif (session('type') == 'Member') {
             $addedById = session('member_id');
         }

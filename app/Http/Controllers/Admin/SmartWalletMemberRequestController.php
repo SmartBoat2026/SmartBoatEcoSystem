@@ -80,7 +80,7 @@ class SmartWalletMemberRequestController extends Controller
 
     public function listData(Request $request)
     {
-        $adminId = session('admin_id');
+        $adminId = \App\Support\AdminPanelAccess::actorId();
 
         $query = SmartWalletCompanyPayment::with('sender')
             ->where('admin_member_id', $adminId)

@@ -60,7 +60,7 @@ class StpscheduleController extends Controller
 
         $addedById = null;
         if (session('type') == 'Admin') {
-            $addedById = session('admin_id');
+            $addedById = \App\Support\AdminPanelAccess::actorId();
         } elseif (session('type') == 'Member') {
             $memberRecord = ManageReport::where('memberID', session('member_memberID'))->first();
             $addedById    = $memberRecord ? $memberRecord->member_id : null;

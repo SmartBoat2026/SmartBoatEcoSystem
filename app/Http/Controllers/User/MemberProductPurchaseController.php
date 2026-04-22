@@ -192,7 +192,7 @@ class MemberProductPurchaseController extends Controller
         $members = ManageReport::where('memberID', 'like', '%' . $search . '%')
                     ->orWhere('name', 'like', '%' . $search . '%')
                     ->limit(8)
-                    ->get(['memberID', 'name', 'phone']);
+                    ->get(['memberID', 'name']);
 
         if ($members->count()) {
             return response()->json([

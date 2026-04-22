@@ -304,12 +304,6 @@
                                     </span>
                                 </div>
                                 @endif
-                                @if($pur->member->mobile ?? $pur->member->phone ?? null)
-                                <div style="font-size:11px;color:#6c757d;margin-top:2px;">
-                                    <i class="bi bi-telephone-fill me-1" style="color:#1a3a6b;font-size:10px;"></i>
-                                    {{ $pur->member->mobile ?? $pur->member->phone }}
-                                </div>
-                                @endif
                             </td>
                             <td style="white-space:nowrap;">
                                 <div style="font-weight:500;color:#333;font-size:12px;">
@@ -342,7 +336,6 @@
                                     data-purchase-date="{{ \Carbon\Carbon::parse($pur->purchase_date)->format('d M Y, h:i A') }}"
                                     data-member-id="{{ $pur->member_id ?? '' }}"
                                     data-member-name="{{ $pur->member->name ?? 'Walk-in Customer' }}"
-                                    data-member-mobile="{{ $pur->member->mobile ?? $pur->member->phone ?? '' }}"
                                     data-member-email="{{ $pur->member->email ?? '' }}"
                                     data-member-address="{{ $pur->member->address ?? '' }}"
                                     data-total="{{ number_format($pur->total, 2) }}"
@@ -431,7 +424,6 @@
                                     <div class="inv-section-label" style="color:#1a3a6b;">Bill To</div>
                                     <div id="inv-member-name" class="inv-member-name"></div>
                                     <div id="inv-member-id"></div>
-                                    <div id="inv-member-mobile" class="inv-meta-line"></div>
                                     <div id="inv-member-email" class="inv-meta-line"></div>
                                     <div id="inv-member-address" class="inv-meta-line"></div>
                                 </div>
@@ -680,7 +672,6 @@ $(document).ready(function () {
                                     data-id="${m.memberID}" data-name="${m.name}">
                                     <div>
                                         <div style="font-weight:700;color:#1a3a6b;">${m.name}</div>
-                                        <div style="font-size:11px;color:#6c757d;">${m.phone ?? ''}</div>
                                     </div>
                                     <span style="background:#e6f1fb;color:#0c447c;padding:2px 8px;
                                                  border-radius:12px;font-size:11px;font-weight:600;">
@@ -754,7 +745,6 @@ $(document).ready(function () {
         const purchaseDate = btn.data('purchase-date');
         const mName        = btn.data('member-name')    || 'Walk-in Customer';
         const mId          = btn.data('member-id')      || '';
-        const mMobile      = btn.data('member-mobile')  || '';
         const mEmail       = btn.data('member-email')   || '';
         const mAddress     = btn.data('member-address') || '';
         const grandTotal   = btn.data('total');
@@ -767,7 +757,6 @@ $(document).ready(function () {
         $('#inv-purchase-date').text(purchaseDate);
         $('#inv-member-name').text(mName);
         $('#inv-member-id').html(mId ? `<span style="background:#e6f1fb;color:#0c447c;padding:1px 8px;border-radius:12px;font-size:11px;">ID: ${mId}</span>` : '');
-        $('#inv-member-mobile').html(mMobile  ? `<i class="bi bi-telephone-fill me-1" style="color:#1a3a6b;font-size:10px;"></i>${mMobile}`  : '');
         $('#inv-member-email').html(mEmail    ? `<i class="bi bi-envelope-fill me-1"  style="color:#1a3a6b;font-size:10px;"></i>${mEmail}`    : '');
         $('#inv-member-address').html(mAddress? `<i class="bi bi-geo-alt-fill me-1"   style="color:#1a3a6b;font-size:10px;"></i>${mAddress}`  : '');
         $('#inv-grand-total').text('₹' + grandTotal);

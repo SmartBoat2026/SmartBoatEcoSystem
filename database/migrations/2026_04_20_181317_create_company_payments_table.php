@@ -31,15 +31,15 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('sender_member_id')
-                ->references('member_id')
-                ->on('manage_reports')
-                ->onDelete('cascade');
+            // $table->foreign('sender_member_id')
+            //     ->references('member_id')
+            //     ->on('manage_reports')
+            //     ->onDelete('cascade');
 
-            $table->foreign('admin_member_id')
-                ->references('member_id')
-                ->on('manage_reports')
-                ->onDelete('set null');
+            // $table->foreign('admin_member_id')
+            //     ->references('member_id')
+            //     ->on('manage_reports')
+            //     ->onDelete('set null');
         });
     }
 

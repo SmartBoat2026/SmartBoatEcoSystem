@@ -12,7 +12,7 @@
 
     <ul class="menu" role="menu">
 
-        <!-- Dashboard -->
+        @if(\App\Support\AdminPanelAccess::can('dashboard') || \App\Support\AdminPanelAccess::can('chat'))
         <li class="menu-item" role="none">
             <a href="{{ route('admin.index') }}"
                class="{{ request()->routeIs('admin.index') ? 'active' : '' }}"
@@ -26,8 +26,24 @@
                 <span class="label">Dashboard</span>
             </a>
         </li>
+        @endif
 
-        <!-- Manage Member -->
+        @if(!session('admin_is_staff'))
+        <li class="menu-item" role="none">
+            <a href="{{ route('admin.staff.index') }}"
+               class="{{ request()->routeIs('admin.staff.*') ? 'active' : '' }}"
+               role="menuitem" title="Staff management">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <span class="label">Staff management</span>
+            </a>
+        </li>
+        @endif
+
+        @adminCan('manage_member')
         <li class="menu-item" role="none">
             <a href="{{ route('managereport') }}"
                class="{{ request()->routeIs('managereport') ? 'active' : '' }}"
@@ -43,7 +59,9 @@
                 <span class="label">Manage Member</span>
             </a>
         </li>
-        <!-- Smart Wallet -->
+        @endadminCan
+
+        @adminCan('smart_wallet')
         <li class="menu-item" role="none">
             <a href="{{ route('smartwallet') }}"
                class="{{ request()->routeIs('smartwallet') ? 'active' : '' }}"
@@ -59,10 +77,13 @@
                 <span class="label">Smart Wallet</span>
             </a>
         </li>
+        @endadminCan
+
+        @adminCan('smart_wallet_member_requests')
         <li class="menu-item" role="none">
             <a href="{{ route('smartwallet.memberRequest.index') }}"
                class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
-               role="menuitem" title="Smart Wallet">
+               role="menuitem" title="Smart Wallet Member Requests">
 
                 <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -74,7 +95,9 @@
                 <span class="label">Smart Wallet Member Requests</span>
             </a>
         </li>
+        @endadminCan
 
+        @adminCan('member_activation')
         <li class="menu-item" role="none">
             <a href="{{ route('managereport.memberactive') }}"
                class="{{ request()->routeIs('managereport.memberactive') ? 'active' : '' }}"
@@ -89,8 +112,9 @@
                 <span class="label">Member Activation Requests</span>
             </a>
         </li>
+        @endadminCan
 
-        <!-- Category -->
+        @adminCan('category')
         <li class="menu-item" role="none">
             <a href="{{ route('category') }}"
                class="{{ request()->routeIs('category') ? 'active' : '' }}"
@@ -103,8 +127,9 @@
                 <span class="label">Category</span>
             </a>
         </li>
+        @endadminCan
 
-        <!-- Product -->
+        @adminCan('product')
         <li class="menu-item" role="none">
             <a href="{{ route('product') }}"
                class="{{ request()->routeIs('product') ? 'active' : '' }}"
@@ -119,8 +144,9 @@
                 <span class="label">Product</span>
             </a>
         </li>
+        @endadminCan
 
-        <!-- Product Purchase -->
+        @adminCan('product_purchase')
         <li class="menu-item" role="none">
             <a href="{{ route('productpurchase.index') }}"
                class="{{ request()->routeIs('productpurchase.*') ? 'active' : '' }}"
@@ -135,7 +161,9 @@
                 <span class="label">Product Purchase</span>
             </a>
         </li>
+        @endadminCan
 
+        @adminCan('stp_schedule')
         <li class="menu-item" role="none">
             <a href="{{ route('stpschedule.index') }}"
                class="{{ request()->routeIs('stpschedule.*') ? 'active' : '' }}"
@@ -150,7 +178,9 @@
                 <span class="label">STP Schedule</span>
             </a>
         </li>
-         <!-- Bonus -->
+        @endadminCan
+
+        @if(\App\Support\AdminPanelAccess::can('bonus') || \App\Support\AdminPanelAccess::can('bonus_passive'))
         <li class="menu-item has-submenu" role="none">
 
             <a href="javascript:void(0);" class="menu-link" role="menuitem" title="Bonus">
@@ -165,16 +195,23 @@
                 <span class="arrow-icon">&#8250;</span>
             </a>
 
-            <!-- Sub Menu -->
             <ul class="submenu" role="menu">
+                @adminCan('bonus')
+                <li role="none">
+                    <a href="{{ route('bonus.index') }}" role="menuitem" title="Bonus">Bonus</a>
+                </li>
+                @endadminCan
+                @adminCan('bonus_passive')
                 <li role="none">
                     <a href="{{ route('adminpassivebonus') }}" role="menuitem" title="Passive Bonus">
                         Passive Bonus
                     </a>
                 </li>
+                @endadminCan
             </ul>
 
         </li>
+        @endif
 
     </ul>
 

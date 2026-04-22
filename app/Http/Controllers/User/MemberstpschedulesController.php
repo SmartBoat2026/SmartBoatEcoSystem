@@ -19,10 +19,9 @@ class MemberstpschedulesController extends Controller
 
         $members = ManageReport::where(function ($query) use ($q) {
                 $query->where('memberID', 'LIKE', "%{$q}%")
-                      ->orWhere('name',     'LIKE', "%{$q}%")
-                      ->orWhere('phone',    'LIKE', "%{$q}%");
+                      ->orWhere('name',     'LIKE', "%{$q}%");
             })
-            ->select('memberID', 'name', 'phone')
+            ->select('memberID', 'name')
             ->orderBy('name')
             ->limit(20)
             ->get();
@@ -40,7 +39,7 @@ class MemberstpschedulesController extends Controller
 
         $memberIds   = $schedules->pluck('member_id')->unique()->filter()->values();
         $memberInfos = ManageReport::whereIn('memberID', $memberIds)
-                        ->select('memberID', 'name', 'phone')
+                        ->select('memberID', 'name')
                         ->get()
                         ->keyBy('memberID');
 
