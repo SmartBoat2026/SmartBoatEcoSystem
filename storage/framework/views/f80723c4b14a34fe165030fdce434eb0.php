@@ -6,12 +6,7 @@
             <h1>Smart Wallet Receiving List</h1>
             <p>Record and track all receiving wallet balances</p>
         </div>
-        <div class="page-actions">
-            <a href="javascript:void(0)" class="btn-primary-custom"
-               data-bs-toggle="modal" data-bs-target="#addModal">
-                <i class="bi bi-plus-lg"></i> NEW RECEIVING WALLET bALANCE
-            </a>
-        </div>
+        
     </div>
 
    
@@ -48,8 +43,8 @@
     
     
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('member.smartwallet.chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-<?php echo $__env->make('member.smartwallet.chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->startPush('scripts'); ?>
 
 <script>
