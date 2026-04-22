@@ -24,7 +24,7 @@
                 <div class="modal-header" style="background:#1a3a6b;color:#fff;">
                     <h5 class="modal-title" id="addModalLabel"
                         style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">
-                        <i class="bi bi-receipt me-2"></i>SENDING WALLET bALANCE  
+                        <i class="bi bi-receipt me-2"></i>SENDING WALLET BALANCE  
                     </h5>
                     <button type="button" class="btn-close btn-close-white"
                             data-bs-dismiss="modal" aria-label="Close"></button>

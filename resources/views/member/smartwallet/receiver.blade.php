@@ -8,12 +8,7 @@
             <h1>Smart Wallet Receiving List</h1>
             <p>Record and track all receiving wallet balances</p>
         </div>
-        <div class="page-actions">
-            <a href="javascript:void(0)" class="btn-primary-custom"
-               data-bs-toggle="modal" data-bs-target="#addModal">
-                <i class="bi bi-plus-lg"></i> NEW RECEIVING WALLET bALANCE
-            </a>
-        </div>
+        
     </div>
 
    

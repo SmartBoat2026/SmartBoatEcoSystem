@@ -27,6 +27,7 @@ use App\Http\Controllers\User\MemberstpschedulesController;
 use App\Http\Controllers\User\MemberPaymentController;
 use App\Http\Controllers\User\SmartWallet\UserToUsersController;
 use App\Http\Controllers\User\SmartWallet\CompanyPaymentController;
+use App\Http\Controllers\User\SmartWallet\BuySellController;
 
 // ─── Common Controllers ──────────────────────────────────────────────────
 
@@ -205,6 +206,17 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     Route::get('/smart-wallet/company-payment/list', [CompanyPaymentController::class, 'listData'])->name('smartwallet.companyPayment.list');
     Route::post('/smart-wallet/company-payment/store', [CompanyPaymentController::class, 'store'])->name('smartwallet.companyPayment.store');
     
+    // ── Buy/Sell───────────────────────────────────────────────────────────
+    Route::get('/smart-wallet/buy-sell/selfSell', [BuySellController::class, 'selfSell'])->name('smartwallet.buySell.selfSell');
+    Route::post('/smart-wallet/buy-sell/selfSell-store', [BuySellController::class, 'selfSellStore'])->name('smartwallet.buySell.selfSellStore');
+    Route::get('/smart-wallet/buy-sell/selfSelllist', [BuySellController::class, 'selfSellListData'])->name('smartwallet.buySell.selfSellListData');
+    
+
+    Route::get('/smart-wallet/buy-sell/load-model-open-data', [BuySellController::class, 'loadModelOpenData'])->name('smartwallet.buySell.loadModelOpenData');
+    
+
+
+
     // ── Chat ───────────────────────────────────────────────────────────
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
