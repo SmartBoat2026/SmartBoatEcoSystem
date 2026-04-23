@@ -127,10 +127,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
-<<<<<<< HEAD
-=======
     Route::get('/chat/list', [ChatController::class, 'listChats'])->name('chat.list');
->>>>>>> Pingki
 });
 
 
