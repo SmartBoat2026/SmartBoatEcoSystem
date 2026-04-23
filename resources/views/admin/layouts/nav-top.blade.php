@@ -9,7 +9,15 @@
                 </button>
                 <a href="{{ route('admin.index') }}" class="navbar-brand">
                     <div class="logo" aria-hidden="true">
+<<<<<<< HEAD
                         {{-- <img src={{ asset('public/admin/assets/images/icon-logo.png')}}" alt="logo"> --}}
+=======
+<<<<<<< HEAD
+                        {{-- <img src={{ asset('admin/assets/images/icon-logo.png')}}" alt="logo"> --}}
+=======
+                        {{-- <img src={{ asset('public/admin/assets/images/icon-logo.png')}}" alt="logo"> --}}
+>>>>>>> Pingki
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
                     </div>
                     <div class="brand-text fw-bold fs-5 text-dark">
                         SmartBoatEcosystem

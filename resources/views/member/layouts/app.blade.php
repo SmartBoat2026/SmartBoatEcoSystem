@@ -633,7 +633,10 @@
         id="smartWalletDropdown">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
         <!-- PAYMENT SUBMISSION -->
         <a href="{{ route('member.smartwallet.companyPayment.index') }}"
         class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : '' }}">
@@ -642,7 +645,10 @@
             <span class="nav-label">Company Payment Approval</span>
         </a>
 
+<<<<<<< HEAD
 >>>>>>> Pingki
+=======
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
         <!-- USER TO USER -->
         <a href="#smartWalletUserToUserDropdown"
         class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.userToUser.*') ? 'active' : '' }}"
@@ -650,10 +656,14 @@
 
             <i class="bi bi-wallet2"></i>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <span class="nav-label">USER TO USER TRANSFER</span>
 =======
             <span class="nav-label">Peer-to-Peer Wallet Transfer</span>
 >>>>>>> Pingki
+=======
+            <span class="nav-label">Peer-to-Peer Wallet Transfer</span>
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
             <i class="bi bi-chevron-down nav-arrow"></i>
         </a>
 
@@ -675,6 +685,7 @@
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <!-- PAYMENT SUBMISSION -->
         <a href="{{ route('member.smartwallet.companyPayment.index') }}"
         class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : '' }}">
@@ -683,6 +694,8 @@
             <span class="nav-label">Payment Submission</span>
         </a>
 =======
+=======
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
         
 
         <!-- BUY/SELL -->
@@ -727,7 +740,10 @@
             </a> -->
 
         </div>
+<<<<<<< HEAD
 >>>>>>> Pingki
+=======
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
 
     </div>
 

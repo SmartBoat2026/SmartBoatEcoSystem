@@ -9,6 +9,7 @@
             <p>Record and track all receiving wallet balances</p>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="page-actions">
             <a href="javascript:void(0)" class="btn-primary-custom"
                data-bs-toggle="modal" data-bs-target="#addModal">
@@ -18,6 +19,9 @@
 =======
         
 >>>>>>> Pingki
+=======
+        
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
     </div>
 
    

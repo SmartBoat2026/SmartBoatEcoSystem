@@ -7,6 +7,7 @@
             <p>Record and track all receiving wallet balances</p>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="page-actions">
             <a href="javascript:void(0)" class="btn-primary-custom"
                data-bs-toggle="modal" data-bs-target="#addModal">
@@ -16,6 +17,9 @@
 =======
         
 >>>>>>> Pingki
+=======
+        
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
     </div>
 
    
@@ -53,12 +57,17 @@
     
 <?php $__env->stopSection(); ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php echo $__env->make('member.smartwallet.chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php echo $__env->make('member.smartwallet.chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 =======
 <?php echo $__env->make('chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php echo $__env->make('chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 >>>>>>> Pingki
+=======
+<?php echo $__env->make('chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
 <?php $__env->startPush('scripts'); ?>
 
 <script>

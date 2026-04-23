@@ -108,7 +108,12 @@
     
 
 @endsection
+<<<<<<< HEAD
+@include('chatbox')
+@include('chat-script')
+=======
 
+>>>>>>> Pingki
 @push('scripts')
 
 <script>

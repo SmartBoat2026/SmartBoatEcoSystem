@@ -175,6 +175,11 @@
             </ul>
 
         </li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
         <li class="menu-item" role="none">
             <a id="smartBoatChatLink" href="#"
                role="menuitem" title="Smart Boat Chat">
@@ -192,6 +197,10 @@
                 <span class="label">Smart Boat Chat</span>
             </a>
         </li>
+<<<<<<< HEAD
+=======
+>>>>>>> Pingki
+>>>>>>> cfff5f07947a8bf512e80723df7ccf0697277a77
 
     </ul>
 
