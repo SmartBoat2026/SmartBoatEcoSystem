@@ -142,7 +142,7 @@ class RegistrationController extends Controller
             'status'                          => '2',
             'amount'                          => '',
             'referral_code'                   => $referallCode,
-            'referral_by'                     => $referallBY,
+            'referral_by'                     => $referallBY ?? '',
             'smart_wallet_balance'            => 0,
             'verification_payment_screenshot' => '',
             'payment_utr_no'                  => '',

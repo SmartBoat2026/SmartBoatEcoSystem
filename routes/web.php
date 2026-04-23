@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ProductPurchaseController;
 use App\Http\Controllers\Admin\SmartwalletController;
 use App\Http\Controllers\Admin\StpscheduleController;
 use App\Http\Controllers\Admin\SmartWalletMemberRequestController;
+use App\Http\Controllers\Admin\StaffManageController;
 
 // ── User Folder Controllers ───────────────────────────────────────────────────
 use App\Http\Controllers\User\MemberController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\User\MemberstpschedulesController;
 use App\Http\Controllers\User\MemberPaymentController;
 use App\Http\Controllers\User\SmartWallet\UserToUsersController;
 use App\Http\Controllers\User\SmartWallet\CompanyPaymentController;
+use App\Http\Controllers\User\SmartWallet\BuySellController;
 
 // ─── Common Controllers ──────────────────────────────────────────────────
 
@@ -36,6 +38,14 @@ Route::get('/', function () {
     if (session()->has('admin_logged_in'))  return redirect('/admin-page');
     if (session()->has('member_logged_in')) return redirect('/member/dashboard');
     return view('admin.login');
+});
+
+// ─── Clear Cache ──────────────────────────────────────────────────
+Route::get('/clear-cache', function () {
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    return "Cache Cleared ✅";
 });
 
 // ─── Login / Logout ───────────────────────────────────────────────────────────
@@ -58,6 +68,22 @@ Route::middleware('admin.auth')->group(function () {
 
     // Logout
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    
+    // Route::get('/admin/no-access', function () {
+    //     return view('admin.errors.no-access');
+    // })->name('admin.no-access');
+
+    // Sub Admin Access
+    Route::middleware('admin.super')->prefix('admin/staff')->name('admin.staff.')->group(function () {
+        Route::get('/', [StaffManageController::class, 'index'])->name('index');
+        Route::get('/create', [StaffManageController::class, 'create'])->name('create');
+        Route::post('/', [StaffManageController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [StaffManageController::class, 'edit'])->name('edit')->whereNumber('id');
+        Route::put('/{id}', [StaffManageController::class, 'update'])->name('update')->whereNumber('id');
+        Route::delete('/{id}', [StaffManageController::class, 'destroy'])->name('destroy')->whereNumber('id');
+    });
+
+    Route::middleware('admin.panel')->group(function () {
 
     // Dashboard & Tasks
     Route::get('/admin-page', [AdminPanelController::class, 'index'])->name('admin.index');
@@ -126,6 +152,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    
+   });
 });
 
 
@@ -205,6 +233,17 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     Route::get('/smart-wallet/company-payment/list', [CompanyPaymentController::class, 'listData'])->name('smartwallet.companyPayment.list');
     Route::post('/smart-wallet/company-payment/store', [CompanyPaymentController::class, 'store'])->name('smartwallet.companyPayment.store');
     
+    // ── Buy/Sell───────────────────────────────────────────────────────────
+    Route::get('/smart-wallet/buy-sell/selfSell', [BuySellController::class, 'selfSell'])->name('smartwallet.buySell.selfSell');
+    Route::post('/smart-wallet/buy-sell/selfSell-store', [BuySellController::class, 'selfSellStore'])->name('smartwallet.buySell.selfSellStore');
+    Route::get('/smart-wallet/buy-sell/selfSelllist', [BuySellController::class, 'selfSellListData'])->name('smartwallet.buySell.selfSellListData');
+    
+
+    Route::get('/smart-wallet/buy-sell/load-model-open-data', [BuySellController::class, 'loadModelOpenData'])->name('smartwallet.buySell.loadModelOpenData');
+    
+
+
+
     // ── Chat ───────────────────────────────────────────────────────────
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');

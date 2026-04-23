@@ -436,7 +436,6 @@ button[type=submit]:disabled { background: #1a3a7a; cursor: not-allowed; opacity
         </span>
         <span id="sc_found_content" style="display:none">
           <b>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> <span id="sc_name"></span><br>
-          <b>Mobile&nbsp;&nbsp;&nbsp;&nbsp;:</b> <span id="sc_phone"></span><br>
           <b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> <span id="sc_email"></span><br>
           <b>Member ID&nbsp;:</b> <span class="sc-mid" id="sc_memberid"></span><br>
           <b>Sponsor ID&nbsp;:</b> <span id="sc_sponsorid"></span>
@@ -961,7 +960,6 @@ async function fetchSponsorResults(q) {
         '<div class="sp-name">' + nameHL + '</div>' +
         '<div class="sp-meta">' +
           '<span class="sp-id">' + idHL + '</span>' +
-          ' &nbsp;·&nbsp; ' + phoneHL +
           (m.email ? ' &nbsp;·&nbsp; ' + emailHL : '') +
         '</div>';
       div.addEventListener('mousedown', function (e) {

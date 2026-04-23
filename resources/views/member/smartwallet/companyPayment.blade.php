@@ -47,7 +47,7 @@
                                 </p>
 
                                 <div style="text-align:center;margin:15px 0;">
-                                    <img src="{{ asset('admin/assets/images/HindolMukherjeeQRCode.png') }}"
+                                    <img src="{{ asset('public/admin/assets/images/HindolMukherjeeQRCode.png') }}"
                                         style="width:180px;border-radius:10px;cursor:pointer;"
                                         onclick="openQrModal(this.src)">
                                     <p style="font-size:11px;color:#888;margin-top:6px;">Click to enlarge</p>

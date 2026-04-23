@@ -44,37 +44,37 @@
 <!-- ================= JS ================= -->
 
 <!-- jQuery -->
-<script src="{{ asset('admin/assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/jquery-3.6.0.min.js') }}"></script>
 
 <!-- Bootstrap -->
-<script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- Plugins -->
-<script src="{{ asset('admin/assets/plugin/chart/chart.js') }}"></script>
-<script src="{{ asset('admin/assets/plugin/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/plugin/chart/chart.js') }}"></script>
+<script src="{{ asset('public/admin/assets/plugin/select2/js/select2.min.js') }}"></script>
 
 <!-- Custom JS -->
-<script src="{{ asset('admin/assets/js/chart.js') }}"></script>
-<script src="{{ asset('admin/assets/js/chat.js') }}"></script>
-<script src="{{ asset('admin/assets/js/board.js') }}"></script>
-<script src="{{ asset('admin/assets/js/script.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/chart.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/chat.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/board.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/script.js') }}"></script>
 
 <!-- DataTables Core -->
-<script src="{{ asset('admin/assets/js/admin/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/dataTables.bootstrap5.min.js') }}"></script>
 
 <!-- Export Dependencies -->
-<script src="{{ asset('admin/assets/js/admin/jszip.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/pdfmake.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/jszip.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/vfs_fonts.js') }}"></script>
 
 <!-- DataTables Buttons -->
-<script src="{{ asset('admin/assets/js/admin/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/buttons.print.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/buttons.print.min.js') }}"></script>
 
 <!-- SweetAlert -->
-<script src="{{ asset('admin/assets/js/admin/sweetalert2@11.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/sweetalert2@11.js') }}"></script>
 
 @stack('scripts')
 

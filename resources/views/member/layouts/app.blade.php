@@ -18,7 +18,7 @@
     <link href="{{ asset('admin/assets/css/admin/buttons.dataTables.min.css') }}" rel="stylesheet">
 
     {{-- Toastr CSS --}}
-    <link rel="stylesheet" href="{{ asset('admin/assets/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/admin/assets/toastr/toastr.min.css') }}">
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
@@ -605,13 +605,21 @@
     <div class="collapse sub-menu {{ request()->routeIs('member.smartwallet.*') ? 'show' : '' }}"
         id="smartWalletDropdown">
 
+        <!-- PAYMENT SUBMISSION -->
+        <a href="{{ route('member.smartwallet.companyPayment.index') }}"
+        class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : '' }}">
+
+            <i class="bi bi-building"></i>
+            <span class="nav-label">Company Payment Approval</span>
+        </a>
+
         <!-- USER TO USER -->
         <a href="#smartWalletUserToUserDropdown"
         class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.userToUser.*') ? 'active' : '' }}"
         data-bs-toggle="collapse">
 
             <i class="bi bi-wallet2"></i>
-            <span class="nav-label">USER TO USER TRANSFER</span>
+            <span class="nav-label">Peer-to-Peer Wallet Transfer</span>
             <i class="bi bi-chevron-down nav-arrow"></i>
         </a>
 
@@ -632,13 +640,50 @@
 
         </div>
 
-        <!-- PAYMENT SUBMISSION -->
-        <a href="{{ route('member.smartwallet.companyPayment.index') }}"
-        class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : '' }}">
+        
 
-            <i class="bi bi-building"></i>
-            <span class="nav-label">Payment Submission</span>
+        <!-- BUY/SELL -->
+        <a href="#smartWalletBuySellDropdown"
+        class="nav-link ps-4 {{ request()->routeIs('member.smartwallet.buySell.*') ? 'active' : '' }}"
+        data-bs-toggle="collapse">
+
+            <i class="bi bi-currency-exchange"></i>
+            <span class="nav-label">Peer-to-Peer Wallet Buy/Sell</span>
+            <i class="bi bi-chevron-down nav-arrow"></i>
         </a>
+        <div class="collapse sub-menu {{ request()->routeIs('member.smartwallet.buySell.*') ? 'show' : '' }}"
+            id="smartWalletBuySellDropdown">
+
+            <a href="{{ route('member.smartwallet.buySell.selfSell') }}"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.buySell.selfSell') ? 'active' : '' }}">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Self Sell Details</span>
+            </a>
+
+            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Sent Request For Buy</span>
+            </a>
+
+            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Received Request For Buy</span>
+            </a>
+            <!-- <a href="{{ route('member.smartwallet.userToUser.receiver') }}"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Sent Request For Buy</span>
+            </a>
+
+            <a href="{{ route('member.smartwallet.userToUser.receiver') }}"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Received Request For Buy</span>
+            </a> -->
+
+        </div>
 
     </div>
 
@@ -697,31 +742,31 @@
 </main>
 
 {{-- ════ SCRIPTS ════ --}}
-<script src="{{ asset('admin/assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/bootstrap.bundle.min.js') }}"></script>
 
 {{-- DataTables --}}
-<script src="{{ asset('admin/assets/js/admin/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/dataTables.bootstrap5.min.js') }}"></script>
 
 {{-- Export --}}
-<script src="{{ asset('admin/assets/js/admin/jszip.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/pdfmake.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/jszip.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/vfs_fonts.js') }}"></script>
 
 {{-- Buttons --}}
-<script src="{{ asset('admin/assets/js/admin/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('admin/assets/js/admin/buttons.print.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/buttons.print.min.js') }}"></script>
 
 {{-- SweetAlert2 --}}
-<script src="{{ asset('admin/assets/js/admin/sweetalert2@11.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/sweetalert2@11.js') }}"></script>
 
 {{-- Toastr --}}
-<script src="{{ asset('admin/assets/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/toastr/toastr.min.js') }}"></script>
 
 {{-- sweetAlert --}}
-<script src="{{ asset('admin/assets/js/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/sweetalert2.min.js') }}"></script>
 
 <script>
 (function () {

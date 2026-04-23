@@ -189,9 +189,11 @@
                                         id="edit_member_dropdown_<?php echo e($schedule->id); ?>"
                                         style="display:none;z-index:9999;max-height:200px;overflow-y:auto;top:100%;left:0;right:0;"></div>
                                 </div>
-                                <input type="hidden" name="member_id"
-                                    id="edit_member_id_<?php echo e($schedule->id); ?>"
-                                    value="<?php echo e($schedule->member_id); ?>" required>
+                                                            <input type="text" name="member_id"
+                                id="edit_member_id_<?php echo e($schedule->id); ?>"
+                                value="<?php echo e($schedule->member_id); ?>"
+                                style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;"
+                                required tabindex="-1">
                                 <small id="edit_member_info_<?php echo e($schedule->id); ?>" class="text-success" style="font-size:11px;">
                                     <?php if(isset($memberInfos[$schedule->member_id])): ?>
                                         ✅ <?php echo e($memberInfos[$schedule->member_id]->name); ?> | 📞 <?php echo e($memberInfos[$schedule->member_id]->phone); ?>
@@ -360,8 +362,10 @@
                                         id="add_member_dropdown"
                                         style="display:none;z-index:9999;max-height:200px;overflow-y:auto;top:100%;left:0;right:0;"></div>
                                 </div>
-                                <input type="hidden" name="member_id" id="add_member_id"
-                                    value="<?php echo e(session('member_memberID')); ?>" required>
+                               <input type="text" name="member_id" id="add_member_id"
+                                value="<?php echo e(session('member_memberID')); ?>"
+                                style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;"
+                                required tabindex="-1">
                                 <small id="add_member_info" class="text-success" style="font-size:11px;"></small>
                             </div>
 
@@ -466,18 +470,7 @@
         </div>
     </div>
 
-    
-    <style>
-        .bulk-action-bar {
-            display:none;align-items:center;gap:12px;flex-wrap:wrap;
-            background:#fff3cd;border:1px solid #ffc107;border-radius:6px;
-            padding:10px 16px;margin-bottom:12px;
-        }
-        .bulk-action-bar.show { display:flex !important; }
-        #stpSchedulesTable thead th { background:#2c5f2e;color:#fff;border-color:#2c5f2e; }
-        #stpSchedulesTable tbody tr:hover { background:#f4f7fb; }
-        #stpSchedulesTable tbody tr.row-selected { background:#e8f4fd !important; }
-    </style>
+   
 
 <?php $__env->stopSection(); ?>
 
@@ -634,12 +627,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             item.className = 'list-group-item list-group-item-action py-2 px-3';
                             item.style.fontSize = '12px';
                             item.innerHTML = '<span class="fw-bold text-primary">' + escHtml(m.memberID) + '</span>'
-                                + ' — ' + escHtml(m.name)
-                                + ' <span class="text-muted">(' + escHtml(m.phone) + ')</span>';
+                                + ' — ' + escHtml(m.name);
                             item.addEventListener('click', function () {
                                 inputEl.value            = m.memberID;
                                 hiddenEl.value           = m.memberID;
-                                infoEl.textContent       = '✅ ' + m.name + ' | ' + m.phone;
+                                infoEl.textContent       = '✅ ' + m.name;
                                 infoEl.className         = 'text-success';
                                 dropdownEl.style.display = 'none';
                             });
