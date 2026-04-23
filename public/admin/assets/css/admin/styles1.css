@@ -1,0 +1,299 @@
+                                /* ----------CATEGORY-----------  */
+    /* ── DataTables Buttons styling ── */
+    #categoryTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #categoryTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #categoryTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #categoryTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #categoryTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #categoryTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #categoryTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #categoryTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #categoryTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    /* ── Bulk bar ── */
+    #bulkActionBar.show { display: flex !important; }
+
+    /* ── Selected row highlight ── */
+    #categoryTable tbody tr.row-selected { background: #e8f4fd !important; }
+
+
+                                /* ----------PASSIVE BONUS---------- */
+    .pb-stat-card {
+        background:#fff;border:0.5px solid #dee2e6;
+        border-radius:8px;padding:16px 18px;
+    }
+    .pb-stat-label {
+        font-size:11px;color:#6c757d;margin-bottom:6px;
+        text-transform:uppercase;letter-spacing:.06em;
+    }
+    .pb-stat-value { font-size:22px;font-weight:700;line-height:1.2; }
+
+    .detail-field-label { font-size:11px;color:#6c757d;margin-bottom:4px; }
+    .detail-field-value { font-size:14px;font-weight:700; }
+
+    #passiveBonusTable thead th { background:#2c5f2e;color:#fff;border-color:#2c5f2e; }
+    #passiveBonusTable tbody tr:hover { background:#f4f7fb; }
+    #passiveBonusTable tbody tr.row-selected { background:#e8f4fd !important; }
+
+    /* ── DataTables Buttons styling ── */
+    #passiveBonusTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #passiveBonusTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #passiveBonusTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #passiveBonusTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #passiveBonusTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #passiveBonusTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #passiveBonusTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #passiveBonusTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #passiveBonusTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    #bulkActionBar.show { display: flex !important; }
+
+    @media (max-width: 576px) {
+        .pb-stat-value { font-size:18px; }
+        .pb-stat-label { font-size:10px; }
+    }
+
+                                /* --------STP SCHEDULE-------- */
+    /* ── DataTables Buttons styling ── */
+    #stpSchedulesTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #stpSchedulesTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #stpSchedulesTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #stpSchedulesTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #stpSchedulesTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #stpSchedulesTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #stpSchedulesTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #stpSchedulesTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #stpSchedulesTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    /* ── Bulk bar ── */
+    #bulkActionBar.show { display: flex !important; }
+
+    /* ── Selected row highlight ── */
+    #stpSchedulesTable tbody tr.row-selected { background: #e8f4fd !important; }
+
+                        /* ---------PRODUCT PURCHASE-------- */
+    @media print {
+        body > *:not(#invoiceModal) { display: none !important; }
+        #invoiceModal              { display: block !important; position: static !important; }
+        .modal-dialog              { max-width: 100% !important; margin: 0 !important; }
+        .modal-header,
+        .modal-backdrop            { display: none !important; }
+        #invoicePrintArea          {
+            box-shadow: none !important;
+            margin: 0 !important;
+            max-width: 100% !important;
+            border-radius: 0 !important;
+        }
+    }
+
+    #purchaseHistoryTable_wrapper .dataTables_length label,
+    #purchaseHistoryTable_wrapper .dataTables_filter label,
+    #purchaseHistoryTable_wrapper .dataTables_info,
+    #purchaseHistoryTable_wrapper .dataTables_paginate { font-size:12px;color:#495057; }
+    #purchaseHistoryTable_wrapper .dataTables_filter input {
+        border:1px solid #dee2e6;border-radius:4px;padding:3px 8px;font-size:12px;margin-left:6px; }
+    #purchaseHistoryTable_wrapper .dataTables_length select {
+        border:1px solid #dee2e6;border-radius:4px;padding:2px 6px;font-size:12px;margin:0 4px; }
+    #purchaseHistoryTable_wrapper .paginate_button { font-size:12px !important;padding:3px 8px !important; }
+    #purchaseHistoryTable_wrapper .paginate_button.current,
+    #purchaseHistoryTable_wrapper .paginate_button.current:hover {
+        background:#1a3a6b !important;border-color:#1a3a6b !important;color:#fff !important;border-radius:4px; }
+    #purchaseHistoryTable thead th { background:#2c5f2e;color:#fff;border-color:#2c5f2e; }
+    #purchaseHistoryTable_wrapper .dataTables_filter { margin-bottom:8px; }
+    #purchaseHistoryTable_wrapper .dt-buttons { margin-bottom:8px; }
+    #purchaseHistoryTable_wrapper .dt-button {
+        font-size:12px !important;padding:4px 12px !important;border-radius:4px !important;
+        border:1px solid #dee2e6 !important;background:#fff !important;
+        color:#495057 !important;margin-right:4px !important;cursor:pointer;transition:background .15s; }
+    #purchaseHistoryTable_wrapper .dt-button:hover { background:#f0f0f0 !important;color:#1a3a6b !important; }
+    #purchaseHistoryTable_wrapper .buttons-pdf    { border-color:#dc3545 !important;color:#dc3545 !important; }
+    #purchaseHistoryTable_wrapper .buttons-excel  { border-color:#198754 !important;color:#198754 !important; }
+    #purchaseHistoryTable_wrapper .buttons-print  { border-color:#1a3a6b !important;color:#1a3a6b !important; }
+    #purchaseHistoryTable_wrapper .buttons-pdf:hover   { background:#dc3545 !important;color:#fff !important; }
+    #purchaseHistoryTable_wrapper .buttons-excel:hover { background:#198754 !important;color:#fff !important; }
+    #purchaseHistoryTable_wrapper .buttons-print:hover { background:#1a3a6b !important;color:#fff !important; }
+    #bulkActionBar { display:none; }
+    #bulkActionBar.show { display:flex !important; }
+    #purchaseHistoryTable tbody tr.row-selected { background:#e8f4fd !important; }
+
+    .product-dropdown .prod-item {
+        padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:12px;transition:background .12s; }
+    .product-dropdown .prod-item:hover,
+    .product-dropdown .prod-item.active { background:#e8f2ff; }
+    .product-dropdown .prod-item .prod-name { font-weight:700;color:#1a3a6b;font-size:12px; }
+    .product-dropdown .prod-item .prod-meta { font-size:10px;color:#6c757d;margin-top:2px; }
+    .product-dropdown .prod-item .prod-meta .badge-cat {
+        display:inline-block;background:#e6f1fb;color:#0c447c;border-radius:10px;
+        padding:1px 7px;font-size:10px;font-weight:600;margin-right:4px; }
+    .product-dropdown .prod-item .prod-meta .badge-sub {
+        display:inline-block;background:#eeedfe;color:#3c3489;border-radius:10px;
+        padding:1px 7px;font-size:10px;font-weight:600; }
+    .product-dropdown .prod-no-result { padding:10px 12px;font-size:12px;color:#dc3545; }
+    .product-search-input { border:1px solid #dee2e6 !important;border-radius:4px !important; }
+    .product-search-input:focus { border-color:#1a3a6b !important;box-shadow:0 0 0 2px rgba(26,58,107,.12) !important; }
+
+                            /* --------PRODUCT-------- */
+    /* ── DataTables Buttons styling ── */
+    #productTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #productTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #productTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #productTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #productTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #productTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #productTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #productTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #productTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    /* ── Bulk bar ── */
+    #bulkActionBar.show { display: flex !important; }
+
+    /* ── Selected row highlight ── */
+    #productTable tbody tr.row-selected { background: #e8f4fd !important; }
+
+
+
+                        /* -----------MEMBER ACTIVATE--------- */
+    /* ── DataTables Buttons styling (matching category page) ── */
+    #memberTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #memberTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #memberTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #memberTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #memberTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #memberTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #memberTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #memberTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #memberTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    /* ── Bulk bar ── */
+    #bulkActionBar.show { display: flex !important; }
+
+    /* ── Selected row highlight ── */
+    #memberTable tbody tr.row-selected { background: #e8f4fd !important; }
+
+    /* ── Access button hover ── */
+    .btn-info.text-white:hover { opacity: 0.85; }
+
+    /* ── Password mask reveal ── */
+    .pass-mask { font-family: monospace; font-size: 13px; }
+    .pass-mask.revealed { letter-spacing: normal; color: #dc3545; font-weight: 600; }
+
+                    /* ----------SMART WALLET--------- */
+    /* ── DataTables Buttons styling (matching category page) ── */
+    #memberTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #memberTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #memberTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #memberTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #memberTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #memberTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #memberTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #memberTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #memberTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    /* ── Bulk bar ── */
+    #bulkActionBar.show { display: flex !important; }
+
+    /* ── Selected row highlight ── */
+    #memberTable tbody tr.row-selected { background: #e8f4fd !important; }
+
+    /* ── Access button hover ── */
+    .btn-info.text-white:hover { opacity: 0.85; }
+
+    /* ── Password mask reveal ── */
+    .pass-mask { font-family: monospace; font-size: 13px; }
+    .pass-mask.revealed { letter-spacing: normal; color: #dc3545; font-weight: 600; }
+
+                        /* ----------MANAGE REPORT--------- */
+    /* ── DataTables Buttons styling (matching category page) ── */
+    #memberTable_wrapper .dt-buttons { margin-bottom: 8px; }
+    #memberTable_wrapper .dt-button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        border: 1px solid #dee2e6 !important;
+        background: #fff !important;
+        color: #495057 !important;
+        margin-right: 4px !important;
+        cursor: pointer;
+        transition: background .15s;
+    }
+    #memberTable_wrapper .dt-button:hover { background: #f0f0f0 !important; }
+    #memberTable_wrapper .buttons-pdf    { border-color: #dc3545 !important; color: #dc3545 !important; }
+    #memberTable_wrapper .buttons-excel  { border-color: #198754 !important; color: #198754 !important; }
+    #memberTable_wrapper .buttons-print  { border-color: #0d6efd !important; color: #0d6efd !important; }
+    #memberTable_wrapper .buttons-pdf:hover   { background: #dc3545 !important; color: #fff !important; }
+    #memberTable_wrapper .buttons-excel:hover { background: #198754 !important; color: #fff !important; }
+    #memberTable_wrapper .buttons-print:hover { background: #0d6efd !important; color: #fff !important; }
+
+    /* ── Bulk bar ── */
+    #bulkActionBar.show { display: flex !important; }
+
+    /* ── Selected row highlight ── */
+    #memberTable tbody tr.row-selected { background: #e8f4fd !important; }
+
+    /* ── Access button hover ── */
+    .btn-info.text-white:hover { opacity: 0.85; }
+
+    /* ── Password mask reveal ── */
+    .pass-mask { font-family: monospace; font-size: 13px; }
+    .pass-mask.revealed { letter-spacing: normal; color: #dc3545; font-weight: 600; }
+
