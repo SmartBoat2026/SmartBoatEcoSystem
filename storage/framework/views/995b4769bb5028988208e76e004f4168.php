@@ -14,8 +14,8 @@
 
         <!-- Dashboard -->
         <li class="menu-item" role="none">
-            <a href="{{ route('admin.index') }}"
-               class="{{ request()->routeIs('admin.index') ? 'active' : '' }}"
+            <a href="<?php echo e(route('admin.index')); ?>"
+               class="<?php echo e(request()->routeIs('admin.index') ? 'active' : ''); ?>"
                role="menuitem" title="Dashboard">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -29,8 +29,8 @@
 
         <!-- Manage Member -->
         <li class="menu-item" role="none">
-            <a href="{{ route('managereport') }}"
-               class="{{ request()->routeIs('managereport') ? 'active' : '' }}"
+            <a href="<?php echo e(route('managereport')); ?>"
+               class="<?php echo e(request()->routeIs('managereport') ? 'active' : ''); ?>"
                role="menuitem" title="Manage Report">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -45,8 +45,8 @@
         </li>
         <!-- Smart Wallet -->
         <li class="menu-item" role="none">
-            <a href="{{ route('smartwallet') }}"
-               class="{{ request()->routeIs('smartwallet') ? 'active' : '' }}"
+            <a href="<?php echo e(route('smartwallet')); ?>"
+               class="<?php echo e(request()->routeIs('smartwallet') ? 'active' : ''); ?>"
                role="menuitem" title="Smart Wallet">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -60,8 +60,8 @@
             </a>
         </li>
         <li class="menu-item" role="none">
-            <a href="{{ route('smartwallet.memberRequest.index') }}"
-               class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
+            <a href="<?php echo e(route('smartwallet.memberRequest.index')); ?>"
+               class="<?php echo e(request()->routeIs('smartwallet.memberRequest.index') ? 'active' : ''); ?>"
                role="menuitem" title="Smart Wallet">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -76,8 +76,8 @@
         </li>
 
         <li class="menu-item" role="none">
-            <a href="{{ route('managereport.memberactive') }}"
-               class="{{ request()->routeIs('managereport.memberactive') ? 'active' : '' }}"
+            <a href="<?php echo e(route('managereport.memberactive')); ?>"
+               class="<?php echo e(request()->routeIs('managereport.memberactive') ? 'active' : ''); ?>"
                role="menuitem" title="Member Activate">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -92,8 +92,8 @@
 
         <!-- Category -->
         <li class="menu-item" role="none">
-            <a href="{{ route('category') }}"
-               class="{{ request()->routeIs('category') ? 'active' : '' }}"
+            <a href="<?php echo e(route('category')); ?>"
+               class="<?php echo e(request()->routeIs('category') ? 'active' : ''); ?>"
                role="menuitem" title="Manage Category">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -106,8 +106,8 @@
 
         <!-- Product -->
         <li class="menu-item" role="none">
-            <a href="{{ route('product') }}"
-               class="{{ request()->routeIs('product') ? 'active' : '' }}"
+            <a href="<?php echo e(route('product')); ?>"
+               class="<?php echo e(request()->routeIs('product') ? 'active' : ''); ?>"
                role="menuitem" title="Product">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -122,8 +122,8 @@
 
         <!-- Product Purchase -->
         <li class="menu-item" role="none">
-            <a href="{{ route('productpurchase.index') }}"
-               class="{{ request()->routeIs('productpurchase.*') ? 'active' : '' }}"
+            <a href="<?php echo e(route('productpurchase.index')); ?>"
+               class="<?php echo e(request()->routeIs('productpurchase.*') ? 'active' : ''); ?>"
                role="menuitem" title="Product Purchase">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -137,8 +137,8 @@
         </li>
 
         <li class="menu-item" role="none">
-            <a href="{{ route('stpschedule.index') }}"
-               class="{{ request()->routeIs('stpschedule.*') ? 'active' : '' }}"
+            <a href="<?php echo e(route('stpschedule.index')); ?>"
+               class="<?php echo e(request()->routeIs('stpschedule.*') ? 'active' : ''); ?>"
                role="menuitem" title="STP Schedule">
 
                 <svg viewBox="0 0 24 24" fill="none">
@@ -168,15 +168,13 @@
             <!-- Sub Menu -->
             <ul class="submenu" role="menu">
                 <li role="none">
-                    <a href="{{ route('adminpassivebonus') }}" role="menuitem" title="Passive Bonus">
+                    <a href="<?php echo e(route('adminpassivebonus')); ?>" role="menuitem" title="Passive Bonus">
                         Passive Bonus
                     </a>
                 </li>
             </ul>
 
         </li>
-<<<<<<< HEAD
-=======
         <li class="menu-item" role="none">
             <a id="smartBoatChatLink" href="#"
                role="menuitem" title="Smart Boat Chat">
@@ -194,16 +192,11 @@
                 <span class="label">Smart Boat Chat</span>
             </a>
         </li>
->>>>>>> Pingki
 
     </ul>
 
 </aside>
-<<<<<<< HEAD
-
-=======
-@include('smartBoatChat')
->>>>>>> Pingki
+<?php echo $__env->make('smartBoatChat', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <script>
 document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
     menu.addEventListener('click', function() {
@@ -211,3 +204,4 @@ document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
     });
 });
 </script>
+<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/admin/layouts/sidebar.blade.php ENDPATH**/ ?>

@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Panel — SmartBoatEcosystem</title>
-    <link rel="shortcut icon" href="<?php echo e(asset('admin/assets/images/favicon.ico')); ?>">
+    <link rel="shortcut icon" href="<?php echo e(asset('public/admin/assets/images/favicon.ico')); ?>">
 
     
-    <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
 
     
-    <link href="<?php echo e(asset('admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
 
     
-    <link href="<?php echo e(asset('admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 
     
-    <link rel="stylesheet" href="<?php echo e(asset('admin/assets/toastr/toastr.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('public/admin/assets/toastr/toastr.min.css')); ?>">
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
@@ -592,15 +592,12 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
-<<<<<<< HEAD
-=======
     <a id="smartBoatChatLink" href="#"
        class="nav-link"
        data-bs-title="Smart Boat Chat">
         <i class="bi bi-chat-dots-fill"></i>
         <span class="nav-label">Smart Boat Chat</span>
     </a>
->>>>>>> Pingki
     <!-- Smart Wallet START -->
 
     <a href="#smartWalletDropdown"
@@ -754,37 +751,34 @@
 
 </main>
 
-<<<<<<< HEAD
-=======
 <?php echo $__env->make('smartBoatChat', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
->>>>>>> Pingki
 
-<script src="<?php echo e(asset('admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
-<script src="<?php echo e(asset('admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
-
-
-<script src="<?php echo e(asset('admin/assets/js/admin/jquery.dataTables.min.js')); ?>"></script>
-<script src="<?php echo e(asset('admin/assets/js/admin/dataTables.bootstrap5.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
 
 
-<script src="<?php echo e(asset('admin/assets/js/admin/jszip.min.js')); ?>"></script>
-<script src="<?php echo e(asset('admin/assets/js/admin/pdfmake.min.js')); ?>"></script>
-<script src="<?php echo e(asset('admin/assets/js/admin/vfs_fonts.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/dataTables.bootstrap5.min.js')); ?>"></script>
 
 
-<script src="<?php echo e(asset('admin/assets/js/admin/dataTables.buttons.min.js')); ?>"></script>
-<script src="<?php echo e(asset('admin/assets/js/admin/buttons.html5.min.js')); ?>"></script>
-<script src="<?php echo e(asset('admin/assets/js/admin/buttons.print.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/jszip.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/pdfmake.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/vfs_fonts.js')); ?>"></script>
 
 
-<script src="<?php echo e(asset('admin/assets/js/admin/sweetalert2@11.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/dataTables.buttons.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/buttons.html5.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/buttons.print.min.js')); ?>"></script>
 
 
-<script src="<?php echo e(asset('admin/assets/toastr/toastr.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/sweetalert2@11.js')); ?>"></script>
 
 
-<script src="<?php echo e(asset('admin/assets/js/sweetalert2.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/toastr/toastr.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/js/sweetalert2.min.js')); ?>"></script>
 
 <script>
 (function () {
@@ -845,15 +839,12 @@
     });
     <?php endif; ?>
 })();
-<<<<<<< HEAD
-=======
 
 
->>>>>>> Pingki
 </script>
 
 <?php echo $__env->yieldPushContent('scripts'); ?>
 
 </body>
 </html>
-<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\resources\views/member/layouts/app.blade.php ENDPATH**/ ?>
+<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/member/layouts/app.blade.php ENDPATH**/ ?>

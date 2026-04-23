@@ -1,6 +1,4 @@
-@extends('member.layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <style>
 .profile-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
@@ -150,7 +148,7 @@
 @keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 </style>
 
-{{-- ══ TAB BUTTONS ══ --}}
+
 <div class="profile-tabs">
     <button class="tab-btn active" onclick="switchTab('profile')" id="tab-profile">
         <i class="bi bi-person-circle"></i> Profile Details
@@ -163,39 +161,39 @@
     </button>
 </div>
 
-{{-- ══════════════════ TAB 1 — PROFILE ══════════════════ --}}
+
 <div class="tab-panel active" id="panel-profile">
 
     <div class="profile-header-card">
-        <div class="avatar-big">{{ strtoupper(substr($member->name, 0, 1)) }}</div>
+        <div class="avatar-big"><?php echo e(strtoupper(substr($member->name, 0, 1))); ?></div>
         <div class="profile-header-info">
-            <h5>{{ $member->name }}</h5>
-            <p>{{ $member->memberID }}</p>
+            <h5><?php echo e($member->name); ?></h5>
+            <p><?php echo e($member->memberID); ?></p>
             <div class="profile-stat-badges">
-                <span class="psb">Smart Points: {{ number_format($member->smart_point, 4) }}</span>
-                <span class="psb">Smart Qty: {{ $member->smart_quanity ?: '0.0000' }}</span>
-                <span class="psb green">₹{{ number_format($smartWalletBalance ?? 0, 2) }} Wallet</span>
+                <span class="psb">Smart Points: <?php echo e(number_format($member->smart_point, 4)); ?></span>
+                <span class="psb">Smart Qty: <?php echo e($member->smart_quanity ?: '0.0000'); ?></span>
+                <span class="psb green">₹<?php echo e(number_format($smartWalletBalance ?? 0, 2)); ?> Wallet</span>
             </div>
         </div>
     </div>
 
     <div class="info-grid">
-        <div class="info-box"><label>Full Name</label><span>{{ $member->name }}</span></div>
-        <div class="info-box"><label>Member ID</label><span>{{ $member->memberID }}</span></div>
-        <div class="info-box"><label>Joining Date</label><span>{{ $member->joining_date }}</span></div>
-        <div class="info-box"><label>Referral Code</label><span>{{ $member->referral_code }}</span></div>
+        <div class="info-box"><label>Full Name</label><span><?php echo e($member->name); ?></span></div>
+        <div class="info-box"><label>Member ID</label><span><?php echo e($member->memberID); ?></span></div>
+        <div class="info-box"><label>Joining Date</label><span><?php echo e($member->joining_date); ?></span></div>
+        <div class="info-box"><label>Referral Code</label><span><?php echo e($member->referral_code); ?></span></div>
         <div class="info-box">
             <label>Status</label>
             <span>
-                @if($member->status == 1) <span class="badge bg-success">Active</span>
-                @elseif($member->status == 2) <span class="badge bg-warning text-dark">Pending</span>
-                @else <span class="badge bg-danger">Blocked</span>
-                @endif
+                <?php if($member->status == 1): ?> <span class="badge bg-success">Active</span>
+                <?php elseif($member->status == 2): ?> <span class="badge bg-warning text-dark">Pending</span>
+                <?php else: ?> <span class="badge bg-danger">Blocked</span>
+                <?php endif; ?>
             </span>
         </div>
         <div class="info-box">
             <label>Smart Wallet Balance</label>
-            <span class="text-success">₹{{ number_format($smartWalletBalance ?? 0, 2) }}</span>
+            <span class="text-success">₹<?php echo e(number_format($smartWalletBalance ?? 0, 2)); ?></span>
         </div>
     </div>
 
@@ -224,7 +222,7 @@
     </div>
 </div>
 
-{{-- ══════════════════ TAB 2 — PAYMENT DETAILS ══════════════════ --}}
+
 <div class="tab-panel" id="panel-payment">
     <div class="section-card">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
@@ -232,9 +230,9 @@
                 <h6 style="margin:0;"><i class="bi bi-bank me-1"></i> Payment Details</h6>
                 <p class="sub" style="margin:4px 0 0;">Your saved bank account, UPI and QR code details</p>
             </div>
-            {{-- + New button: hidden when records exist, shown when empty --}}
+            
             <button class="btn-new" id="btnAddNew"
-                    style="{{ $memberPayments->count() > 0 ? 'display:none;' : '' }}"
+                    style="<?php echo e($memberPayments->count() > 0 ? 'display:none;' : ''); ?>"
                     onclick="openPaymentModal('add', null, null)">
                 <i class="bi bi-plus-circle-fill"></i> + New Payment Details
             </button>
@@ -258,33 +256,29 @@
                     </tr>
                 </thead>
                 <tbody id="paymentTableBody">
-                    @forelse($memberPayments as $i => $pay)
-                    <tr id="payRow_{{ $pay->id }}">
+                    <?php $__empty_1 = true; $__currentLoopData = $memberPayments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $pay): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <tr id="payRow_<?php echo e($pay->id); ?>">
                         <td><input type="checkbox"></td>
-                        <td style="color:#6c757d;">{{ $i + 1 }}</td>
-                        <td>{{ $pay->account_holder ?: '-' }}</td>
-                        <td>{{ $pay->bank_name       ?: '-' }}</td>
-                        <td>{{ $pay->account_number  ?: '-' }}</td>
-                        <td>{{ $pay->ifsc_code       ?: '-' }}</td>
-                        <td>{{ $pay->upi_id          ?: '-' }}</td>
-                        <td>{{ strtoupper($pay->upi_app ?? '-') }}</td>
+                        <td style="color:#6c757d;"><?php echo e($i + 1); ?></td>
+                        <td><?php echo e($pay->account_holder ?: '-'); ?></td>
+                        <td><?php echo e($pay->bank_name       ?: '-'); ?></td>
+                        <td><?php echo e($pay->account_number  ?: '-'); ?></td>
+                        <td><?php echo e($pay->ifsc_code       ?: '-'); ?></td>
+                        <td><?php echo e($pay->upi_id          ?: '-'); ?></td>
+                        <td><?php echo e(strtoupper($pay->upi_app ?? '-')); ?></td>
                         <td>
-                            @if($pay->qr_code)
-<<<<<<< HEAD
-                                <img src="{{ asset('storage/'.$pay->qr_code) }}"
-=======
-                                <img src="{{ asset('public/storage/'.$pay->qr_code) }}"
->>>>>>> Pingki
+                            <?php if($pay->qr_code): ?>
+                                <img src="<?php echo e(asset('public/storage/'.$pay->qr_code)); ?>"
                                      style="width:36px;height:36px;object-fit:contain;border:1px solid #e9ecef;border-radius:5px;">
-                            @else
+                            <?php else: ?>
                                 <span style="color:#adb5bd;font-size:11px;">No QR</span>
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td><span class="badge-active">Active</span></td>
                         <td>
                             <div style="display:flex;gap:5px;">
                                 <button class="btn-edit-row" title="Edit"
-                                        onclick='openPaymentModal("edit", {{ $pay->id }}, {{ json_encode([
+                                        onclick='openPaymentModal("edit", <?php echo e($pay->id); ?>, <?php echo e(json_encode([
                                             "account_holder" => $pay->account_holder,
                                             "account_number" => $pay->account_number,
                                             "bank_name"      => $pay->bank_name,
@@ -295,17 +289,17 @@
                                             "upi_mobile"     => $pay->upi_mobile,
                                             "upi_app"        => $pay->upi_app,
                                             "qr_code"        => $pay->qr_code,
-                                        ]) }})'>
+                                        ])); ?>)'>
                                     <i class="bi bi-pencil-fill"></i>
                                 </button>
                                 <button class="btn-del-row" title="Delete"
-                                        onclick="deletePaymentDetails({{ $pay->id }})">
+                                        onclick="deletePaymentDetails(<?php echo e($pay->id); ?>)">
                                     <i class="bi bi-trash-fill"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr id="emptyRow">
                         <td colspan="11">
                             <div class="empty-state">
@@ -314,22 +308,22 @@
                             </div>
                         </td>
                     </tr>
-                    @endforelse
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <div style="margin-top:10px;font-size:12px;color:#6c757d;" id="payCountLabel">
-            Showing {{ $memberPayments->count() }} record(s)
+            Showing <?php echo e($memberPayments->count()); ?> record(s)
         </div>
     </div>
 </div>
 
-{{-- ══════════════════ TAB 3 — TRANSACTIONS ══════════════════ --}}
+
 <div class="tab-panel" id="panel-transaction">
     <div class="section-card">
         <h6><i class="bi bi-clock-history me-1"></i> Transaction History</h6>
-        <p class="sub">All credit &amp; debit transactions linked to your account ({{ $member->memberID }})</p>
+        <p class="sub">All credit &amp; debit transactions linked to your account (<?php echo e($member->memberID); ?>)</p>
         <div style="overflow-x:auto;">
             <table class="txn-table" id="txnTable">
                 <thead>
@@ -338,52 +332,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($transactions as $i => $txn)
+                    <?php $__empty_1 = true; $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $txn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr>
-                        <td style="color:#6c757d;">{{ $i + 1 }}</td>
-                        <td>{{ $txn->action }}</td>
+                        <td style="color:#6c757d;"><?php echo e($i + 1); ?></td>
+                        <td><?php echo e($txn->action); ?></td>
                         <td style="font-weight:600;">
-                            @if(strtolower($txn->type) === 'credit')
-                                <span class="text-success">+₹{{ number_format($txn->amount, 2) }}</span>
-                            @else
-                                <span class="text-danger">-₹{{ number_format($txn->amount, 2) }}</span>
-                            @endif
+                            <?php if(strtolower($txn->type) === 'credit'): ?>
+                                <span class="text-success">+₹<?php echo e(number_format($txn->amount, 2)); ?></span>
+                            <?php else: ?>
+                                <span class="text-danger">-₹<?php echo e(number_format($txn->amount, 2)); ?></span>
+                            <?php endif; ?>
                         </td>
                         <td>
-                            @if(strtolower($txn->type) === 'credit')
+                            <?php if(strtolower($txn->type) === 'credit'): ?>
                                 <span class="badge-credit">Credit</span>
-                            @else
+                            <?php else: ?>
                                 <span class="badge-debit">Debit</span>
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td>
-                            @if($txn->status == 1)
+                            <?php if($txn->status == 1): ?>
                                 <span class="badge-success-status">Success</span>
-                            @else
+                            <?php else: ?>
                                 <span style="background:#f3f4f6;color:#6b7280;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;">Pending</span>
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td style="color:#6c757d;white-space:nowrap;">
-                            {{ \Carbon\Carbon::parse($txn->created_at)->format('d M Y, h:i A') }}
+                            <?php echo e(\Carbon\Carbon::parse($txn->created_at)->format('d M Y, h:i A')); ?>
+
                         </td>
                     </tr>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
                         <td colspan="6">
                             <div class="empty-state">
                                 <i class="bi bi-inbox" style="font-size:36px;opacity:.3;display:block;margin-bottom:10px;"></i>
-                                <p>No transactions found for <strong>{{ $member->memberID }}</strong></p>
+                                <p>No transactions found for <strong><?php echo e($member->memberID); ?></strong></p>
                             </div>
                         </td>
                     </tr>
-                    @endforelse
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-{{-- ══ PAYMENT MODAL ══ --}}
+
 <div class="modal-overlay" id="paymentModal">
     <div class="modal-box">
         <button class="modal-close" onclick="closePaymentModal()">✕</button>
@@ -391,7 +386,7 @@
         <p class="sub" id="modalSubtitle">Fill in your bank account, UPI and QR code details</p>
 
         <form id="paymentDetailsForm" enctype="multipart/form-data">
-            @csrf
+            <?php echo csrf_field(); ?>
             <div class="divider-label"><i class="bi bi-building me-1"></i> Bank Account Details</div>
             <div class="form-grid">
                 <div class="form-group-custom">
@@ -475,7 +470,7 @@
     </div>
 </div>
 
-{{-- QR ZOOM MODAL --}}
+
 <div id="qrModal" onclick="this.style.display='none'"
      style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.65);
             align-items:center;justify-content:center;padding:20px;">
@@ -533,7 +528,7 @@ function openPaymentModal(mode, editId, data) {
         document.getElementById('f_upi_mobile').value       = data.upi_mobile      || '';
         document.getElementById('f_upi_app').value          = data.upi_app         || '';
         if (data.qr_code) {
-            document.getElementById('existingQrImg').src            = '{{ asset("storage") }}/' + data.qr_code;
+            document.getElementById('existingQrImg').src            = '<?php echo e(asset("storage")); ?>/' + data.qr_code;
             document.getElementById('existingQrWrap').style.display = 'block';
         }
     } else {
@@ -584,9 +579,9 @@ function savePaymentDetails() {
     var formData = new FormData(document.getElementById('paymentDetailsForm'));
     if (currentEditId) formData.append('edit_id', currentEditId);
 
-    fetch('{{ route("member.payment.details.store") }}', {
+    fetch('<?php echo e(route("member.payment.details.store")); ?>', {
         method: 'POST',
-        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+        headers: { 'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>' },
         body: formData
     })
     .then(function(res) { return res.json(); })
@@ -656,9 +651,9 @@ function savePaymentDetails() {
 function deletePaymentDetails(id) {
     if (!confirm('Are you sure you want to delete this payment record?')) return;
 
-    fetch('{{ route("member.payment.details.destroy") }}', {
+    fetch('<?php echo e(route("member.payment.details.destroy")); ?>', {
         method: 'POST',
-        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Content-Type': 'application/json' },
+        headers: { 'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>', 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: id })
     })
     .then(function(res) { return res.json(); })
@@ -722,4 +717,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('member.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/member/profile.blade.php ENDPATH**/ ?>

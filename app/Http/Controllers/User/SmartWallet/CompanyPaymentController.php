@@ -118,7 +118,11 @@ class CompanyPaymentController extends Controller
                             </span>',
                 'transaction_id' => $row->transaction_id ?? 'N/A',
                 'qr_file' => $row->qr_file 
+<<<<<<< HEAD
                     ? '<a href="'.asset('uploads/company_payment/'.$row->qr_file).'" target="_blank">
+=======
+                    ? '<a href="'.asset('public/uploads/company_payment/'.$row->qr_file).'" target="_blank">
+>>>>>>> Pingki
                         <i class="bi '.(in_array(strtolower(pathinfo($row->qr_file, PATHINFO_EXTENSION)), ['jpg','jpeg','png']) 
                         ? 'bi-image' 
                         : 'bi-file-earmark-pdf').'"></i>

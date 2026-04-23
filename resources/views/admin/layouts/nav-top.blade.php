@@ -9,7 +9,11 @@
                 </button>
                 <a href="{{ route('admin.index') }}" class="navbar-brand">
                     <div class="logo" aria-hidden="true">
+<<<<<<< HEAD
                         {{-- <img src={{ asset('admin/assets/images/icon-logo.png')}}" alt="logo"> --}}
+=======
+                        {{-- <img src={{ asset('public/admin/assets/images/icon-logo.png')}}" alt="logo"> --}}
+>>>>>>> Pingki
                     </div>
                     <div class="brand-text fw-bold fs-5 text-dark">
                         SmartBoatEcosystem
@@ -104,7 +108,11 @@
                                 <div class="timeline-panel">
                                     <div class="media me-2">
                                         DR
+<<<<<<< HEAD
                                         <!-- <img alt="image" width="50" src="{{ asset('admin/assets/images/profile.png')}}"> -->
+=======
+                                        <!-- <img alt="image" width="50" src="{{ asset('public/admin/assets/images/profile.png')}}"> -->
+>>>>>>> Pingki
                                     </div>
                                     <div class="media-body">
                                         <h6 class="mb-1">Dr Smith uploaded a new report</h6>
@@ -138,7 +146,11 @@
                                 <div class="timeline-panel">
                                     <div class="media me-2">
                                         AS
+<<<<<<< HEAD
                                         <!-- <img alt="image" width="50" src="{{ asset('admin/assets/images/profile.png')}}"> -->
+=======
+                                        <!-- <img alt="image" width="50" src="{{ asset('public/admin/assets/images/profile.png')}}"> -->
+>>>>>>> Pingki
                                     </div>
                                     <div class="media-body">
                                         <h6 class="mb-1">Dr Alice shared a prescription</h6>

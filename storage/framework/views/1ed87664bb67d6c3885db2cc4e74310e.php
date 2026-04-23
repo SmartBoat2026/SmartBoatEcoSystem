@@ -1,21 +1,14 @@
-{{-- FILE: resources/views/admin/login.blade.php --}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SmartBoatEcosystem</title>
-<<<<<<< HEAD
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}" type="image/x-icon">
-    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo e(asset('public/admin/assets/images/favicon.ico')); ?>" type="image/x-icon">
+    <link href="<?php echo e(asset('public/admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
-=======
-    <link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.ico') }}" type="image/x-icon">
-    <link href="{{ asset('public/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="{{ asset('public/admin/assets/css/style.css') }}" rel="stylesheet">
->>>>>>> Pingki
+    <link href="<?php echo e(asset('public/admin/assets/css/style.css')); ?>" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -285,40 +278,42 @@
                 <p>Sign in to your SmartBoatEcosystem Account</p>
             </div>
 
-            {{-- Login type hint --}}
+            
             <div class="login-hint">
                 <i class="bi bi-info-circle me-1"></i>
                 Admin: use <strong>username</strong> &nbsp;|&nbsp;
                 Member: use <strong>Member ID</strong>
             </div>
 
-            {{-- Session status --}}
-            @if (session('status'))
+            
+            <?php if(session('status')): ?>
                 <div class="alert alert-info mb-3">
-                    {{ session('status') }}
-                </div>
-            @endif
+                    <?php echo e(session('status')); ?>
 
-            {{-- Error --}}
-            @if ($errors->has('username'))
+                </div>
+            <?php endif; ?>
+
+            
+            <?php if($errors->has('username')): ?>
                 <div class="alert alert-danger mb-3">
                     <i class="bi bi-exclamation-circle me-1"></i>
-                    {{ $errors->first('username') }}
-                </div>
-            @endif
+                    <?php echo e($errors->first('username')); ?>
 
-            <form class="auth-form" id="loginForm" method="POST" action="{{ route('login.post') }}">
-                @csrf
+                </div>
+            <?php endif; ?>
+
+            <form class="auth-form" id="loginForm" method="POST" action="<?php echo e(route('login.post')); ?>">
+                <?php echo csrf_field(); ?>
 
                 <div class="form-group">
                     <label class="form-label" for="loginUsername">Username</label>
                     <input
                         type="text"
-                        class="form-input {{ $errors->has('username') ? 'is-invalid' : '' }}"
+                        class="form-input <?php echo e($errors->has('username') ? 'is-invalid' : ''); ?>"
                         id="loginUsername"
                         name="username"
                         placeholder="Enter username or Member ID (e.g. SB3891186636)"
-                        value="{{ old('username') }}"
+                        value="<?php echo e(old('username')); ?>"
                         required
                         autocomplete="username"
                     >
@@ -340,12 +335,12 @@
                             <i class="bi bi-eye"></i>
                         </button>
                     </div>
-                    @if ($errors->has('password'))
+                    <?php if($errors->has('password')): ?>
                         <div class="error-message">
                             <i class="bi bi-exclamation-circle"></i>
-                            <span>{{ $errors->first('password') }}</span>
+                            <span><?php echo e($errors->first('password')); ?></span>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <div class="form-check">
@@ -360,7 +355,7 @@
 
                 <div class="divider">or</div>
 
-                <a href="{{ route('register') }}" class="btn-register">
+                <a href="<?php echo e(route('register')); ?>" class="btn-register">
                     <i class="bi bi-person-plus"></i>
                     <span>Register as Member</span>
                 </a>
@@ -369,15 +364,9 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    <script src="{{ asset('admin/assets/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/script.js') }}"></script>
-=======
-    <script src="{{ asset('public/admin/assets/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/js/script.js') }}"></script>
->>>>>>> Pingki
+    <script src="<?php echo e(asset('public/admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('public/admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('public/admin/assets/js/script.js')); ?>"></script>
     <script>
         document.getElementById('loginPasswordToggle').addEventListener('click', function () {
             const input = document.getElementById('loginPassword');
@@ -393,3 +382,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/admin/login.blade.php ENDPATH**/ ?>

@@ -14,4 +14,15 @@ class Chat extends Model
         'type',
         'is_seen'
     ];
+<<<<<<< HEAD
+=======
+    public function senderUser()
+    {
+        return $this->belongsTo(ManageReport::class, 'sender_member_id', 'member_id');
+    }
+    public function receiverUser()
+    {
+        return $this->belongsTo(ManageReport::class, 'receiver_member_id', 'member_id');
+    }
+>>>>>>> Pingki
 }

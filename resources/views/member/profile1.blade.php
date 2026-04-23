@@ -405,7 +405,11 @@
                         <td>{{ strtoupper($memberPayment->upi_app ?? '-') }}</td>
                         <td>
                             @if($memberPayment->qr_code)
+<<<<<<< HEAD
                                 <img src="{{ asset('storage/'.$memberPayment->qr_code) }}"
+=======
+                                <img src="{{ asset('public/storage/'.$memberPayment->qr_code) }}"
+>>>>>>> Pingki
                                      style="width:36px;height:36px;object-fit:contain;
                                             border:1px solid #e9ecef;border-radius:5px;">
                             @else

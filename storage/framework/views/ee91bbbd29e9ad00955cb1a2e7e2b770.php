@@ -1,8 +1,6 @@
-@extends('member.layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-    {{-- ===== PAGE HEADER ===== --}}
+    
     <div class="page-header">
         <div class="page-title">
             <h1>Company Payment Submission List</h1>
@@ -16,7 +14,7 @@
         </div>
     </div>
 
-    {{-- ===== SENDER REQUEST FORM MODAL ===== --}}
+    
     <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
@@ -47,11 +45,7 @@
                                 </p>
 
                                 <div style="text-align:center;margin:15px 0;">
-<<<<<<< HEAD
-                                    <img src="{{ asset('admin/assets/images/HindolMukherjeeQRCode.png') }}"
-=======
-                                    <img src="{{ asset('public/admin/assets/images/HindolMukherjeeQRCode.png') }}"
->>>>>>> Pingki
+                                    <img src="<?php echo e(asset('public/admin/assets/images/HindolMukherjeeQRCode.png')); ?>"
                                         style="width:180px;border-radius:10px;cursor:pointer;"
                                         onclick="openQrModal(this.src)">
                                     <p style="font-size:11px;color:#888;margin-top:6px;">Click to enlarge</p>
@@ -77,9 +71,9 @@
                         <!-- RIGHT SIDE -->
                         <div class="col-md-7">
 
-                            <form method="POST" action="{{ route('member.smartwallet.companyPayment.store') }}" 
+                            <form method="POST" action="<?php echo e(route('member.smartwallet.companyPayment.store')); ?>" 
                                 enctype="multipart/form-data" id="CompanyPaymentSubmissionForm">
-                                @csrf
+                                <?php echo csrf_field(); ?>
 
                                 <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
 
@@ -139,7 +133,7 @@
         </div>
     </div>
     
-    {{-- QR CODE MODAL --}}
+    
     <div id="qrModal"
      style="display:none;position:fixed;inset:0;
             background:rgba(0,0,0,.85);
@@ -164,7 +158,7 @@
 
         </div>
     </div>
-    {{--==== TRANSACTION PASSWORD ==== --}}
+    
     <div class="modal fade" id="transactionPasswordModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -187,7 +181,7 @@
         </div>
     </div>
 
-    {{-- ===== Payment Submission History ===== --}}
+    
     <div class="card mb-4">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2"
              style="background:#1a3a6b;color:#fff;">
@@ -220,14 +214,9 @@
     </div>
     
 
-@endsection
-<<<<<<< HEAD
-@include('chatbox')
-@include('chat-script')
-=======
+<?php $__env->stopSection(); ?>
 
->>>>>>> Pingki
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 
 <script>
     function openQrModal(src) {
@@ -257,7 +246,7 @@ $(document).ready(function () {
     });
     $('#addModal').on('shown.bs.modal', function () {
          $.ajax({
-            url: "{{ route('member.smartwallet.companyPayment.loadModelOpenData') }}",
+            url: "<?php echo e(route('member.smartwallet.companyPayment.loadModelOpenData')); ?>",
             type: "GET",
             dataType: "json",
 
@@ -377,7 +366,7 @@ $(document).ready(function () {
     $('#sendCompanyPaymentSubmissionHistoryTable').DataTable({
         processing: true,
         serverSide: false,
-        ajax: "{{ route('member.smartwallet.companyPayment.list') }}",
+        ajax: "<?php echo e(route('member.smartwallet.companyPayment.list')); ?>",
         columns: [
             { data: 'DT_RowIndex' },
             { data: 'date' },
@@ -486,4 +475,6 @@ $(document).ready(function () {
 });
 
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('member.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/member/smartwallet/companyPayment.blade.php ENDPATH**/ ?>

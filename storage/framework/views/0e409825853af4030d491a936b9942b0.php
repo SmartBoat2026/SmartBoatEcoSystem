@@ -1,6 +1,4 @@
-{{-- resources/views/admin/product.blade.php --}}
-@extends('admin.layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <main class="main" id="main" role="main">
 
@@ -16,30 +14,32 @@
         </div>
     </div>
 
-    {{-- Flash Messages --}}
-    @if(session('success'))
+    
+    <?php if(session('success')): ?>
         <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
-    @if(session('error'))
+    <?php endif; ?>
+    <?php if(session('error')): ?>
         <div class="alert alert-danger alert-dismissible fade show">
-            {{ session('error') }}
+            <?php echo e(session('error')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
+    <?php endif; ?>
 
     <div class="card shadow-sm">
         <div class="card-body table-responsive">
 
-            {{-- ── BULK DELETE BAR (hidden until rows selected) ── --}}
+            
             <div id="bulkActionBar"
                  style="display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;
                         padding:10px 16px;margin-bottom:12px;align-items:center;gap:12px;">
                 <span id="selectedCount" style="font-size:13px;font-weight:600;color:#856404;">0 selected</span>
-                <form id="bulkDeleteForm" method="POST" action="{{ route('product.bulkDelete') }}" style="display:inline;">
-                    @csrf
+                <form id="bulkDeleteForm" method="POST" action="<?php echo e(route('product.bulkDelete')); ?>" style="display:inline;">
+                    <?php echo csrf_field(); ?>
                     <div id="bulkDeleteIds"></div>
                     <button type="submit" class="btn btn-danger btn-sm"
                             onclick="return confirm('Delete selected products? This cannot be undone.')">
@@ -54,7 +54,7 @@
             <table id="productTable" class="table table-bordered table-hover align-middle">
                 <thead class="table-primary">
                     <tr>
-                        {{-- ── SELECT ALL checkbox ── --}}
+                        
                         <th style="width:40px;text-align:center;">
                             <input type="checkbox" id="selectAll" style="cursor:pointer;width:15px;height:15px;">
                         </th>
@@ -73,58 +73,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $i => $product)
+                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        {{-- ── ROW checkbox ── --}}
+                        
                         <td class="text-center">
-                            <input type="checkbox" class="row-checkbox" value="{{ $product->id }}"
+                            <input type="checkbox" class="row-checkbox" value="<?php echo e($product->id); ?>"
                                    style="cursor:pointer;width:15px;height:15px;">
                         </td>
-                        <td>{{ $i + 1 }}</td>
-                        <td>{{ $product->category->name ?? '-' }}</td>
-                        <td>{{ $product->subcategory->name ?? '-' }}</td>
-                        <td>{{ $product->name }}</td>
+                        <td><?php echo e($i + 1); ?></td>
+                        <td><?php echo e($product->category->name ?? '-'); ?></td>
+                        <td><?php echo e($product->subcategory->name ?? '-'); ?></td>
+                        <td><?php echo e($product->name); ?></td>
                         <td>
                             <span class="badge bg-dark font-monospace" style="letter-spacing:1px; font-size:0.8rem;">
-                                {{ $product->hsn_code ?? '-' }}
+                                <?php echo e($product->hsn_code ?? '-'); ?>
+
                             </span>
                         </td>
-                        <td>{{ $product->smart_points }}</td>
-                        <td>₹{{ number_format($product->base_price, 2) }}</td>
-                        <td>{{ $product->qty }}</td>
-                        <td>{{ Str::limit($product->description, 40) }}</td>
+                        <td><?php echo e($product->smart_points); ?></td>
+                        <td>₹<?php echo e(number_format($product->base_price, 2)); ?></td>
+                        <td><?php echo e($product->qty); ?></td>
+                        <td><?php echo e(Str::limit($product->description, 40)); ?></td>
                         <td>
-                            @if($product->image)
-<<<<<<< HEAD
-                                <img src="{{ asset('storage/' . $product->image) }}" width="50" height="50"
-=======
-                                <img src="{{ asset('public/storage/' . $product->image) }}" width="50" height="50"
->>>>>>> Pingki
+                            <?php if($product->image): ?>
+                                <img src="<?php echo e(asset('public/storage/' . $product->image)); ?>" width="50" height="50"
                                      style="object-fit:cover; border-radius:4px;">
-                            @else
+                            <?php else: ?>
                                 <span class="text-muted">No Image</span>
-                            @endif
+                            <?php endif; ?>
                         </td>
                         <td>
-                            <button class="btn btn-sm toggle-status {{ $product->status == 1 ? 'btn-success' : 'btn-danger' }}"
-                                data-id="{{ $product->id }}">
-                                {{ $product->status == 1 ? 'Active' : 'Inactive' }}
+                            <button class="btn btn-sm toggle-status <?php echo e($product->status == 1 ? 'btn-success' : 'btn-danger'); ?>"
+                                data-id="<?php echo e($product->id); ?>">
+                                <?php echo e($product->status == 1 ? 'Active' : 'Inactive'); ?>
+
                             </button>
                         </td>
                         <td class="text-center">
                             <div class="d-flex gap-1 justify-content-center">
                                 <button class="btn btn-warning btn-sm px-2 py-1 edit-btn"
-                                    data-id="{{ $product->id }}"
-                                    data-category="{{ $product->category_id }}"
-                                    data-subcategory="{{ $product->subcategory_id }}"
-                                    data-name="{{ $product->name }}"
-                                    data-smart_points="{{ $product->smart_points }}"
-                                    data-base_price="{{ $product->base_price }}"
-                                    data-description="{{ $product->description }}"
+                                    data-id="<?php echo e($product->id); ?>"
+                                    data-category="<?php echo e($product->category_id); ?>"
+                                    data-subcategory="<?php echo e($product->subcategory_id); ?>"
+                                    data-name="<?php echo e($product->name); ?>"
+                                    data-smart_points="<?php echo e($product->smart_points); ?>"
+                                    data-base_price="<?php echo e($product->base_price); ?>"
+                                    data-description="<?php echo e($product->description); ?>"
                                     data-bs-toggle="modal" data-bs-target="#editModal">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                                <a href="{{ route('product.delete', $product->id) }}"
+                                <a href="<?php echo e(route('product.delete', $product->id)); ?>"
                                    class="btn btn-danger btn-sm px-2 py-1"
                                    onclick="return confirm('Delete this product?')">
                                     <i class="bi bi-trash"></i>
@@ -132,18 +130,18 @@
                             </div>
                         </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
         </div>
     </div>
 
 
-    {{-- ===================== ADD MODAL ===================== --}}
+    
     <div class="modal fade" id="addModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
-            <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
-                @csrf
+            <form method="POST" action="<?php echo e(route('product.store')); ?>" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Add New Product</h5>
@@ -156,9 +154,9 @@
                                 <label class="form-label">Category <span class="text-danger">*</span></label>
                                 <select name="category_id" id="add_category_id" class="form-select" required>
                                     <option value="">-- Select Category --</option>
-                                    @foreach($categories as $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($cat->id); ?>"><?php echo e($cat->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
@@ -218,11 +216,11 @@
     </div>
 
 
-    {{-- ===================== EDIT MODAL ===================== --}}
+    
     <div class="modal fade" id="editModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <form method="POST" id="editForm" action="" enctype="multipart/form-data">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Product</h5>
@@ -235,9 +233,9 @@
                                 <label class="form-label">Category <span class="text-danger">*</span></label>
                                 <select name="category_id" id="edit_category_id" class="form-select" required>
                                     <option value="">-- Select Category --</option>
-                                    @foreach($categories as $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($cat->id); ?>"><?php echo e($cat->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
@@ -308,7 +306,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 
 
 <script>
@@ -430,7 +428,7 @@ $(document).ready(function () {
             return;
         }
 
-        $.get('{{ route("product.subcategories", ":id") }}'.replace(':id', categoryId), function (data) {
+        $.get('<?php echo e(route("product.subcategories", ":id")); ?>'.replace(':id', categoryId), function (data) {
             $select.empty().append('<option value="">-- Select Sub-Category --</option>');
             $.each(data, function (i, sub) {
                 const selected = (sub.id == selectedId) ? 'selected' : '';
@@ -459,7 +457,7 @@ $(document).ready(function () {
 
         const hsnDisplay = 'HSN' + String(id).padStart(7, '0');
 
-        $('#editForm').attr('action', '{{ route("product.update", ":id") }}'.replace(':id', id));
+        $('#editForm').attr('action', '<?php echo e(route("product.update", ":id")); ?>'.replace(':id', id));
         $('#edit_name').val(btn.data('name'));
         $('#edit_smart_points').val(smartPoints);
         $('#edit_base_price').val(btn.data('base_price'));
@@ -477,9 +475,9 @@ $(document).ready(function () {
         const id  = btn.data('id');
 
         $.ajax({
-            url: '{{ route("product.toggleStatus", ":id") }}'.replace(':id', id),
+            url: '<?php echo e(route("product.toggleStatus", ":id")); ?>'.replace(':id', id),
             type: 'POST',
-            data: { _token: '{{ csrf_token() }}' },
+            data: { _token: '<?php echo e(csrf_token()); ?>' },
             success: function (res) {
                 if (res.status == 1) {
                     btn.removeClass('btn-danger').addClass('btn-success').text('Active');
@@ -495,6 +493,8 @@ $(document).ready(function () {
 
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/admin/product.blade.php ENDPATH**/ ?>

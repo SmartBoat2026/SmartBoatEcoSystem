@@ -215,7 +215,11 @@ class MemberController extends Controller
     }
 
     // Return the new/updated row HTML for dynamic injection
+<<<<<<< HEAD
     $qrUrl = $payment->qr_code ? asset('storage/' . $payment->qr_code) : null;
+=======
+    $qrUrl = $payment->qr_code ? asset('public/storage/' . $payment->qr_code) : null;
+>>>>>>> Pingki
 
     return response()->json([
         'success' => true,

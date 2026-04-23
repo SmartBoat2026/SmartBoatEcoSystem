@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Panel — SmartBoatEcosystem</title>
+<<<<<<< HEAD
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
 
     {{-- Bootstrap 5 --}}
@@ -19,6 +20,23 @@
 
     {{-- Toastr CSS --}}
     <link rel="stylesheet" href="{{ asset('admin/assets/toastr/toastr.min.css') }}">
+=======
+    <link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.ico') }}">
+
+    {{-- Bootstrap 5 --}}
+    <link href="{{ asset('public/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/admin/assets/css/user/styles.css') }}" rel="stylesheet">
+
+    {{-- Bootstrap Icons (local) --}}
+    <link href="{{ asset('public/admin/assets/css/admin/bootstrap-icons.css') }}" rel="stylesheet">
+
+    {{-- DataTables CSS --}}
+    <link href="{{ asset('public/admin/assets/css/admin/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/admin/assets/css/admin/buttons.dataTables.min.css') }}" rel="stylesheet">
+
+    {{-- Toastr CSS --}}
+    <link rel="stylesheet" href="{{ asset('public/admin/assets/toastr/toastr.min.css') }}">
+>>>>>>> Pingki
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
@@ -590,6 +608,15 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
+<<<<<<< HEAD
+=======
+    <a id="smartBoatChatLink" href="#"
+       class="nav-link"
+       data-bs-title="Smart Boat Chat">
+        <i class="bi bi-chat-dots-fill"></i>
+        <span class="nav-label">Smart Boat Chat</span>
+    </a>
+>>>>>>> Pingki
     <!-- Smart Wallet START -->
 
     <a href="#smartWalletDropdown"
@@ -741,6 +768,7 @@
 
 </main>
 
+<<<<<<< HEAD
 {{-- ════ SCRIPTS ════ --}}
 <script src="{{ asset('admin/assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -767,6 +795,36 @@
 
 {{-- sweetAlert --}}
 <script src="{{ asset('admin/assets/js/sweetalert2.min.js') }}"></script>
+=======
+@include('smartBoatChat')
+
+{{-- ════ SCRIPTS ════ --}}
+<script src="{{ asset('public/admin/assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/bootstrap.bundle.min.js') }}"></script>
+
+{{-- DataTables --}}
+<script src="{{ asset('public/admin/assets/js/admin/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/dataTables.bootstrap5.min.js') }}"></script>
+
+{{-- Export --}}
+<script src="{{ asset('public/admin/assets/js/admin/jszip.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/vfs_fonts.js') }}"></script>
+
+{{-- Buttons --}}
+<script src="{{ asset('public/admin/assets/js/admin/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('public/admin/assets/js/admin/buttons.print.min.js') }}"></script>
+
+{{-- SweetAlert2 --}}
+<script src="{{ asset('public/admin/assets/js/admin/sweetalert2@11.js') }}"></script>
+
+{{-- Toastr --}}
+<script src="{{ asset('public/admin/assets/toastr/toastr.min.js') }}"></script>
+
+{{-- sweetAlert --}}
+<script src="{{ asset('public/admin/assets/js/sweetalert2.min.js') }}"></script>
+>>>>>>> Pingki
 
 <script>
 (function () {
@@ -827,6 +885,11 @@
     });
     @endif
 })();
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> Pingki
 </script>
 
 @stack('scripts')
