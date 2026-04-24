@@ -180,7 +180,7 @@
         </li>
         @endadminCan
 
-        @if(\App\Support\AdminPanelAccess::can('bonus') || \App\Support\AdminPanelAccess::can('bonus_passive'))
+        @if(\App\Support\AdminPanelAccess::can('bonus') || \App\Support\AdminPanelAccess::can('bonus_passive') || \App\Support\AdminPanelAccess::can('bonus_direct'))
         <li class="menu-item has-submenu" role="none">
 
             <a href="javascript:void(0);" class="menu-link" role="menuitem" title="Bonus">
@@ -205,6 +205,13 @@
                 <li role="none">
                     <a href="{{ route('adminpassivebonus') }}" role="menuitem" title="Passive Bonus">
                         Passive Bonus
+                    </a>
+                </li>
+                @endadminCan
+                @adminCan('bonus_direct')
+                <li role="none">
+                    <a href="{{ route('admindirectbonus') }}" role="menuitem" title="Direct Bonus">
+                        Direct Bonus
                     </a>
                 </li>
                 @endadminCan

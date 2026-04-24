@@ -9,6 +9,8 @@ use App\Http\Controllers\RegistrationController;
 // ── Admin Folder Controllers ──────────────────────────────────────────────────
 use App\Http\Controllers\Admin\AdminController as AdminPanelController;
 use App\Http\Controllers\Admin\AdminpassivebonusController;
+use App\Http\Controllers\Admin\AdmindirectbonusController;
+use App\Http\Controllers\Admin\DirectbonusController;
 use App\Http\Controllers\Admin\BonusController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ManageReportController;
@@ -129,6 +131,7 @@ Route::middleware('admin.auth')->group(function () {
     // ── Bonus ─────────────────────────────────────────────────────────────────
     Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
     Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
+    Route::get('/admindirectbonus',                     [AdmindirectbonusController::class, 'index'])->name('admindirectbonus');
 
 
     // ── Additional admin routes can be added here ─────────────────────────────────
@@ -181,6 +184,7 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
 
     // Passive Bonus
     Route::get('/passivebonus',                         [PassivebonusController::class, 'passivebonus'])->name('passivebonus');
+    Route::get('/directbonus',                        [DirectbonusController::class, 'directbonus'])->name('directbonus');
 
     // ── Product Purchase ──────────────────────────────────────────────────────
     Route::get('/productpurchase/purchaseList/{pagename}', [MemberProductPurchaseController::class, 'purchaseList'])->name('productpurchase.purchaseList');
