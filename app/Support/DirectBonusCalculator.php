@@ -6,44 +6,79 @@ use Illuminate\Support\Facades\DB;
 
 class DirectBonusCalculator
 {
+    public const SETTING_KEY_DIRECT_BONUS = 'direct_bonus';
+
     /**
-     * @return array<int, array{min: float|int, max: float|int|null, percent: float|int}>
+     * Raw JSON from site_settings.setting_value where setting_key = direct_bonus.
      */
-    public static function defaultSlabs(): array
+    public static function rawDirectBonusSetting(): ?string
     {
-        return [
-            ['min' => 1, 'max' => 999, 'percent' => 3],
-            ['min' => 1000, 'max' => 5999, 'percent' => 5],
-            ['min' => 6000, 'max' => 9999, 'percent' => 7],
-            ['min' => 10000, 'max' => null, 'percent' => 10],
-        ];
+        try {
+            $raw = DB::table('site_settings')
+                ->whereRaw('LOWER(setting_key) = ?', [strtolower(self::SETTING_KEY_DIRECT_BONUS)])
+                ->value('setting_value');
+        } catch (\Throwable) {
+            return null;
+        }
+
+        if (! is_string($raw)) {
+            return null;
+        }
+
+        $raw = preg_replace('/^\xEF\xBB\xBF/', '', trim($raw));
+
+        return $raw === '' ? null : $raw;
     }
 
     /**
-     * Load slabs from site_settings.direct_bonus JSON, or defaults.
+     * Decode JSON from site_settings (handles double-encoded JSON string).
+     *
+     * @return array<string, mixed>|list<mixed>|null
+     */
+    public static function decodeSettingJson(string $raw): ?array
+    {
+        $decoded = json_decode($raw, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+        if (is_string($decoded)) {
+            $decoded = json_decode($decoded, true);
+            if (json_last_error() !== JSON_ERROR_NONE || ! is_array($decoded)) {
+                return null;
+            }
+        }
+        if (! is_array($decoded)) {
+            return null;
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * Slabs from site_settings only. Invalid / missing config => empty array (no bonus).
      *
      * @return array<int, array{min: float, max: float|null, percent: float}>
      */
     public static function slabsFromSettings(): array
     {
-        $raw = DB::table('site_settings')->where('setting_key', 'direct_bonus')->value('setting_value');
-        if (!$raw) {
-            return self::defaultSlabs();
+        $raw = self::rawDirectBonusSetting();
+        if ($raw === null) {
+            return [];
         }
 
-        $decoded = json_decode($raw, true);
-        if (!is_array($decoded)) {
-            return self::defaultSlabs();
+        $decoded = self::decodeSettingJson($raw);
+        if ($decoded === null) {
+            return [];
         }
 
         $slabs = $decoded['slabs'] ?? $decoded;
-        if (!is_array($slabs) || $slabs === []) {
-            return self::defaultSlabs();
+        if (! is_array($slabs) || $slabs === []) {
+            return [];
         }
 
         $normalized = [];
         foreach ($slabs as $row) {
-            if (!is_array($row) || !isset($row['min'], $row['percent'])) {
+            if (! is_array($row) || ! isset($row['min'], $row['percent'])) {
                 continue;
             }
             $max = array_key_exists('max', $row) ? $row['max'] : null;
@@ -55,7 +90,7 @@ class DirectBonusCalculator
         }
 
         if ($normalized === []) {
-            return self::defaultSlabs();
+            return [];
         }
 
         usort($normalized, static fn (array $a, array $b): int => $a['min'] <=> $b['min']);
@@ -64,11 +99,11 @@ class DirectBonusCalculator
     }
 
     /**
-     * Percent for purchase amount (INR), 0 if no slab matches.
+     * Percent for purchase amount (INR), 0 if no slab matches or no slabs configured.
      */
     public static function percentForAmount(float $amount): float
     {
-        if ($amount < 1) {
+        if ($amount <= 0) {
             return 0.0;
         }
 
