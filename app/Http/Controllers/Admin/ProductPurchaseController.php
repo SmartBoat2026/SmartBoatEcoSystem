@@ -10,6 +10,8 @@ use App\Models\ProductPurchase;
 use App\Models\ProductPurchaseList;
 use App\Models\ManageReport;
 use App\Models\Transaction;
+use App\Support\DirectBonusCalculator;
+use Illuminate\Support\Facades\DB;
 
 class ProductPurchaseController extends Controller
 {
@@ -120,52 +122,106 @@ class ProductPurchaseController extends Controller
             $addedById = session('member_id');
         }
 
-        // ── Save parent purchase ──────────────────────────────────────
-        $purchase = ProductPurchase::create([
-            'member_id'           => $memberId,
-            'invoice_no'          => $invoiceNo,
-            'purchase_date'       => $request->purchase_date,
-            'total'               => $grandTotal,
-            'total_smartpoint'    => $totalSmartPoint,
-            'total_smartquantity' => $totalSmartQuantity,
-            'status'              => 1,
-            'added_by_id'         => $addedById,
-        ]);
+        DB::transaction(function () use (
+            $request,
+            $memberId,
+            $invoiceNo,
+            $grandTotal,
+            $totalSmartPoint,
+            $totalSmartQuantity,
+            $listItems,
+            $addedById
+        ) {
+            $purchase = ProductPurchase::create([
+                'member_id'           => $memberId,
+                'invoice_no'          => $invoiceNo,
+                'purchase_date'       => $request->purchase_date,
+                'total'               => $grandTotal,
+                'total_smartpoint'    => $totalSmartPoint,
+                'total_smartquantity' => $totalSmartQuantity,
+                'status'              => 1,
+                'added_by_id'         => $addedById,
+            ]);
 
-        // ── Inject real purchase_id then insert items ─────────────────
-        foreach ($listItems as &$item) {
-            $item['purchase_id'] = $purchase->id;
-        }
-        unset($item);
-        ProductPurchaseList::insert($listItems);
+            foreach ($listItems as &$item) {
+                $item['purchase_id'] = $purchase->id;
+            }
+            unset($item);
+            ProductPurchaseList::insert($listItems);
 
-        // ── If member selected: deduct wallet + update status + transaction ──
-        if ($memberId) {
+            if (!$memberId) {
+                return;
+            }
+
             $memberReport = ManageReport::where('memberID', $memberId)->first();
 
             if ($memberReport) {
-                // Reactivate if pending
                 if ($memberReport->status == 2) {
                     $memberReport->status = 1;
                     $memberReport->save();
                 }
 
-                // Deduct smart wallet balance
                 ManageReport::where('memberID', $memberId)
                     ->decrement('smart_wallet_balance', $grandTotal);
             }
 
-            // Create debit transaction
             Transaction::create([
                 'member_id'   => $memberId,
-                'added_by_id' => $addedById ?? '',
+                'added_by_id' => (int) ($addedById ?? 0),
                 'amount'      => $grandTotal,
                 'action'      => 'Product Purchase',
                 'type'        => 'Debit',
                 'status'      => 1,
                 'created_at'  => now(),
             ]);
-        }
+
+            if (!$memberReport) {
+                return;
+            }
+
+            $sponsorMemberId = trim((string) ($memberReport->sponser_id ?? ''));
+            if ($sponsorMemberId === '' || strcasecmp($sponsorMemberId, $memberId) === 0) {
+                return;
+            }
+
+            $sponsor = ManageReport::where('memberID', $sponsorMemberId)->first();
+            if (!$sponsor) {
+                return;
+            }
+
+            $purchaseTotal = (float) $grandTotal;
+            $percent        = DirectBonusCalculator::percentForAmount($purchaseTotal);
+            $bonusAmount    = $percent > 0
+                ? round($purchaseTotal * ($percent / 100), 2)
+                : 0.0;
+
+            if ($bonusAmount <= 0) {
+                return;
+            }
+
+            DB::table('bonus')->insert([
+                'bonus_type'     => 'Direct',
+                'member_id'      => $sponsorMemberId,
+                'total_quantity' => $purchaseTotal,
+                'rate'           => $percent,
+                'bonus_amount'   => $bonusAmount,
+                'status'         => 1,
+                'created_at'     => now(),
+            ]);
+
+            ManageReport::where('memberID', $sponsorMemberId)
+                ->increment('smart_wallet_balance', $bonusAmount);
+
+            Transaction::create([
+                'member_id'   => $sponsorMemberId,
+                'added_by_id' => (int) ($addedById ?? 0),
+                'amount'      => $bonusAmount,
+                'action'      => 'Direct Bonus',
+                'type'        => 'Credit',
+                'status'      => 1,
+                'created_at'  => now(),
+            ]);
+        });
 
         return redirect()->route('productpurchase.index')
             ->with('success', "Purchase saved! Invoice: {$invoiceNo}");
@@ -179,7 +235,7 @@ class ProductPurchaseController extends Controller
         $members = ManageReport::where('memberID', 'like', '%' . $search . '%')
                     ->orWhere('name', 'like', '%' . $search . '%')
                     ->limit(8)
-                    ->get(['memberID', 'name', 'phone']);
+                    ->get(['memberID', 'name']);
 
         if ($members->count()) {
             return response()->json([
