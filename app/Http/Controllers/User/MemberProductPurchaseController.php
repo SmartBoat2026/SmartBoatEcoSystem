@@ -9,6 +9,8 @@ use App\Models\ProductPurchase;
 use App\Models\ProductPurchaseList;
 use App\Models\ManageReport;
 use App\Models\Transaction;
+use App\Support\DirectBonusCalculator;
+use Illuminate\Support\Facades\DB;
 
 class MemberProductPurchaseController extends Controller
 {
@@ -57,132 +59,198 @@ class MemberProductPurchaseController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'purchase_date' => 'required|date_format:Y-m-d\TH:i',
-        'product_ids'   => 'required|array|min:1',
-        'product_ids.*' => 'required|exists:products,id',
-        'dp.*'          => 'required|numeric|min:0',
-    ]);
+    {
+        $request->validate([
+            'purchase_date' => 'required|date_format:Y-m-d\TH:i',
+            'product_ids'   => 'required|array|min:1',
+            'product_ids.*' => 'required|exists:products,id',
+            'dp.*'          => 'required|numeric|min:0',
+        ]);
 
-    $memberId = !empty($request->member_id) ? trim($request->member_id) : null;
+        $memberId = !empty($request->member_id) ? trim($request->member_id) : null;
 
-    $loggedInMemberID = session('member_memberID');
-    $isSelfPurchase   = ($memberId === $loggedInMemberID);
-
-    if ($isSelfPurchase && $memberId) {
-        $walletBalance = ManageReport::where('memberID', $loggedInMemberID)
-                            ->value('smart_wallet_balance') ?? 0;
+        $loggedInMemberID = session('member_memberID');
+        $isSelfPurchase   = ($memberId === $loggedInMemberID);
 
         $grandTotalCheck = array_sum(array_map('floatval', $request->dp ?? []));
 
-        if ($grandTotalCheck > $walletBalance) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'wallet' => 'Your Smart Wallet balance is ₹' . number_format($walletBalance, 2) .
-                                ', but the bill total is ₹' . number_format($grandTotalCheck, 2) . '.'
-                ]);
+        if ($memberId) {
+            $walletBalance = ManageReport::where('memberID', $memberId)
+                ->value('smart_wallet_balance') ?? 0;
+
+            if ($grandTotalCheck > $walletBalance) {
+                $label = $isSelfPurchase ? 'Your' : 'Member\'s';
+
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'wallet' => $label . ' Smart Wallet balance is ₹' . number_format($walletBalance, 2) .
+                            ', but the bill total is ₹' . number_format($grandTotalCheck, 2) .
+                            '. Insufficient balance.',
+                    ]);
+            }
         }
-    }
 
+        $lastInvoice = ProductPurchase::where('invoice_no', 'like', 'SBES%')
+            ->orderBy('id', 'desc')->first();
+        $sequence = $lastInvoice
+            ? (intval(substr($lastInvoice->invoice_no, -5)) + 1)
+            : 1;
+        $invoiceNo = 'SBES' . str_pad($sequence, 5, '0', STR_PAD_LEFT);
 
-    $lastInvoice = ProductPurchase::where('invoice_no', 'like', 'SBES%')
-                    ->orderBy('id', 'desc')->first();
-    $sequence    = $lastInvoice
-                    ? (intval(substr($lastInvoice->invoice_no, -5)) + 1)
-                    : 1;
-    $invoiceNo   = 'SBES' . str_pad($sequence, 5, '0', STR_PAD_LEFT);
+        $productIds         = $request->product_ids;
+        $dps                = $request->dp;
+        $grandTotal         = 0;
+        $totalSmartPoint    = 0;
+        $totalSmartQuantity = 0;
+        $listItems          = [];
 
-    $productIds         = $request->product_ids;
-    $dps                = $request->dp;
-    $grandTotal         = 0;
-    $totalSmartPoint    = 0;
-    $totalSmartQuantity = 0;
-    $listItems          = [];
+        foreach ($productIds as $i => $productId) {
+            $product = Product::find($productId);
+            if (!$product) {
+                continue;
+            }
 
-    foreach ($productIds as $i => $productId) {
-        $product = Product::find($productId);
-        if (!$product) continue;
+            $dp    = floatval($dps[$i] ?? 0);
+            $base  = floatval($product->base_price);
+            $count = $base > 0 ? $dp / $base : 0;
+            $sp    = floatval($product->smart_points);
+            $sq    = $sp * 0.001;
 
-        $dp    = floatval($dps[$i] ?? 0);
-        $base  = floatval($product->base_price);
-        $count = $base > 0 ? $dp / $base : 0;
-        $sp    = floatval($product->smart_points);
-        $sq    = $sp * 0.001;
+            $grandTotal         += $dp;
+            $totalSmartPoint    += $dp * $sp;
+            $totalSmartQuantity += $dp * $sq;
 
-        $grandTotal         += $dp;
-        $totalSmartPoint    += $dp * $sp;
-        $totalSmartQuantity += $dp * $sq;
-
-        $listItems[] = [
-            'purchase_id'         => 0,
-            'member_id'           => $memberId,
-            'product_id'          => $productId,
-            'product_name'        => $product->name,
-            'product_hsn'         => $product->hsn_code ?? '',
-            'product_baseprice'   => $base,
-            'product_dp'          => $dp,
-            'product_count'       => $count,
-            'product_smartpoints' => $sp,
-            'product_smartqty'    => $sq,
-            'product_total'       => $dp,
-            'created_at'          => now(),
-            'updated_at'          => now(),
-        ];
-    }
-
-    $addedById = null;
-    if (session('type') == 'Admin') {
-        $addedById = session('admin_id');
-    } elseif (session('type') == 'Member') {
-        $addedById = session('member_id');
-    }
-
-    $purchase = ProductPurchase::create([
-        'member_id'           => $memberId,
-        'invoice_no'          => $invoiceNo,
-        'purchase_date'       => $request->purchase_date,
-        'total'               => $grandTotal,
-        'total_smartpoint'    => $totalSmartPoint,
-        'total_smartquantity' => $totalSmartQuantity,
-        'status'              => 1,
-        'added_by_id'         => $addedById,
-    ]);
-
-    foreach ($listItems as &$item) {
-        $item['purchase_id'] = $purchase->id;
-    }
-    unset($item);
-    ProductPurchaseList::insert($listItems);
-
-
-    if ($isSelfPurchase && $memberId) {
-
-        $memberReport = ManageReport::where('memberID', $memberId)->first();
-        if ($memberReport && $memberReport->status == 2) {
-            $memberReport->status = 1;
-            $memberReport->save();
+            $listItems[] = [
+                'purchase_id'         => 0,
+                'member_id'           => $memberId,
+                'product_id'          => $productId,
+                'product_name'        => $product->name,
+                'product_hsn'         => $product->hsn_code ?? '',
+                'product_baseprice'   => $base,
+                'product_dp'          => $dp,
+                'product_count'       => $count,
+                'product_smartpoints' => $sp,
+                'product_smartqty'    => $sq,
+                'product_total'       => $dp,
+                'created_at'          => now(),
+                'updated_at'          => now(),
+            ];
         }
+
+        $addedById = null;
+        if (session('type') == 'Admin') {
+            $addedById = session('admin_id');
+        } elseif (session('type') == 'Member') {
+            $addedById = session('member_id');
+        }
+
+        DB::transaction(function () use (
+            $request,
+            $memberId,
+            $invoiceNo,
+            $grandTotal,
+            $totalSmartPoint,
+            $totalSmartQuantity,
+            $listItems,
+            $addedById
+        ) {
+            $purchase = ProductPurchase::create([
+                'member_id'           => $memberId,
+                'invoice_no'          => $invoiceNo,
+                'purchase_date'       => $request->purchase_date,
+                'total'               => $grandTotal,
+                'total_smartpoint'    => $totalSmartPoint,
+                'total_smartquantity' => $totalSmartQuantity,
+                'status'              => 1,
+                'added_by_id'         => $addedById,
+            ]);
+
+            foreach ($listItems as &$item) {
+                $item['purchase_id'] = $purchase->id;
+            }
+            unset($item);
+            ProductPurchaseList::insert($listItems);
+
+            if (!$memberId) {
+                return;
+            }
+
+            $memberReport = ManageReport::where('memberID', $memberId)->first();
+
+            if ($memberReport) {
+                if ($memberReport->status == 2) {
+                    $memberReport->status = 1;
+                    $memberReport->save();
+                }
+
+                ManageReport::where('memberID', $memberId)
+                    ->decrement('smart_wallet_balance', $grandTotal);
+            }
+
+            Transaction::create([
+                'member_id'   => $memberId,
+                'added_by_id' => (int) ($addedById ?? 0),
+                'amount'      => $grandTotal,
+                'action'      => 'Product Purchase',
+                'type'        => 'Debit',
+                'status'      => 1,
+                'created_at'  => now(),
+            ]);
+
+            if (!$memberReport) {
+                return;
+            }
+
+            $sponsorMemberId = trim((string) ($memberReport->sponser_id ?? ''));
+            if ($sponsorMemberId === '' || strcasecmp($sponsorMemberId, $memberId) === 0) {
+                return;
+            }
+
+            $sponsor = ManageReport::where('memberID', $sponsorMemberId)->first();
+            if (!$sponsor) {
+                return;
+            }
+
+            $purchaseTotal = (float) $grandTotal;
+            $percent        = DirectBonusCalculator::percentForAmount($purchaseTotal);
+            $bonusAmount    = $percent > 0
+                ? round($purchaseTotal * ($percent / 100), 2)
+                : 0.0;
+
+            if ($bonusAmount <= 0) {
+                return;
+            }
+
+            DB::table('bonus')->insert([
+                'bonus_type'     => 'Direct',
+                'member_id'      => $sponsorMemberId,
+                'total_quantity' => $purchaseTotal,
+                'rate'           => $percent,
+                'bonus_amount'   => $bonusAmount,
+                'status'         => 1,
+                'created_at'     => now(),
+            ]);
+
+            ManageReport::where('memberID', $sponsorMemberId)
+                ->increment('smart_wallet_balance', $bonusAmount);
+
+            Transaction::create([
+                'member_id'   => $sponsorMemberId,
+                'added_by_id' => (int) ($addedById ?? 0),
+                'amount'      => $bonusAmount,
+                'action'      => 'Direct Bonus',
+                'type'        => 'Credit',
+                'status'      => 1,
+                'created_at'  => now(),
+            ]);
+        });
+
+        $pagename = $isSelfPurchase ? 'self' : 'other';
+
+        return redirect()->route('member.productpurchase.purchaseList', $pagename)
+            ->with('success', "Purchase saved! Invoice: {$invoiceNo}");
     }
-        ManageReport::where('member_id', $addedById)
-            ->decrement('smart_wallet_balance', $grandTotal);
-        Transaction::create([
-
-            'member_id'           => $memberId        ?? 'M000001',
-            'added_by_id'         => $addedById                       ?? '',
-            'amount'              => $grandTotal            ?? '',
-            'action'              => 'Product Purchase',
-            'type'                => 'Debit',
-            'status'              => 1,
-            'created_at'          => Now(),
-        ]);
-
-    $pagename = $isSelfPurchase ? 'self' : 'other';
-
-    return redirect()->route('member.productpurchase.purchaseList', $pagename)
-        ->with('success', "Purchase saved! Invoice: {$invoiceNo}");
-}
 
     // ── AJAX: member lookup ───────────────────────────────────────────
     public function memberLookup(Request $request)
