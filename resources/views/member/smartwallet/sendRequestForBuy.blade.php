@@ -104,6 +104,42 @@
         </div>
     </div>
     
+    {{-- ===== VIEW SELLER MODAL ===== --}}
+    <div class="modal fade" id="viewSellerModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header" style="background:#1a3a6b;color:#fff;">
+                    <h5 class="modal-title">Seller List</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm align-middle">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Sell ID</th>
+                                    <th>Seller Details</th>
+                                    <th>Status</th>
+                                    <th>Contact Number</th>
+                                    <th>Smart Boat Chat</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody id="sellerListBody">
+                                <!-- AJAX data load হবে -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     {{-- ===== Sell Wallet History ===== --}}
     <div class="card mb-4">
@@ -145,6 +181,13 @@
 $(document).ready(function () {   
     $('#addModal').on('show.bs.modal', function () {
         $('#sentRequestBuy')[0].reset();
+        $('#paymentFilter').hide();
+        $('#sellerSection').hide();
+        $('#sendRequestBtn').hide();
+        $('#edit_rfb_id').remove();
+        if ($.fn.DataTable.isDataTable('#sellerTable')) {
+            $('#sellerTable').DataTable().columns.adjust();
+        }
     });
     function checkForm() {
         let walletBalance = $('#requestWalletBalanceInput').val().trim();
@@ -169,6 +212,7 @@ $(document).ready(function () {
     $('#submitSentRequestBuyBtn').on('click', function () {
 
         let form = $('#sentRequestBuy');
+        
 
         $.ajax({
             url: "{{ route('member.smartwallet.buySell.fetchSellerData') }}",
@@ -182,6 +226,7 @@ $(document).ready(function () {
                 $('#sendRequestBtn').show();
                 $('#selectAll').prop('checked', false);
                 $('#sendRequestBtn').prop('disabled', true);
+                $('#sendRequestBtn').text('Save Request').show();
                 loadSellerTable(res.data);
             },
 
@@ -289,6 +334,20 @@ $(document).ready(function () {
         });
         let checked = $('.row-checkbox:checked').length;
         $('#sendRequestBtn').prop('disabled', checked === 0);
+
+        setTimeout(function () {
+
+            let total = $('.row-checkbox').length;
+            let checked = $('.row-checkbox:checked').length;
+
+            // select all checkbox update
+            $('#selectAll').prop('checked', total > 0 && total === checked);
+
+            // button enable/disable
+            $('#sendRequestBtn').prop('disabled', checked === 0);
+
+        }, 100);
+        $('#edit_rfb_id').val() ? $('#sendRequestBtn').text('Update Request') : $('#sendRequestBtn').text('Save Request');
     }
     $('#paymentFilter').on('change', function () {
         $('#sellerSearch').val('');
@@ -312,6 +371,7 @@ $(document).ready(function () {
 
     $('#sendRequestBtn').on('click', function () {
         let selected = [];
+        let editId = $('#edit_rfb_id').val();
         let amount = $('#requestWalletBalanceInput').val();
         if (!amount || amount <= 0) {
             Swal.fire('Error', 'Please enter valid amount', 'error');
@@ -330,7 +390,8 @@ $(document).ready(function () {
             data: {
                 _token: "{{ csrf_token() }}",
                 sellers: selected,
-                amount: amount
+                amount: amount,
+                edit_rfb_id: editId
             },
             success: function (res) {
                 Swal.fire({
@@ -353,11 +414,13 @@ $(document).ready(function () {
     });
       
     $(document).on('click', '.edit-btn', function () {
-    let rfbId = $(this).data('rfb-id');
+        let rfbId = $(this).data('rfb-id');
         $.ajax({
-            url: "{{ route('member.smartwallet.buySell.sendRequestForBuyShow', ':id') }}".replace(':id', rfbId),
-            type: "GET",
-
+            url: "{{ route('member.smartwallet.buySell.fetchSellerData', ':id') }}".replace(':id', rfbId),
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
             success: function (res) {
                 $('#addModal').modal('show');
                 // set amount
@@ -368,20 +431,75 @@ $(document).ready(function () {
                 $('#sendRequestBtn').show();
 
                 // load table with checked sellers
-                loadSellerTable(res.data);
+                $('#addModal').one('shown.bs.modal', function () {
+                    loadSellerTable(res.data);
+                });
 
                 // store edit id
                 $('#edit_rfb_id').remove();
                 $('#sentRequestBuy').append(
                     '<input type="hidden" id="edit_rfb_id" name="edit_rfb_id" value="'+rfbId+'">'
                 );
+                $('#sendRequestBtn').text('Update Request').show();
 
+                
+
+                
                 
             }
         });
     });
 
-        
+    $(document).on('click', '.view-btn', function () {
+        let rfbId = $(this).data('rfb-id');
+        $.ajax({
+            url: "{{ route('member.smartwallet.buySell.rfbSellerList') }}",
+            type: "GET",
+            data: { rfb_id: rfbId },
+
+            success: function (res) {
+
+                let html = '';
+
+                res.data.forEach(function (row) {
+
+                    html += `
+                        <tr>
+                            <td>
+                                <span class="badge" style="background:#eeedfe;color:#3c3489;">${row.sell_id}</span>
+                            </td>
+
+                            <td>
+                                <div style="font-weight:600">${row.name}</div>
+                            </td>
+
+                            <td style="font-weight:600;font-size:14px;">
+                                ${row.status == 1 
+                                    ? '<span class="badge text-primary">Request Received</span>'
+                                    : row.status == 2
+                                        ? '<span class="badge text-success">Request Accepted</span>'
+                                        : row.status == 3
+                                            ? '<span class="badge text-warning text-dark">Closed Request</span>'
+                                            : row.status == 4
+                                                ? '<span class="badge text-danger">Closed Sell</span>'
+                                                : '<span class="badge text-secondary">Unknown</span>'
+                                }
+                            </td>
+
+                            <td>${row.mobile_number}</td>
+                            <td>
+                                ${row.actions}
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                $('#sellerListBody').html(html);
+
+                $('#viewSellerModal').modal('show');
+            }
+        });
+    }); 
 
 });
 

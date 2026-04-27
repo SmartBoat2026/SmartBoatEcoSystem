@@ -216,11 +216,10 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     
 
     Route::get('/smart-wallet/buy-sell/sendRequestForBuy', [BuySellController::class, 'sendRequestForBuy'])->name('smartwallet.buySell.sendRequestForBuy');
-    Route::post('/smart-wallet/buy-sell/fetchSellerData', [BuySellController::class, 'fetchSellerData'])->name('smartwallet.buySell.fetchSellerData');
+    Route::post('/smart-wallet/buy-sell/fetchSellerData/{id?}', [BuySellController::class, 'fetchSellerData'])->name('smartwallet.buySell.fetchSellerData');
     Route::post('/smart-wallet/buy-sell/sendRequestForBuy-store', [BuySellController::class, 'sendRequestForBuyStore'])->name('smartwallet.buySell.sendRequestForBuyStore');
-    Route::get('/smart-wallet/buy-sell/showBuyRequest/{id}', [BuySellController::class, 'sendRequestForBuyShow'])->name('smartwallet.buySell.sendRequestForBuyShow');
     Route::get('/smart-wallet/buy-sell/rfbListData', [BuySellController::class, 'rfbListData'])->name('smartwallet.buySell.rfbListData');
-   
+    Route::get('/smart-wallet/buy-sell/rfb/seller-list', [BuySellController::class, 'rfbSellerList'])->name('smartwallet.buySell.rfbSellerList');
 
     // ── Chat ───────────────────────────────────────────────────────────
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');

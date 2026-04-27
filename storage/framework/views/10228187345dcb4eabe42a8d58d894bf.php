@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form method="POST" action="<?php echo e(route('member.smartwallet.buySell.selfSellStore')); ?>" id="sellWalletBalanceForm">
+                    <form method="POST" action="<?php echo e(route('member.smartwallet.buySell.selfSellStore')); ?>" id="sellWalletBalanceForm" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
 
                         <div class="row g-3 mb-3">
@@ -49,6 +49,20 @@
                                     <option value="3">Bank to Bank Transfer</option>
                                     <option value="4">Cash to Bank Transfer</option>
                                 </select>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4" id="qrUploadBox" style="display:none;">
+                                <label class="form-label fw-label">QR Image Upload</label>
+                                <input type="file" name="qr_image" id="qr_image" class="form-control form-control-sm">
+                                <div class="mt-2">
+                                    <img id="qrPreview" src="" style="max-width:100px; display:none; border:1px solid #ddd; padding:5px;">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-4" id="detailsBox" style="display:none;">
+                                <label class="form-label fw-label">Payment Details</label>
+                                <textarea name="payment_details" id="payment_details"
+                                        class="form-control form-control-sm"
+                                        placeholder="Enter payment details"></textarea>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4">
                                 <label class="form-label fw-label">Mobile Number (optional)</label>
@@ -94,6 +108,7 @@
                             <th>Start Date &amp; Time</th>
                             <th>Total Sell Amount</th>
                             <th>Mobile Number</th>
+                            <th>Payment Details</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -115,6 +130,14 @@
 $(document).ready(function () {   
     $('#addModal').on('show.bs.modal', function () {
         $('#sellWalletBalanceForm')[0].reset();
+        $('#requestWalletBalanceInput').val('');
+
+        $('#mobile_number').val('');
+        
+        $('#payment_details').val('');
+        $('#qrUploadBox').hide();
+        $('#detailsBox').hide();
+        
     });
     $('#addModal').on('hidden.bs.modal', function () {
         $('#sellWalletBalanceForm')[0].reset();
@@ -122,6 +145,29 @@ $(document).ready(function () {
         $('#submitSellBtn')
             .html('<i class="bi bi-check2-circle me-1"></i>Save Sell Details')
             .prop('disabled', true);
+        $('#qrPreview').hide().attr('src', '');
+        $('#qrUploadBox').hide();
+        $('#detailsBox').hide();
+    });
+    function togglePaymentFields() {
+        let method = $('#paymentMethod').val();
+
+        if (method == 1) {
+            $('#qrUploadBox').show();
+            $('#detailsBox').hide();
+        } else {
+            $('#qrUploadBox').hide();
+            $('#detailsBox').show();
+        }
+    }
+    $('#qr_image').on('change', function (e) {
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#qrPreview').attr('src', e.target.result).show();
+        }
+
+        reader.readAsDataURL(this.files[0]);
     });
 
     // ════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -130,13 +176,26 @@ $(document).ready(function () {
         let walletBalance = $('#requestWalletBalanceInput').val().trim();
         let paymentMethod = $('#paymentMethod').val();
 
+        let qr = $('#qr_image').val();
+        let details = $('#payment_details').val().trim();
+
         let submitBtn = $('#submitSellBtn');
 
-        let isValid =
+        let isValid = false;
+
+        if (
             walletBalance !== '' &&
             !isNaN(walletBalance) &&
             parseFloat(walletBalance) > 0 &&
-            paymentMethod !== '';
+            paymentMethod !== ''
+        ) {
+
+            if (paymentMethod == 1) {
+                isValid = (qr !== '');
+            } else {
+                isValid = (details !== '');
+            }
+        }
 
         submitBtn.prop('disabled', !isValid);
     }
@@ -150,9 +209,17 @@ $(document).ready(function () {
 
     $('#paymentMethod').on('change', function () {
         checkForm();
+        togglePaymentFields();
     });
 
     $('#mobile_number').on('keyup', function () {
+        checkForm();
+    });
+    $('#qr_image').on('change', function () {
+        checkForm();
+    });
+
+    $('#payment_details').on('keyup', function () {
         checkForm();
     });
     //--------------------------END CHECK FORM DATA FOR ENABLE/DISABLE SUBMIT BUTTOM-------------------------------------------------------
@@ -162,12 +229,15 @@ $(document).ready(function () {
     //---------------------------------------------------------START NEW SENDING WALLET bALANCE FORM SUBMIT------------------------------------------------------------------------------
     
     $('#submitSellBtn').on('click', function () {
-        let form = $('#sellWalletBalanceForm');
+        let form = $('#sellWalletBalanceForm')[0];
         let btn  = $('#submitSellBtn');
+        let formData = new FormData(form);
         $.ajax({
-            url: form.attr('action'),
+            url: $('#sellWalletBalanceForm').attr('action'),
             type: "POST",
-            data: form.serialize(),
+            data: formData,
+            processData: false,
+            contentType: false,
 
             success: function (res) {   
 
@@ -221,6 +291,7 @@ $(document).ready(function () {
             { data: 'created_at' },
             { data: 'total_sell_wallet_balance' },
             { data: 'mobile_number' },
+            { data: 'payment_details' },
             { data: 'status' },
             { data: 'actions' }
         ],
@@ -238,7 +309,7 @@ $(document).ready(function () {
                 className:'buttons-excel',
                 title:'Sell Wallet History',
                 exportOptions:{ 
-                    columns:[0,1,2,3,4,5,6,7] ,
+                    columns:[0,1,2,3,4,5,6,7,8] ,
                     format: {
                         body: function (data, row, column, node) {
                             return $(node).text().trim();
@@ -254,7 +325,7 @@ $(document).ready(function () {
                 orientation:'landscape',
                 pageSize:'A4',
                 exportOptions:{ 
-                    columns:[0,1,2,3,4,5,6,7] ,
+                    columns:[0,1,2,3,4,5,6,7,8] ,
                     format: {
                         body: function (data, row, column, node) {
                             return $(node).text().trim();
@@ -268,7 +339,7 @@ $(document).ready(function () {
                 className:'buttons-print',
                 title:'Sell Wallet History',
                 exportOptions:{ 
-                    columns:[0,1,2,3,4,5,6,7] ,
+                    columns:[0,1,2,3,4,5,6,7,8] ,
                     format: {
                         body: function (data, row, column, node) {
                             return $('<div>').html(data).text().trim();
@@ -299,12 +370,12 @@ $(document).ready(function () {
 
         Swal.fire({
             title: 'Are you sure?',
-            text: "This sellill be cancelled!",
+            text: "This sell will be closed!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dc3545',
             cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Yes, Cancel it!'
+            confirmButtonText: 'Yes, Close it!'
         }).then((result) => {
 
             if (result.isConfirmed) {
@@ -396,9 +467,7 @@ $(document).ready(function () {
         });
     });
     $(document).on('click', '.edit-btn', function () {
-
         let id = $(this).data('sell-history-id');
-
         $.ajax({
             url: "<?php echo e(route('member.smartwallet.buySell.selfSellShowData', ['id' => ':id'])); ?>".replace(':id', id),
             type: "GET",
@@ -414,6 +483,29 @@ $(document).ready(function () {
                     $('#paymentMethod').val(String(res.payment_method)).trigger('change');
 
                     $('#mobile_number').val(res.mobile_number ?? '');
+
+                    if (res.payment_method == 1) {
+
+                        // QR SHOW
+                        if (res.qr_image) {
+                            
+                                $('#qrPreview')
+                                    .attr('src',res.qr_image_url)
+                                    .show();
+                            } else {
+                                $('#qrPreview').hide();
+                            }
+
+                            $('#payment_details').val('');
+
+                    } else {
+
+                        // DETAILS SHOW
+                        $('#payment_details').val(res.payment_details ?? '');
+
+                        $('#qrPreview').hide().attr('src', '');
+                    }
+                    checkForm();
 
                 });
                 // add hidden edit id

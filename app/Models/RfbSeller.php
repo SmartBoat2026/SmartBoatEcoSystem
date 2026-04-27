@@ -24,4 +24,8 @@ class RfbSeller extends Model
     {
         return $this->belongsTo(ManageReport::class, 'seller_member_id');
     }
+    public function sellId()
+    {
+        return $this->belongsTo(SellWalletHistory::class, 'sell_history_id');
+    }
 }

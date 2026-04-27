@@ -19,6 +19,8 @@ class SellWalletHistory extends Model
         'payment_method',
         'mobile_number',
         'status',
+        'qr_image',
+        'payment_details'
     ];
 
     protected $casts = [
