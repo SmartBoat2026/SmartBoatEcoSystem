@@ -283,7 +283,7 @@ $(document).ready(function () {
     // ---------------------------------------------- START SECTION DATABASE CALL , EXCEL , PDF DOWNLOAD , SEARCHING , PRINT ----------------------------------
     $('#sellWalletBalanceRequestHistoryTable').DataTable({
         processing: true,
-        serverSide: false,
+        serverSide: true,
         ajax: "{{ route('member.smartwallet.buySell.selfSellListData') }}",
         columns: [
             { data: 'DT_RowIndex' },
@@ -413,6 +413,8 @@ $(document).ready(function () {
         let wallet_balance = $(this).data('wallet-balance');
         let payment_method = $(this).data('payment-method');
         let mobile_number = $(this).data('mobile-number');
+        let qr_image = $(this).data('qr-image');
+        let payment_details = $(this).data('payment-details');
 
         Swal.fire({
             title: 'Renew this request?',
@@ -433,7 +435,10 @@ $(document).ready(function () {
                         _token: $('meta[name="csrf-token"]').attr('content'),
                         wallet_balance: wallet_balance,
                         payment_method: payment_method,
-                        mobile_number: mobile_number
+                        mobile_number: mobile_number,
+                        payment_details: payment_details,
+                        qr_image: qr_image,
+                        type:'r'
                     },
                     success: function (res) {
 

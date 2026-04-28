@@ -51,7 +51,7 @@ class SmartWalletMemberRequestController extends Controller
                     $sender->save();
 
                     Transaction::create([
-                        'member_id'   => $member_id,
+                        'member_id'   => ManageReport::where('member_id', $member_id)->value('memberID'),
                         'added_by_id' => $admin_member_id,
                         'type'        => 'credit',
                         'amount'      => $amount,

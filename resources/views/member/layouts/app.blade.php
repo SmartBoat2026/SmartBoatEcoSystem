@@ -673,11 +673,12 @@
                 <span class="nav-label">Sent Request For Buy</span>
             </a>
 
-            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
-            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+            <a href="{{ route('member.smartwallet.buySell.receiverRequestForBuy') }}"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.buySell.receiverRequestForBuy') ? 'active' : '' }}">
                 <i class="bi bi-person"></i>
                 <span class="nav-label">Received Request For Buy</span>
             </a>
+            
             <!-- <a href="{{ route('member.smartwallet.userToUser.receiver') }}"
             class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
                 <i class="bi bi-person"></i>

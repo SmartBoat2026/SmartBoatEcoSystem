@@ -101,6 +101,94 @@
             </div>
         </div>
     </div>
+  
+    
+    <div class="modal fade" id="transferMoneyModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- HEADER -->
+                <div class="modal-header" style="background:#1a3a6b;color:#fff;">
+                    <h5 class="modal-title">
+                        <i class="bi bi-cash-coin me-2"></i> Transfer Payment
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- BODY -->
+                <div class="modal-body">
+                    <div class="row g-3">
+
+                        <!-- LEFT SIDE -->
+                        <div class="col-md-5" id="paymentInfoSection">
+
+                            <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
+
+                                <h6 style="font-weight:700;color:#1a3a6b;">
+                                    <i class="bi bi-info-circle"></i> Payment Details
+                                </h6>
+
+                                <div id="paymentContent"></div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT SIDE -->
+                        <div class="col-md-7">
+
+                            <form method="POST" action="#" id="transferMoneyForm" enctype="multipart/form-data">
+                                <?php echo csrf_field(); ?>
+
+                                <input type="hidden" name="rfb_id" id="transferRfbId">
+
+                                <div class="row g-3">
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Member ID</label>
+                                        <input type="text" class="form-control" id="transferMemberId" name="member_id" readonly>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Amount</label>
+                                        <input type="number" step="0.01" class="form-control" name="amount" id="transferAmount" readonly>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Transaction ID</label>
+                                        <input type="text" class="form-control" name="transaction_id" required>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Upload Screenshot</label>
+                                        <input type="file" class="form-control" name="screenshot" required>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Note</label>
+                                        <textarea class="form-control" name="note" rows="2"></textarea>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary btn-sm px-4" id="submitTransferMoney">
+                        <i class="bi bi-send-check me-2"></i> Submit Transfer
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
     
     
     <div class="modal fade" id="viewSellerModal" tabindex="-1">
@@ -438,9 +526,7 @@ $(document).ready(function () {
                 $('#sentRequestBuy').append(
                     '<input type="hidden" id="edit_rfb_id" name="edit_rfb_id" value="'+rfbId+'">'
                 );
-                $('#sendRequestBtn').text('Update Request').show();
-
-                
+                $('#sendRequestBtn').text('Update Request').show();              
 
                 
                 
@@ -497,7 +583,97 @@ $(document).ready(function () {
                 $('#viewSellerModal').modal('show');
             }
         });
-    }); 
+    });
+    
+    $(document).on('click', '.transfer-btn', function () {
+
+        let rfbId = $(this).data('rfb-id');
+        let btn = $(this);
+
+        btn.prop('disabled', true).html('Loading...');
+
+        $.ajax({
+            url: "<?php echo e(route('member.smartwallet.buySell.sellerAcceptDetails', ':id')); ?>".replace(':id', rfbId),
+            type: "GET",
+
+            success: function (res) {
+
+                $('#transferMoneyModal').modal('show');
+
+                $('#transferRfbId').val(rfbId);
+                $('#transferMemberId').val(res.transferMemberId);
+                $('#transferAmount').val(res.amount ?? 0);
+
+                let m = res.payment_method;
+
+                let methodText =
+                    m == 1 ? "UPI Transfer via QR Code" :
+                    m == 2 ? "UPI Number" :
+                    m == 3 ? "Bank to Bank Transfer" :
+                    m == 4 ? "Cash to Bank Transfer" :
+                    "Unknown";
+
+                let html = `<p><b>Payment Method:</b> ${methodText}</p>`;
+
+                if (m == 1 && res.qr_image) {
+                    html += `${res.qr_image}`;
+                } else {
+                    html += `<div>${res.payment_details ?? ''}</div>`;
+                }
+
+                html += `<div class="mt-2"><b>Amount:</b> ${res.amount ?? 0}</div>`;
+
+                $('#paymentContent').html(html);
+            },
+
+            error: function () {
+                Swal.fire('Error', 'Something went wrong', 'error');
+            },
+
+            complete: function () {
+                btn.prop('disabled', false).html('<i class="bi bi-cash-coin"></i> Transfer');
+            }
+        });
+
+    });
+
+    $(document).on('click', '#submitTransferMoney', function () {
+        let btn = $(this);
+        let formData = new FormData($('#transferMoneyForm')[0]);
+        btn.prop('disabled', true).html('Processing...');
+        $.ajax({
+            url: "<?php echo e(route('member.smartwallet.buySell.transferMoneyStore')); ?>",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+
+            success: function (res) {
+
+                Swal.fire('Success', res.message, 'success');
+
+                $('#transferMoneyModal').modal('hide');
+                $('#transferMoneyForm')[0].reset();
+
+                $('#sentRfbHistoryTable').DataTable().ajax.reload();
+
+            },
+
+            error: function (xhr) {
+
+                Swal.fire(
+                    'Error',
+                    xhr.responseJSON?.message || 'Something went wrong',
+                    'error'
+                );
+
+            },
+
+            complete: function () {
+                btn.prop('disabled', false).html('<i class="bi bi-send-check me-2"></i> Submit Transfer');
+            }
+        });
+    });
 
 });
 

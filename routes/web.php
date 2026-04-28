@@ -219,8 +219,19 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     Route::post('/smart-wallet/buy-sell/fetchSellerData/{id?}', [BuySellController::class, 'fetchSellerData'])->name('smartwallet.buySell.fetchSellerData');
     Route::post('/smart-wallet/buy-sell/sendRequestForBuy-store', [BuySellController::class, 'sendRequestForBuyStore'])->name('smartwallet.buySell.sendRequestForBuyStore');
     Route::get('/smart-wallet/buy-sell/rfbListData', [BuySellController::class, 'rfbListData'])->name('smartwallet.buySell.rfbListData');
+    Route::get('/smart-wallet/buy-sell/sellerAcceptDetails/{id}', [BuySellController::class, 'sellerAcceptDetails'])->name('smartwallet.buySell.sellerAcceptDetails');
     Route::get('/smart-wallet/buy-sell/rfb/seller-list', [BuySellController::class, 'rfbSellerList'])->name('smartwallet.buySell.rfbSellerList');
+    Route::post('smart-wallet/buy-sell/rfb/transfer-money-store', [BuySellController::class, 'transferMoneyStore'])->name('smartwallet.buySell.transferMoneyStore');
 
+
+    Route::get('/smart-wallet/buy-sell/receiverRequestForBuy', [BuySellController::class, 'receiverRequestForBuy'])->name('smartwallet.buySell.receiverRequestForBuy');
+    Route::get('/smart-wallet/buy-sell/receive-rfbListData', [BuySellController::class, 'receiveRfbListData'])->name('smartwallet.buySell.receiveRfbListData');
+    Route::post('/smart-wallet/buy-sell/acceptRequest/{id}', [BuySellController::class, 'acceptRequest'])->name('smartwallet.buySell.acceptRequest');
+    Route::post('/smart-wallet/buy-sell/payment-receive-confirmation', [BuySellController::class, 'paymentReceiveConfirmation'])->name('smartwallet.buySell.rfb.payment.receive');
+    Route::post('/smart-wallet/buy-sell/payment-details', [BuySellController::class, 'paymentDetails'])
+    ->name('smartwallet.buySell.rfb.payment.details');
+
+    
     // ── Chat ───────────────────────────────────────────────────────────
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
