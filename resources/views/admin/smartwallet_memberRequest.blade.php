@@ -42,7 +42,12 @@
 
 </main>
 
+<<<<<<< HEAD
 
+=======
+@include('chatbox')
+@include('chat-script')
+>>>>>>> dev
 
 @push('scripts')
 

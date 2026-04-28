@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7abc32fedef9f0fe8dc66cad737c7e23",
+    "content-hash": "27e347a8b5690b9553d03455e725edaa",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -7121,6 +7121,7 @@
                 }
             ],
             "time": "2024-11-21T01:49:47+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "yajra/laravel-datatables-oracle",
@@ -7210,6 +7211,8 @@
                 }
             ],
             "time": "2026-02-20T15:00:37+00:00"
+=======
+>>>>>>> dev
         }
     ],
     "packages-dev": [
@@ -9597,5 +9600,9 @@
         "php": "^8.2"
     },
     "platform-dev": {},
+<<<<<<< HEAD
     "plugin-api-version": "2.9.0"
+=======
+    "plugin-api-version": "2.6.0"
+>>>>>>> dev
 }

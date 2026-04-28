@@ -16,6 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin.auth'  => \App\Http\Middleware\AdminAuth::class,
+            'admin.panel' => \App\Http\Middleware\EnsureAdminPanelPermission::class,
+            'admin.super' => \App\Http\Middleware\EnsureNotStaff::class,
             'member.auth' => \App\Http\Middleware\MemberAuth::class,
         ]);
     })

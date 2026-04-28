@@ -217,7 +217,6 @@
     
 
 @endsection
-
 @push('scripts')
 
 <script>

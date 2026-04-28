@@ -618,12 +618,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             item.className = 'list-group-item list-group-item-action py-2 px-3';
                             item.style.fontSize = '12px';
                             item.innerHTML = '<span class="fw-bold text-primary">' + escHtml(m.memberID) + '</span>'
-                                + ' — ' + escHtml(m.name)
-                                + ' <span class="text-muted">(' + escHtml(m.phone) + ')</span>';
+                                + ' — ' + escHtml(m.name);
                             item.addEventListener('click', function () {
                                 inputEl.value            = m.memberID;
                                 hiddenEl.value           = m.memberID;
-                                infoEl.textContent       = '✅ ' + m.name + ' | ' + m.phone;
+                                infoEl.textContent       = '✅ ' + m.name;
                                 infoEl.className         = 'text-success';
                                 dropdownEl.style.display = 'none';
                             });

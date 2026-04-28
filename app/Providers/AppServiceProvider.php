@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Blade;
+use App\Support\AdminPanelAccess;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+        Blade::if('adminCan', function (string $permission) {
+            return AdminPanelAccess::can($permission);
+        });
 
         View::composer('member.*', function ($view) {
             if (session()->has('member_logged_in') && session('member_id')) {

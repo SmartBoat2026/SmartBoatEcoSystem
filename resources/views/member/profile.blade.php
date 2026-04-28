@@ -270,7 +270,7 @@
                         <td>{{ strtoupper($pay->upi_app ?? '-') }}</td>
                         <td>
                             @if($pay->qr_code)
-                                <img src="{{ asset('public/storage/'.$pay->qr_code) }}"
+                                <img src="{{ asset('storage/'.$pay->qr_code) }}"
                                      style="width:36px;height:36px;object-fit:contain;border:1px solid #e9ecef;border-radius:5px;">
                             @else
                                 <span style="color:#adb5bd;font-size:11px;">No QR</span>

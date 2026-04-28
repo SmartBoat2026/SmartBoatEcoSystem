@@ -95,7 +95,11 @@
                         <td>{{ Str::limit($product->description, 40) }}</td>
                         <td>
                             @if($product->image)
+<<<<<<< HEAD
                                 <img src="{{ asset('public/storage/' . $product->image) }}" width="50" height="50"
+=======
+                                <img src="{{ asset('storage/' . $product->image) }}" width="50" height="50"
+>>>>>>> dev
                                      style="object-fit:cover; border-radius:4px;">
                             @else
                                 <span class="text-muted">No Image</span>

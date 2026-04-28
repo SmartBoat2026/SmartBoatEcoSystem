@@ -215,7 +215,7 @@ class MemberController extends Controller
     }
 
     // Return the new/updated row HTML for dynamic injection
-    $qrUrl = $payment->qr_code ? asset('public/storage/' . $payment->qr_code) : null;
+    $qrUrl = $payment->qr_code ? asset('storage/' . $payment->qr_code) : null;
 
     return response()->json([
         'success' => true,
