@@ -101,11 +101,7 @@ class AdminController extends Controller
             return redirect('/member/dashboard')->with('success', 'Welcome, ' . $member->name . '!');
         }
 
-<<<<<<< HEAD
-        // 3. Neither matched
-=======
         // 4. Neither matched
->>>>>>> dev
         return back()->withErrors([
             'username' => 'Invalid Member ID / Username or Password.',
         ])->withInput(['username' => $username]);
@@ -115,12 +111,8 @@ class AdminController extends Controller
     {
         $request->session()->forget([
             'admin_logged_in', 'admin_id', 'admin_name',
-<<<<<<< HEAD
-            'admin_username', 'admin_role',
-=======
             'admin_username', 'admin_role', 'admin_is_staff',
             'staff_id', 'admin_permissions', 'type',
->>>>>>> dev
         ]);
         return redirect('/login')->with('status', 'You have been logged out.');
     }
