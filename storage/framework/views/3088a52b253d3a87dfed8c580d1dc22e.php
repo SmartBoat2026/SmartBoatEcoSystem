@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Panel — SmartBoatEcosystem</title>
-    <link rel="shortcut icon" href="<?php echo e(asset('public/admin/assets/images/favicon.ico')); ?>">
+    <link rel="shortcut icon" href="<?php echo e(asset('admin/assets/images/favicon.ico')); ?>">
 
     
-    <link href="<?php echo e(asset('public/admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
 
     
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
 
     
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 
     
     <link rel="stylesheet" href="<?php echo e(asset('public/admin/assets/toastr/toastr.min.css')); ?>">
@@ -680,19 +679,6 @@
                 <i class="bi bi-person"></i>
                 <span class="nav-label">Received Request For Buy</span>
             </a>
-            
-            <!-- <a href="<?php echo e(route('member.smartwallet.userToUser.receiver')); ?>"
-            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
-                <i class="bi bi-person"></i>
-                <span class="nav-label">Sent Request For Buy</span>
-            </a>
-
-            <a href="<?php echo e(route('member.smartwallet.userToUser.receiver')); ?>"
-            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
-                <i class="bi bi-person"></i>
-                <span class="nav-label">Received Request For Buy</span>
-            </a> -->
-
         </div>
 
     </div>

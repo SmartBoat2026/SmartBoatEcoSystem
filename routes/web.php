@@ -85,76 +85,76 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::middleware('admin.panel')->group(function () {
 
-    // Dashboard & Tasks
-    Route::get('/admin-page', [AdminPanelController::class, 'index'])->name('admin.index');
-    Route::get('/tasks',      [AdminPanelController::class, 'tasks'])->name('tasks');
+        // Dashboard & Tasks
+        Route::get('/admin-page', [AdminPanelController::class, 'index'])->name('admin.index');
+        Route::get('/tasks',      [AdminPanelController::class, 'tasks'])->name('tasks');
 
-    // ── Manage Member ─────────────────────────────────────────────────────────
-    Route::get('/managereport',                         [ManageReportController::class, 'managereport'])->name('managereport');
-    Route::get('/managereport/memberactive',            [ManageReportController::class, 'memberactive'])->name('managereport.memberactive');
-    Route::post('/managereport/toggle-status/{id}',     [ManageReportController::class, 'toggleStatus'])->name('managereport.toggleStatus');
-    Route::post('/managereport/store',                  [ManageReportController::class, 'store'])->name('managereport.store');
-    Route::post('/managereport/update/{id}',            [ManageReportController::class, 'update'])->name('managereport.update');
-    Route::get('/managereport/delete/{id}',             [ManageReportController::class, 'delete'])->name('managereport.delete');
-    Route::post('/managereport/bulk-delete',            [ManageReportController::class, 'bulkDelete'])->name('managereport.bulkDelete');
-    Route::get('/managereport/member-search',           [ManageReportController::class, 'memberSearch'])->name('managereport.member-search');
-    Route::post('/managereport/access',                 [ManageReportController::class, 'accessMember'])->name('managereport.access');
+        // ── Manage Member ─────────────────────────────────────────────────────────
+        Route::get('/managereport',                         [ManageReportController::class, 'managereport'])->name('managereport');
+        Route::get('/managereport/memberactive',            [ManageReportController::class, 'memberactive'])->name('managereport.memberactive');
+        Route::post('/managereport/toggle-status/{id}',     [ManageReportController::class, 'toggleStatus'])->name('managereport.toggleStatus');
+        Route::post('/managereport/store',                  [ManageReportController::class, 'store'])->name('managereport.store');
+        Route::post('/managereport/update/{id}',            [ManageReportController::class, 'update'])->name('managereport.update');
+        Route::get('/managereport/delete/{id}',             [ManageReportController::class, 'delete'])->name('managereport.delete');
+        Route::post('/managereport/bulk-delete',            [ManageReportController::class, 'bulkDelete'])->name('managereport.bulkDelete');
+        Route::get('/managereport/member-search',           [ManageReportController::class, 'memberSearch'])->name('managereport.member-search');
+        Route::post('/managereport/access',                 [ManageReportController::class, 'accessMember'])->name('managereport.access');
 
-    // ── Smart Wallet ──────────────────────────────────────────────────────────
-    Route::get('/smartwallet',                          [SmartwalletController::class, 'smartwallet'])->name('smartwallet');
-    Route::post('/smartwallet/store',                   [SmartwalletController::class, 'store'])->name('smartwallet.store');
+        // ── Smart Wallet ──────────────────────────────────────────────────────────
+        Route::get('/smartwallet',                          [SmartwalletController::class, 'smartwallet'])->name('smartwallet');
+        Route::post('/smartwallet/store',                   [SmartwalletController::class, 'store'])->name('smartwallet.store');
 
-    // ── Category ──────────────────────────────────────────────────────────────
-    Route::get('/category',                             [CategoryController::class, 'category'])->name('category');
-    Route::post('/category/store',                      [CategoryController::class, 'store'])->name('category.store');
-    Route::post('/category/update/{id}',                [CategoryController::class, 'update'])->name('category.update');
-    Route::get('/category/delete/{id}',                 [CategoryController::class, 'delete'])->name('category.delete');
-    Route::post('/category/toggle-status/{id}',         [CategoryController::class, 'toggleStatus'])->name('category.toggleStatus');
-    Route::post('/category/bulk-delete',                [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
+        // ── Category ──────────────────────────────────────────────────────────────
+        Route::get('/category',                             [CategoryController::class, 'category'])->name('category');
+        Route::post('/category/store',                      [CategoryController::class, 'store'])->name('category.store');
+        Route::post('/category/update/{id}',                [CategoryController::class, 'update'])->name('category.update');
+        Route::get('/category/delete/{id}',                 [CategoryController::class, 'delete'])->name('category.delete');
+        Route::post('/category/toggle-status/{id}',         [CategoryController::class, 'toggleStatus'])->name('category.toggleStatus');
+        Route::post('/category/bulk-delete',                [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
 
-    // ── Product ───────────────────────────────────────────────────────────────
-    Route::get('/product',                              [ProductController::class, 'product'])->name('product');
-    Route::post('/product/store',                       [ProductController::class, 'store'])->name('product.store');
-    Route::post('/product/update/{id}',                 [ProductController::class, 'update'])->name('product.update');
-    Route::get('/product/delete/{id}',                  [ProductController::class, 'delete'])->name('product.delete');
-    Route::post('/product/toggle-status/{id}',          [ProductController::class, 'toggleStatus'])->name('product.toggleStatus');
-    Route::get('/product/subcategories/{categoryId}',   [ProductController::class, 'getSubcategories'])->name('product.subcategories');
-    Route::post('/product/bulk-delete',                 [ProductController::class, 'bulkDelete'])->name('product.bulkDelete');
+        // ── Product ───────────────────────────────────────────────────────────────
+        Route::get('/product',                              [ProductController::class, 'product'])->name('product');
+        Route::post('/product/store',                       [ProductController::class, 'store'])->name('product.store');
+        Route::post('/product/update/{id}',                 [ProductController::class, 'update'])->name('product.update');
+        Route::get('/product/delete/{id}',                  [ProductController::class, 'delete'])->name('product.delete');
+        Route::post('/product/toggle-status/{id}',          [ProductController::class, 'toggleStatus'])->name('product.toggleStatus');
+        Route::get('/product/subcategories/{categoryId}',   [ProductController::class, 'getSubcategories'])->name('product.subcategories');
+        Route::post('/product/bulk-delete',                 [ProductController::class, 'bulkDelete'])->name('product.bulkDelete');
 
-    // ── Product Purchase ──────────────────────────────────────────────────────
-    Route::get('/productpurchase',                      [ProductPurchaseController::class, 'index'])->name('productpurchase.index');
-    Route::post('/productpurchase/store',               [ProductPurchaseController::class, 'store'])->name('productpurchase.store');
-    Route::get('/productpurchase/member',               [ProductPurchaseController::class, 'memberLookup'])->name('productpurchase.member');
-    Route::post('/productpurchase/bulk-delete',         [ProductPurchaseController::class, 'bulkDelete'])->name('productpurchase.bulkDelete');
-    Route::get('/productpurchase/member-wallet',        [ProductPurchaseController::class, 'memberWalletBalance'])->name('productpurchase.memberWallet');
+        // ── Product Purchase ──────────────────────────────────────────────────────
+        Route::get('/productpurchase',                      [ProductPurchaseController::class, 'index'])->name('productpurchase.index');
+        Route::post('/productpurchase/store',               [ProductPurchaseController::class, 'store'])->name('productpurchase.store');
+        Route::get('/productpurchase/member',               [ProductPurchaseController::class, 'memberLookup'])->name('productpurchase.member');
+        Route::post('/productpurchase/bulk-delete',         [ProductPurchaseController::class, 'bulkDelete'])->name('productpurchase.bulkDelete');
+        Route::get('/productpurchase/member-wallet',        [ProductPurchaseController::class, 'memberWalletBalance'])->name('productpurchase.memberWallet');
 
-    // ── STP Schedules ─────────────────────────────────────────────────────────
-    Route::get('/stpschedules',                         [StpscheduleController::class, 'index'])->name('stpschedule.index');
-    Route::get('/stpschedule/search-member',            [StpscheduleController::class, 'searchMember'])->name('stpschedule.searchMember');
-    Route::post('/stpschedule/store',                   [StpscheduleController::class, 'store'])->name('stpschedule.store');
-    Route::post('/stpschedule/update/{id}',             [StpscheduleController::class, 'update'])->name('stpschedule.update');
-    Route::post('/stpschedule/delete/{id}',             [StpscheduleController::class, 'delete'])->name('stpschedule.delete');
-    Route::post('/stpschedule/toggle-status/{id}',      [StpscheduleController::class, 'toggleStatus'])->name('stpschedule.toggleStatus');
-    Route::post('/stpschedule/bulk-delete',             [StpscheduleController::class, 'bulkDelete'])->name('stpschedule.bulkDelete');
+        // ── STP Schedules ─────────────────────────────────────────────────────────
+        Route::get('/stpschedules',                         [StpscheduleController::class, 'index'])->name('stpschedule.index');
+        Route::get('/stpschedule/search-member',            [StpscheduleController::class, 'searchMember'])->name('stpschedule.searchMember');
+        Route::post('/stpschedule/store',                   [StpscheduleController::class, 'store'])->name('stpschedule.store');
+        Route::post('/stpschedule/update/{id}',             [StpscheduleController::class, 'update'])->name('stpschedule.update');
+        Route::post('/stpschedule/delete/{id}',             [StpscheduleController::class, 'delete'])->name('stpschedule.delete');
+        Route::post('/stpschedule/toggle-status/{id}',      [StpscheduleController::class, 'toggleStatus'])->name('stpschedule.toggleStatus');
+        Route::post('/stpschedule/bulk-delete',             [StpscheduleController::class, 'bulkDelete'])->name('stpschedule.bulkDelete');
 
-    // ── Bonus ─────────────────────────────────────────────────────────────────
-    Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
-    Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
+        // ── Bonus ─────────────────────────────────────────────────────────────────
+        Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
+        Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
 
 
-    // ── Additional admin routes can be added here ─────────────────────────────────
-    Route::get('/smart-wallet/memberRequest', [SmartWalletMemberRequestController::class, 'memberRequest'])->name('smartwallet.memberRequest.index');
-    Route::get('/smart-wallet/memberRequest/load-model-open-data', [SmartWalletMemberRequestController::class, 'loadModelOpenData'])->name('smartwallet.memberRequest.loadModelOpenData');
-    Route::get('/smart-wallet/memberRequest/list', [SmartWalletMemberRequestController::class, 'listData'])->name('smartwallet.memberRequest.list');
-    Route::post('/smart-wallet/memberRequest/statusUpdate/{id}', [SmartWalletMemberRequestController::class, 'statusUpdate'])->name('smartwallet.memberRequest.statusUpdate');
+        // ── Additional admin routes can be added here ─────────────────────────────────
+        Route::get('/smart-wallet/memberRequest', [SmartWalletMemberRequestController::class, 'memberRequest'])->name('smartwallet.memberRequest.index');
+        Route::get('/smart-wallet/memberRequest/load-model-open-data', [SmartWalletMemberRequestController::class, 'loadModelOpenData'])->name('smartwallet.memberRequest.loadModelOpenData');
+        Route::get('/smart-wallet/memberRequest/list', [SmartWalletMemberRequestController::class, 'listData'])->name('smartwallet.memberRequest.list');
+        Route::post('/smart-wallet/memberRequest/statusUpdate/{id}', [SmartWalletMemberRequestController::class, 'statusUpdate'])->name('smartwallet.memberRequest.statusUpdate');
 
-    // ── Chat ───────────────────────────────────────────────────────────
-    Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
-    Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
-    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
-    Route::get('/chat/list', [ChatController::class, 'listChats'])->name('chat.list');
+        // ── Chat ───────────────────────────────────────────────────────────
+        Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
+        Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
+        Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+        Route::get('/chat/list', [ChatController::class, 'listChats'])->name('chat.list');
+    });
 });
-
 
 // ════════════════════════════════════════════════════════════════════════════════
 //  CRON RUN
