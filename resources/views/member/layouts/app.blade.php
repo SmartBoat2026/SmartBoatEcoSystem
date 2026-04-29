@@ -590,6 +590,12 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
+    <a id="smartBoatChatLink" href="#"
+       class="nav-link"
+       data-bs-title="Smart Boat Chat">
+        <i class="bi bi-chat-dots-fill"></i>
+        <span class="nav-label">Smart Boat Chat</span>
+    </a>
     <!-- Smart Wallet START -->
 
     <a href="#smartWalletDropdown"
@@ -660,29 +666,17 @@
                 <span class="nav-label">Self Sell Details</span>
             </a>
 
-            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
-            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+            <a href="{{ route('member.smartwallet.buySell.sendRequestForBuy') }}"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.buySell.sendRequestForBuy') ? 'active' : '' }}">
                 <i class="bi bi-person"></i>
                 <span class="nav-label">Sent Request For Buy</span>
             </a>
 
-            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
-            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
+            <a href="{{ route('member.smartwallet.buySell.receiverRequestForBuy') }}"
+            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.buySell.receiverRequestForBuy') ? 'active' : '' }}">
                 <i class="bi bi-person"></i>
                 <span class="nav-label">Received Request For Buy</span>
             </a>
-            <!-- <a href="{{ route('member.smartwallet.userToUser.receiver') }}"
-            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
-                <i class="bi bi-person"></i>
-                <span class="nav-label">Sent Request For Buy</span>
-            </a>
-
-            <a href="{{ route('member.smartwallet.userToUser.receiver') }}"
-            class="nav-link ps-5 {{ request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : '' }}">
-                <i class="bi bi-person"></i>
-                <span class="nav-label">Received Request For Buy</span>
-            </a> -->
-
         </div>
 
     </div>
@@ -740,6 +734,8 @@
     @yield('content')
 
 </main>
+
+@include('smartBoatChat')
 
 {{-- ════ SCRIPTS ════ --}}
 <script src="{{ asset('public/admin/assets/js/jquery-3.6.0.min.js') }}"></script>
@@ -827,6 +823,8 @@
     });
     @endif
 })();
+
+
 </script>
 
 @stack('scripts')

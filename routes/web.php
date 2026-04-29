@@ -85,77 +85,76 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::middleware('admin.panel')->group(function () {
 
-    // Dashboard & Tasks
-    Route::get('/admin-page', [AdminPanelController::class, 'index'])->name('admin.index');
-    Route::get('/tasks',      [AdminPanelController::class, 'tasks'])->name('tasks');
+        // Dashboard & Tasks
+        Route::get('/admin-page', [AdminPanelController::class, 'index'])->name('admin.index');
+        Route::get('/tasks',      [AdminPanelController::class, 'tasks'])->name('tasks');
 
-    // ── Manage Member ─────────────────────────────────────────────────────────
-    Route::get('/managereport',                         [ManageReportController::class, 'managereport'])->name('managereport');
-    Route::get('/managereport/memberactive',            [ManageReportController::class, 'memberactive'])->name('managereport.memberactive');
-    Route::post('/managereport/toggle-status/{id}',     [ManageReportController::class, 'toggleStatus'])->name('managereport.toggleStatus');
-    Route::post('/managereport/store',                  [ManageReportController::class, 'store'])->name('managereport.store');
-    Route::post('/managereport/update/{id}',            [ManageReportController::class, 'update'])->name('managereport.update');
-    Route::get('/managereport/delete/{id}',             [ManageReportController::class, 'delete'])->name('managereport.delete');
-    Route::post('/managereport/bulk-delete',            [ManageReportController::class, 'bulkDelete'])->name('managereport.bulkDelete');
-    Route::get('/managereport/member-search',           [ManageReportController::class, 'memberSearch'])->name('managereport.member-search');
-    Route::post('/managereport/access',                 [ManageReportController::class, 'accessMember'])->name('managereport.access');
+        // ── Manage Member ─────────────────────────────────────────────────────────
+        Route::get('/managereport',                         [ManageReportController::class, 'managereport'])->name('managereport');
+        Route::get('/managereport/memberactive',            [ManageReportController::class, 'memberactive'])->name('managereport.memberactive');
+        Route::post('/managereport/toggle-status/{id}',     [ManageReportController::class, 'toggleStatus'])->name('managereport.toggleStatus');
+        Route::post('/managereport/store',                  [ManageReportController::class, 'store'])->name('managereport.store');
+        Route::post('/managereport/update/{id}',            [ManageReportController::class, 'update'])->name('managereport.update');
+        Route::get('/managereport/delete/{id}',             [ManageReportController::class, 'delete'])->name('managereport.delete');
+        Route::post('/managereport/bulk-delete',            [ManageReportController::class, 'bulkDelete'])->name('managereport.bulkDelete');
+        Route::get('/managereport/member-search',           [ManageReportController::class, 'memberSearch'])->name('managereport.member-search');
+        Route::post('/managereport/access',                 [ManageReportController::class, 'accessMember'])->name('managereport.access');
 
-    // ── Smart Wallet ──────────────────────────────────────────────────────────
-    Route::get('/smartwallet',                          [SmartwalletController::class, 'smartwallet'])->name('smartwallet');
-    Route::post('/smartwallet/store',                   [SmartwalletController::class, 'store'])->name('smartwallet.store');
+        // ── Smart Wallet ──────────────────────────────────────────────────────────
+        Route::get('/smartwallet',                          [SmartwalletController::class, 'smartwallet'])->name('smartwallet');
+        Route::post('/smartwallet/store',                   [SmartwalletController::class, 'store'])->name('smartwallet.store');
 
-    // ── Category ──────────────────────────────────────────────────────────────
-    Route::get('/category',                             [CategoryController::class, 'category'])->name('category');
-    Route::post('/category/store',                      [CategoryController::class, 'store'])->name('category.store');
-    Route::post('/category/update/{id}',                [CategoryController::class, 'update'])->name('category.update');
-    Route::get('/category/delete/{id}',                 [CategoryController::class, 'delete'])->name('category.delete');
-    Route::post('/category/toggle-status/{id}',         [CategoryController::class, 'toggleStatus'])->name('category.toggleStatus');
-    Route::post('/category/bulk-delete',                [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
+        // ── Category ──────────────────────────────────────────────────────────────
+        Route::get('/category',                             [CategoryController::class, 'category'])->name('category');
+        Route::post('/category/store',                      [CategoryController::class, 'store'])->name('category.store');
+        Route::post('/category/update/{id}',                [CategoryController::class, 'update'])->name('category.update');
+        Route::get('/category/delete/{id}',                 [CategoryController::class, 'delete'])->name('category.delete');
+        Route::post('/category/toggle-status/{id}',         [CategoryController::class, 'toggleStatus'])->name('category.toggleStatus');
+        Route::post('/category/bulk-delete',                [CategoryController::class, 'bulkDelete'])->name('category.bulkDelete');
 
-    // ── Product ───────────────────────────────────────────────────────────────
-    Route::get('/product',                              [ProductController::class, 'product'])->name('product');
-    Route::post('/product/store',                       [ProductController::class, 'store'])->name('product.store');
-    Route::post('/product/update/{id}',                 [ProductController::class, 'update'])->name('product.update');
-    Route::get('/product/delete/{id}',                  [ProductController::class, 'delete'])->name('product.delete');
-    Route::post('/product/toggle-status/{id}',          [ProductController::class, 'toggleStatus'])->name('product.toggleStatus');
-    Route::get('/product/subcategories/{categoryId}',   [ProductController::class, 'getSubcategories'])->name('product.subcategories');
-    Route::post('/product/bulk-delete',                 [ProductController::class, 'bulkDelete'])->name('product.bulkDelete');
+        // ── Product ───────────────────────────────────────────────────────────────
+        Route::get('/product',                              [ProductController::class, 'product'])->name('product');
+        Route::post('/product/store',                       [ProductController::class, 'store'])->name('product.store');
+        Route::post('/product/update/{id}',                 [ProductController::class, 'update'])->name('product.update');
+        Route::get('/product/delete/{id}',                  [ProductController::class, 'delete'])->name('product.delete');
+        Route::post('/product/toggle-status/{id}',          [ProductController::class, 'toggleStatus'])->name('product.toggleStatus');
+        Route::get('/product/subcategories/{categoryId}',   [ProductController::class, 'getSubcategories'])->name('product.subcategories');
+        Route::post('/product/bulk-delete',                 [ProductController::class, 'bulkDelete'])->name('product.bulkDelete');
 
-    // ── Product Purchase ──────────────────────────────────────────────────────
-    Route::get('/productpurchase',                      [ProductPurchaseController::class, 'index'])->name('productpurchase.index');
-    Route::post('/productpurchase/store',               [ProductPurchaseController::class, 'store'])->name('productpurchase.store');
-    Route::get('/productpurchase/member',               [ProductPurchaseController::class, 'memberLookup'])->name('productpurchase.member');
-    Route::post('/productpurchase/bulk-delete',         [ProductPurchaseController::class, 'bulkDelete'])->name('productpurchase.bulkDelete');
-    Route::get('/productpurchase/member-wallet',        [ProductPurchaseController::class, 'memberWalletBalance'])->name('productpurchase.memberWallet');
+        // ── Product Purchase ──────────────────────────────────────────────────────
+        Route::get('/productpurchase',                      [ProductPurchaseController::class, 'index'])->name('productpurchase.index');
+        Route::post('/productpurchase/store',               [ProductPurchaseController::class, 'store'])->name('productpurchase.store');
+        Route::get('/productpurchase/member',               [ProductPurchaseController::class, 'memberLookup'])->name('productpurchase.member');
+        Route::post('/productpurchase/bulk-delete',         [ProductPurchaseController::class, 'bulkDelete'])->name('productpurchase.bulkDelete');
+        Route::get('/productpurchase/member-wallet',        [ProductPurchaseController::class, 'memberWalletBalance'])->name('productpurchase.memberWallet');
 
-    // ── STP Schedules ─────────────────────────────────────────────────────────
-    Route::get('/stpschedules',                         [StpscheduleController::class, 'index'])->name('stpschedule.index');
-    Route::get('/stpschedule/search-member',            [StpscheduleController::class, 'searchMember'])->name('stpschedule.searchMember');
-    Route::post('/stpschedule/store',                   [StpscheduleController::class, 'store'])->name('stpschedule.store');
-    Route::post('/stpschedule/update/{id}',             [StpscheduleController::class, 'update'])->name('stpschedule.update');
-    Route::post('/stpschedule/delete/{id}',             [StpscheduleController::class, 'delete'])->name('stpschedule.delete');
-    Route::post('/stpschedule/toggle-status/{id}',      [StpscheduleController::class, 'toggleStatus'])->name('stpschedule.toggleStatus');
-    Route::post('/stpschedule/bulk-delete',             [StpscheduleController::class, 'bulkDelete'])->name('stpschedule.bulkDelete');
+        // ── STP Schedules ─────────────────────────────────────────────────────────
+        Route::get('/stpschedules',                         [StpscheduleController::class, 'index'])->name('stpschedule.index');
+        Route::get('/stpschedule/search-member',            [StpscheduleController::class, 'searchMember'])->name('stpschedule.searchMember');
+        Route::post('/stpschedule/store',                   [StpscheduleController::class, 'store'])->name('stpschedule.store');
+        Route::post('/stpschedule/update/{id}',             [StpscheduleController::class, 'update'])->name('stpschedule.update');
+        Route::post('/stpschedule/delete/{id}',             [StpscheduleController::class, 'delete'])->name('stpschedule.delete');
+        Route::post('/stpschedule/toggle-status/{id}',      [StpscheduleController::class, 'toggleStatus'])->name('stpschedule.toggleStatus');
+        Route::post('/stpschedule/bulk-delete',             [StpscheduleController::class, 'bulkDelete'])->name('stpschedule.bulkDelete');
 
-    // ── Bonus ─────────────────────────────────────────────────────────────────
-    Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
-    Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
+        // ── Bonus ─────────────────────────────────────────────────────────────────
+        Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
+        Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
 
 
-    // ── Additional admin routes can be added here ─────────────────────────────────
-    Route::get('/smart-wallet/memberRequest', [SmartWalletMemberRequestController::class, 'memberRequest'])->name('smartwallet.memberRequest.index');
-    Route::get('/smart-wallet/memberRequest/load-model-open-data', [SmartWalletMemberRequestController::class, 'loadModelOpenData'])->name('smartwallet.memberRequest.loadModelOpenData');
-    Route::get('/smart-wallet/memberRequest/list', [SmartWalletMemberRequestController::class, 'listData'])->name('smartwallet.memberRequest.list');
-    Route::post('/smart-wallet/memberRequest/statusUpdate/{id}', [SmartWalletMemberRequestController::class, 'statusUpdate'])->name('smartwallet.memberRequest.statusUpdate');
+        // ── Additional admin routes can be added here ─────────────────────────────────
+        Route::get('/smart-wallet/memberRequest', [SmartWalletMemberRequestController::class, 'memberRequest'])->name('smartwallet.memberRequest.index');
+        Route::get('/smart-wallet/memberRequest/load-model-open-data', [SmartWalletMemberRequestController::class, 'loadModelOpenData'])->name('smartwallet.memberRequest.loadModelOpenData');
+        Route::get('/smart-wallet/memberRequest/list', [SmartWalletMemberRequestController::class, 'listData'])->name('smartwallet.memberRequest.list');
+        Route::post('/smart-wallet/memberRequest/statusUpdate/{id}', [SmartWalletMemberRequestController::class, 'statusUpdate'])->name('smartwallet.memberRequest.statusUpdate');
 
-    // ── Chat ───────────────────────────────────────────────────────────
-    Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
-    Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
-    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
-    
-   });
+        // ── Chat ───────────────────────────────────────────────────────────
+        Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
+        Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
+        Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+        Route::get('/chat/list', [ChatController::class, 'listChats'])->name('chat.list');
+    });
 });
-
 
 // ════════════════════════════════════════════════════════════════════════════════
 //  CRON RUN
@@ -236,18 +235,33 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
     // ── Buy/Sell───────────────────────────────────────────────────────────
     Route::get('/smart-wallet/buy-sell/selfSell', [BuySellController::class, 'selfSell'])->name('smartwallet.buySell.selfSell');
     Route::post('/smart-wallet/buy-sell/selfSell-store', [BuySellController::class, 'selfSellStore'])->name('smartwallet.buySell.selfSellStore');
+    Route::post('/smart-wallet/buy-sell/selfSell-cancel/{id}', [BuySellController::class, 'selfSellCancel'])->name('smartwallet.buySell.selfSellCancel');
+    Route::get('/smart-wallet/buy-sell/selfSellShow/{id}', [BuySellController::class, 'selfSellShowData'])->name('smartwallet.buySell.selfSellShowData');
     Route::get('/smart-wallet/buy-sell/selfSelllist', [BuySellController::class, 'selfSellListData'])->name('smartwallet.buySell.selfSellListData');
     
 
-    Route::get('/smart-wallet/buy-sell/load-model-open-data', [BuySellController::class, 'loadModelOpenData'])->name('smartwallet.buySell.loadModelOpenData');
+    Route::get('/smart-wallet/buy-sell/sendRequestForBuy', [BuySellController::class, 'sendRequestForBuy'])->name('smartwallet.buySell.sendRequestForBuy');
+    Route::post('/smart-wallet/buy-sell/fetchSellerData/{id?}', [BuySellController::class, 'fetchSellerData'])->name('smartwallet.buySell.fetchSellerData');
+    Route::post('/smart-wallet/buy-sell/sendRequestForBuy-store', [BuySellController::class, 'sendRequestForBuyStore'])->name('smartwallet.buySell.sendRequestForBuyStore');
+    Route::get('/smart-wallet/buy-sell/rfbListData', [BuySellController::class, 'rfbListData'])->name('smartwallet.buySell.rfbListData');
+    Route::get('/smart-wallet/buy-sell/sellerAcceptDetails/{id}', [BuySellController::class, 'sellerAcceptDetails'])->name('smartwallet.buySell.sellerAcceptDetails');
+    Route::get('/smart-wallet/buy-sell/rfb/seller-list', [BuySellController::class, 'rfbSellerList'])->name('smartwallet.buySell.rfbSellerList');
+    Route::post('smart-wallet/buy-sell/rfb/transfer-money-store', [BuySellController::class, 'transferMoneyStore'])->name('smartwallet.buySell.transferMoneyStore');
+
+
+    Route::get('/smart-wallet/buy-sell/receiverRequestForBuy', [BuySellController::class, 'receiverRequestForBuy'])->name('smartwallet.buySell.receiverRequestForBuy');
+    Route::get('/smart-wallet/buy-sell/receive-rfbListData', [BuySellController::class, 'receiveRfbListData'])->name('smartwallet.buySell.receiveRfbListData');
+    Route::post('/smart-wallet/buy-sell/acceptRequest/{id}', [BuySellController::class, 'acceptRequest'])->name('smartwallet.buySell.acceptRequest');
+    Route::post('/smart-wallet/buy-sell/payment-receive-confirmation', [BuySellController::class, 'paymentReceiveConfirmation'])->name('smartwallet.buySell.rfb.payment.receive');
+    Route::post('/smart-wallet/buy-sell/payment-details', [BuySellController::class, 'paymentDetails'])
+    ->name('smartwallet.buySell.rfb.payment.details');
+
     
-
-
-
     // ── Chat ───────────────────────────────────────────────────────────
     Route::get('/chat/load-name', [ChatController::class, 'loadChatName'])->name('chat.load.name');
     Route::get('/chat/load-history', [ChatController::class, 'loadChatHistory'])->name('chat.load.history');
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::get('/chat/list', [ChatController::class, 'listChats'])->name('chat.list');
 
     
 });

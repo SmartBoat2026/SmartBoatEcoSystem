@@ -5,17 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SmartBoatEcosystem</title>
-<<<<<<< HEAD
-    <link rel="shortcut icon" href="<?php echo e(asset('public/admin/assets/images/favicon.ico')); ?>" type="image/x-icon">
-    <link href="<?php echo e(asset('public/admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="<?php echo e(asset('public/admin/assets/css/style.css')); ?>" rel="stylesheet">
-=======
     <link rel="shortcut icon" href="<?php echo e(asset('admin/assets/images/favicon.ico')); ?>" type="image/x-icon">
     <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="<?php echo e(asset('admin/assets/css/style.css')); ?>" rel="stylesheet">
->>>>>>> dev
     <style>
         * {
             box-sizing: border-box;
@@ -371,15 +364,9 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    <script src="<?php echo e(asset('public/admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('public/admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('public/admin/assets/js/script.js')); ?>"></script>
-=======
     <script src="<?php echo e(asset('admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
     <script src="<?php echo e(asset('admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
     <script src="<?php echo e(asset('admin/assets/js/script.js')); ?>"></script>
->>>>>>> dev
     <script>
         document.getElementById('loginPasswordToggle').addEventListener('click', function () {
             const input = document.getElementById('loginPassword');
@@ -395,4 +382,4 @@
     </script>
 </body>
 </html>
-<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\Main\resources\views/admin/login.blade.php ENDPATH**/ ?>
+<?php /**PATH F:\xampp\htdocs\SmartBoat\ecosystemnew\resources\views/admin/login.blade.php ENDPATH**/ ?>

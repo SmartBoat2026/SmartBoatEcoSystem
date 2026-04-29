@@ -146,8 +146,6 @@
     
 
 @endsection
-@include('chatbox')
-@include('chat-script')
 @push('scripts')
 
 <script>

@@ -8,6 +8,15 @@
 
     
     <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
+<<<<<<< HEAD
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.4.2/css/buttons.dataTables.min.css">
+=======
     <link href="<?php echo e(asset('admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
 
     
@@ -19,6 +28,7 @@
 
     
     <link rel="stylesheet" href="<?php echo e(asset('public/admin/assets/toastr/toastr.min.css')); ?>">
+>>>>>>> dev
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
@@ -459,7 +469,11 @@
             .sb-main { margin: 0 !important; padding: 0 !important; }
             .card { box-shadow: none !important; border: 1px solid #dee2e6 !important; }
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> dev
         @media (max-width: 768px) {
             .sb-brand-sub {
                 display: none;
@@ -470,8 +484,13 @@
             .hideinmobile {
                 display: none;
             }
+<<<<<<< HEAD
+            
+            
+=======
 
 
+>>>>>>> dev
         }
     </style>
 </head>
@@ -501,9 +520,15 @@
         </span>
         <?php endif; ?>
 
+<<<<<<< HEAD
+        
+        <?php if(isset($smartWalletBalance)): ?>
+        <span class="sb-member-badge" style="
+=======
 
         <?php if(isset($smartWalletBalance)): ?>
         <span class="sb-member-badge" id="selfwalletBalanceForNavBar" style="
+>>>>>>> dev
             background: rgba(44,95,46,.35);
             border-color: rgba(77,214,156,.4);
             color: #4dd69c;">
@@ -592,6 +617,14 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
+<<<<<<< HEAD
+
+    <a href="#" class="nav-link" data-bs-title="Smart Wallet">
+        <i class="bi bi-wallet2"></i>
+        <span class="nav-label">Smart Wallet</span>
+    </a>
+
+=======
     <!-- Smart Wallet START -->
 
     <a href="#smartWalletDropdown"
@@ -696,6 +729,7 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">Chat Box</span>
     </a> -->
+>>>>>>> dev
 </nav>
 
 
@@ -746,6 +780,25 @@
 </main>
 
 
+<<<<<<< HEAD
+<script src="<?php echo e(asset('admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
+
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.4.2/js/buttons.print.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+=======
 <script src="<?php echo e(asset('public/admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
 <script src="<?php echo e(asset('public/admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
 
@@ -771,6 +824,7 @@
 
 
 <script src="<?php echo e(asset('public/admin/assets/js/sweetalert2.min.js')); ?>"></script>
+>>>>>>> dev
 
 <script>
 (function () {
@@ -821,12 +875,17 @@
     // Approval modal
     <?php if(isset($status) && $status == 2): ?>
     document.addEventListener('DOMContentLoaded', function () {
+<<<<<<< HEAD
+        new bootstrap.Modal(document.getElementById('approvalModal'), {
+            backdrop: 'static', keyboard: false
+=======
         // new bootstrap.Modal(document.getElementById('approvalModal'), {
         //     backdrop: 'static', keyboard: false
         // }).show();
         bootstrap.Modal.getOrCreateInstance(document.getElementById('approvalModal'), {
             backdrop: 'static',
             keyboard: false
+>>>>>>> dev
         }).show();
     });
     <?php endif; ?>

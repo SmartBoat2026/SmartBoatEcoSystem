@@ -31,15 +31,19 @@ class ChatController extends Controller
         $receiverUser = ManageReport::where('member_id', $receiver)->first();
 
         $senderName = $senderUser ? ucwords(strtolower($senderUser->name)) : 'Unknown';
+        $senderMemberID = $senderUser ? strtoupper($senderUser->memberID) : 'Unknown';
         $receiverName = $receiverUser ? ucwords(strtolower($receiverUser->name)) : 'Unknown';
+        $receiverMemberID = $receiverUser ? strtoupper($receiverUser->memberID) : 'Unknown';
 
         $sessionId = $this->sessionId();
         $session_member_id = ManageReport::where('memberID', $sessionId)->value('member_id');
         $chatUserName = ($session_member_id == $sender) ? $receiverName : $senderName;
+        $chatUserMemberID = ($session_member_id == $sender) ? $receiverMemberID : $senderMemberID;
 
         return response()->json([
             'success' => true,
             'chatUserName' => $chatUserName,
+            'chatUserMemberID' => $chatUserMemberID
         ]);
     }
     public function loadChatHistory(Request $request)
@@ -108,6 +112,108 @@ class ChatController extends Controller
 
         return response()->json([
             'html' => $html
+        ]);
+    }
+    public function listChats(Request $request)
+    {
+        $sessionId = (string) $this->sessionId();
+
+        $session_member_id = ManageReport::where('memberID', $sessionId)
+            ->value('member_id');
+
+        $search = $request->search;
+
+        $chats = Chat::where(function ($q) use ($session_member_id) {
+                $q->where('sender_member_id', $session_member_id)
+                ->orWhere('receiver_member_id', $session_member_id);
+            })
+            ->when($search, function ($q) use ($search) {
+
+                $q->where(function ($qq) use ($search) {
+
+                    $qq->whereHas('senderUser', function ($u) use ($search) {
+                        $u->where('member_id', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('receiverUser', function ($u) use ($search) {
+                        $u->where('member_id', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%");
+                    });
+
+                });
+
+            })
+            ->with([
+                'senderUser:member_id,name,phone',
+                'receiverUser:member_id,name,phone'
+            ])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $chatUsers = $chats->map(function ($chat) use ($session_member_id) {
+
+            $otherUser = $chat->sender_member_id == $session_member_id
+                ? $chat->receiverUser
+                : $chat->senderUser;
+
+            if (!$otherUser) return null;
+            if($session_member_id == $chat->receiver_member_id)
+                {
+                    $sender_member_id = $chat->receiver_member_id;
+                    $receiver_member_id = $chat->sender_member_id;
+                }
+            else{
+                    $sender_member_id = $chat->sender_member_id;
+                    $receiver_member_id = $chat->receiver_member_id;
+                }
+            return [
+                'member_id' => $otherUser->member_id,
+                'name' => $otherUser->name,
+                'phone' => $otherUser->phone ?? '',
+                'last_message' => $chat->message ?? '',
+                'time' => $chat->created_at->format('h:i A'),
+                'sender_member_id' => $sender_member_id,
+                'receiver_member_id' => $receiver_member_id,
+                'type' => 'chat'
+            ];
+        })
+        ->filter()
+        ->unique('member_id')
+        ->values();
+
+        $reportUsers = collect();
+
+        if ($search) {
+
+            $reportUsers = ManageReport::where('member_id', '!=', $session_member_id)
+                ->where(function ($qq) use ($search) {
+                    $qq->where('member_id', 'like', "%{$search}%")
+                    ->orWhere('name', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
+                })
+                ->limit(10)
+                ->get()
+                ->map(function ($user) use ($session_member_id) {
+                    return [
+                        'member_id' => $user->member_id,
+                        'name' => $user->name,
+                        'phone' => $user->phone ?? '',
+                        'last_message' => 'Start chatting...',
+                        'time' => '',
+                        'sender_member_id' => $session_member_id,
+                        'receiver_member_id' => $user->member_id,
+                        'type' => 'new'
+                    ];
+                })
+                ->values();
+        }
+
+        $users = $chatUsers->concat($reportUsers)->values();
+
+        return response()->json([
+            'users' => $users
         ]);
     }
     public function sendMessage(Request $request)

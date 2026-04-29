@@ -12,7 +12,11 @@
 
     <ul class="menu" role="menu">
 
+<<<<<<< HEAD
+        <!-- Dashboard -->
+=======
         @if(\App\Support\AdminPanelAccess::can('dashboard') || \App\Support\AdminPanelAccess::can('chat'))
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('admin.index') }}"
                class="{{ request()->routeIs('admin.index') ? 'active' : '' }}"
@@ -26,6 +30,10 @@
                 <span class="label">Dashboard</span>
             </a>
         </li>
+<<<<<<< HEAD
+
+        <!-- Manage Member -->
+=======
         @endif
 
         @if(!session('admin_is_staff'))
@@ -44,6 +52,7 @@
         @endif
 
         @adminCan('manage_member')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('managereport') }}"
                class="{{ request()->routeIs('managereport') ? 'active' : '' }}"
@@ -59,9 +68,13 @@
                 <span class="label">Manage Member</span>
             </a>
         </li>
+<<<<<<< HEAD
+        <!-- Smart Wallet -->
+=======
         @endadminCan
 
         @adminCan('smart_wallet')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('smartwallet') }}"
                class="{{ request()->routeIs('smartwallet') ? 'active' : '' }}"
@@ -77,6 +90,12 @@
                 <span class="label">Smart Wallet</span>
             </a>
         </li>
+<<<<<<< HEAD
+        <li class="menu-item" role="none">
+            <a href="{{ route('smartwallet.memberRequest.index') }}"
+               class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
+               role="menuitem" title="Smart Wallet">
+=======
         @endadminCan
 
         @adminCan('smart_wallet_member_requests')
@@ -84,6 +103,7 @@
             <a href="{{ route('smartwallet.memberRequest.index') }}"
                class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
                role="menuitem" title="Smart Wallet Member Requests">
+>>>>>>> dev
 
                 <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -95,9 +115,13 @@
                 <span class="label">Smart Wallet Member Requests</span>
             </a>
         </li>
+<<<<<<< HEAD
+
+=======
         @endadminCan
 
         @adminCan('member_activation')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('managereport.memberactive') }}"
                class="{{ request()->routeIs('managereport.memberactive') ? 'active' : '' }}"
@@ -112,9 +136,14 @@
                 <span class="label">Member Activation Requests</span>
             </a>
         </li>
+<<<<<<< HEAD
+
+        <!-- Category -->
+=======
         @endadminCan
 
         @adminCan('category')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('category') }}"
                class="{{ request()->routeIs('category') ? 'active' : '' }}"
@@ -127,9 +156,14 @@
                 <span class="label">Category</span>
             </a>
         </li>
+<<<<<<< HEAD
+
+        <!-- Product -->
+=======
         @endadminCan
 
         @adminCan('product')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('product') }}"
                class="{{ request()->routeIs('product') ? 'active' : '' }}"
@@ -144,9 +178,14 @@
                 <span class="label">Product</span>
             </a>
         </li>
+<<<<<<< HEAD
+
+        <!-- Product Purchase -->
+=======
         @endadminCan
 
         @adminCan('product_purchase')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('productpurchase.index') }}"
                class="{{ request()->routeIs('productpurchase.*') ? 'active' : '' }}"
@@ -161,9 +200,13 @@
                 <span class="label">Product Purchase</span>
             </a>
         </li>
+<<<<<<< HEAD
+
+=======
         @endadminCan
 
         @adminCan('stp_schedule')
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('stpschedule.index') }}"
                class="{{ request()->routeIs('stpschedule.*') ? 'active' : '' }}"
@@ -178,9 +221,13 @@
                 <span class="label">STP Schedule</span>
             </a>
         </li>
+<<<<<<< HEAD
+         <!-- Bonus -->
+=======
         @endadminCan
 
         @if(\App\Support\AdminPanelAccess::can('bonus') || \App\Support\AdminPanelAccess::can('bonus_passive'))
+>>>>>>> dev
         <li class="menu-item has-submenu" role="none">
 
             <a href="javascript:void(0);" class="menu-link" role="menuitem" title="Bonus">
@@ -195,6 +242,10 @@
                 <span class="arrow-icon">&#8250;</span>
             </a>
 
+<<<<<<< HEAD
+            <!-- Sub Menu -->
+            <ul class="submenu" role="menu">
+=======
             <ul class="submenu" role="menu">
                 @adminCan('bonus')
                 <li role="none">
@@ -202,21 +253,49 @@
                 </li>
                 @endadminCan
                 @adminCan('bonus_passive')
+>>>>>>> dev
                 <li role="none">
                     <a href="{{ route('adminpassivebonus') }}" role="menuitem" title="Passive Bonus">
                         Passive Bonus
                     </a>
                 </li>
+<<<<<<< HEAD
+            </ul>
+
+        </li>
+        <li class="menu-item" role="none">
+            <a id="smartBoatChatLink" href="#"
+               role="menuitem" title="Smart Boat Chat">
+
+                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <circle cx="9" cy="7" r="4"
+                            stroke="currentColor" stroke-width="1.6"/>
+                    <polyline points="16 11 18 13 22 9"
+                            stroke="currentColor" stroke-width="1.6"
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <span class="label">Smart Boat Chat</span>
+            </a>
+        </li>
+=======
                 @endadminCan
             </ul>
 
         </li>
         @endif
+>>>>>>> dev
 
     </ul>
 
 </aside>
+<<<<<<< HEAD
+@include('smartBoatChat')
+=======
 
+>>>>>>> dev
 <script>
 document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
     menu.addEventListener('click', function() {

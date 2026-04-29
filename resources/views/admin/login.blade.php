@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SmartBoatEcosystem</title>
+<<<<<<< HEAD
+    <link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.ico') }}" type="image/x-icon">
+    <link href="{{ asset('public/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="{{ asset('public/admin/assets/css/style.css') }}" rel="stylesheet">
+=======
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}" type="image/x-icon">
     <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
+>>>>>>> dev
     <style>
         * {
             box-sizing: border-box;
@@ -362,9 +369,15 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+    <script src="{{ asset('public/admin/assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('public/admin/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('public/admin/assets/js/script.js') }}"></script>
+=======
     <script src="{{ asset('admin/assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/script.js') }}"></script>
+>>>>>>> dev
     <script>
         document.getElementById('loginPasswordToggle').addEventListener('click', function () {
             const input = document.getElementById('loginPassword');

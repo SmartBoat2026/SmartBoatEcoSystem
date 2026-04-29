@@ -680,6 +680,10 @@ $(document).ready(function () {
                                     data-id="${m.memberID}" data-name="${m.name}">
                                     <div>
                                         <div style="font-weight:700;color:#1a3a6b;">${m.name}</div>
+<<<<<<< HEAD
+                                        <div style="font-size:11px;color:#6c757d;">${m.phone ?? ''}</div>
+=======
+>>>>>>> dev
                                     </div>
                                     <span style="background:#e6f1fb;color:#0c447c;padding:2px 8px;
                                                  border-radius:12px;font-size:11px;font-weight:600;">

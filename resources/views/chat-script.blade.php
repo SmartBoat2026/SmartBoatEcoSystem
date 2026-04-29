@@ -11,7 +11,9 @@ function openChatModal() {
     const el = document.getElementById('chatModal');
 
     if (!el) return;
-
+    if ($('#chatListModal').hasClass('show')) {
+        $('#chatListModal').modal('hide');
+    }
     const modal = bootstrap.Modal.getOrCreateInstance(el);
     modal.show();
 }
@@ -42,6 +44,10 @@ function loadChatName()
 
         
         $('.chat-user-name').text(res.chatUserName);
+<<<<<<< HEAD
+        $('.chat-user-member-id').text(res.chatUserMemberID);
+=======
+>>>>>>> dev
         $('.chat-user-avatar').text(res.chatUserName.charAt(0).toUpperCase());
         openChatModal();
         loadChatHistory();
@@ -61,7 +67,20 @@ $(document).on('click', '.message-btn', function () {
     loadChatName();    
     
 });
+<<<<<<< HEAD
+$(document).on('click', '#backToChatList', function () {
 
+    $('#chatModal').one('hidden.bs.modal', function () {
+        $('#chatSearch').val('');
+        $('#chatListModal').modal('show');        
+        loadChatList('');
+    });
+
+    $('#chatModal').modal('hide');
+});
+=======
+
+>>>>>>> dev
 /**
  * SEND MESSAGE
  */
