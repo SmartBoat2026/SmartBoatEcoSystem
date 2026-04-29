@@ -6,29 +6,6 @@
     <title>SBES Dashboard</title>
 
     <!-- Favicon -->
-<<<<<<< HEAD
-    <link rel="shortcut icon" href="{{ asset('public/admin/assets/images/favicon.ico') }}">
-
-    <!-- CSS -->
-    <link href="{{ asset('public/admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/icons/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/icons/fontawesome/css/brands.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/icons/fontawesome/css/solid.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/plugin/select2/css/select2.min.css') }}" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{ asset('public/admin/assets/css/board.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/css/chat.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/css/admin/styles.css') }}" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="{{ asset('public/admin/assets/css/admin/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin/assets/css/admin/buttons.dataTables.min.css') }}" rel="stylesheet">
-
-    <!-- Bootstrap Icons (local) -->
-    <link href="{{ asset('public/admin/assets/css/admin/bootstrap-icons.css') }}" rel="stylesheet">
-=======
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
 
     <!-- CSS -->
@@ -50,7 +27,6 @@
 
     <!-- Bootstrap Icons (local) -->
     <link href="{{ asset('admin/assets/css/admin/bootstrap-icons.css') }}" rel="stylesheet">
->>>>>>> dev
 
 </head>
 
