@@ -6,27 +6,27 @@
     <title>SBES Dashboard</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?php echo e(asset('public/admin/assets/images/favicon.ico')); ?>">
+    <link rel="shortcut icon" href="<?php echo e(asset('admin/assets/images/favicon.ico')); ?>">
 
     <!-- CSS -->
-    <link href="<?php echo e(asset('public/admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/icons/fontawesome/css/fontawesome.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/icons/fontawesome/css/brands.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/icons/fontawesome/css/solid.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/plugin/select2/css/select2.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/icons/fontawesome/css/fontawesome.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/icons/fontawesome/css/brands.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/icons/fontawesome/css/solid.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/plugin/select2/css/select2.min.css')); ?>" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?php echo e(asset('public/admin/assets/css/board.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/css/chat.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/css/style.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/styles.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/board.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/chat.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/style.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/styles.css')); ?>" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 
     <!-- Bootstrap Icons (local) -->
-    <link href="<?php echo e(asset('public/admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
 
 </head>
 

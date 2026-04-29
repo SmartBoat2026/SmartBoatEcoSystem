@@ -207,9 +207,11 @@
                         Passive Bonus
                     </a>
                 </li>
+                @endadminCan
             </ul>
 
         </li>
+        @endif
         <li class="menu-item" role="none">
             <a id="smartBoatChatLink" href="#"
                role="menuitem" title="Smart Boat Chat">
