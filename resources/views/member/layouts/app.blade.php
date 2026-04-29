@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Panel — SmartBoatEcosystem</title>
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
@@ -534,7 +535,7 @@
        class="nav-link {{ request()->routeIs('member.dashboard') ? 'active' : '' }}"
        data-bs-title="Dashboard">
         <i class="bi bi-speedometer2"></i>
-        <span class="nav-label">Dashboard</span>
+        <span class="nav-label">Dashboard xyz</span>
     </a>
 
     <a href="{{ route('member.profile') }}"
