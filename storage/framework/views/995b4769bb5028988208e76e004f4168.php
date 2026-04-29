@@ -12,7 +12,11 @@
 
     <ul class="menu" role="menu">
 
+<<<<<<< HEAD
         <!-- Dashboard -->
+=======
+        <?php if(\App\Support\AdminPanelAccess::can('dashboard') || \App\Support\AdminPanelAccess::can('chat')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('admin.index')); ?>"
                class="<?php echo e(request()->routeIs('admin.index') ? 'active' : ''); ?>"
@@ -26,8 +30,29 @@
                 <span class="label">Dashboard</span>
             </a>
         </li>
+<<<<<<< HEAD
 
         <!-- Manage Member -->
+=======
+        <?php endif; ?>
+
+        <?php if(!session('admin_is_staff')): ?>
+        <li class="menu-item" role="none">
+            <a href="<?php echo e(route('admin.staff.index')); ?>"
+               class="<?php echo e(request()->routeIs('admin.staff.*') ? 'active' : ''); ?>"
+               role="menuitem" title="Staff management">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <span class="label">Staff management</span>
+            </a>
+        </li>
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'manage_member')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('managereport')); ?>"
                class="<?php echo e(request()->routeIs('managereport') ? 'active' : ''); ?>"
@@ -43,7 +68,13 @@
                 <span class="label">Manage Member</span>
             </a>
         </li>
+<<<<<<< HEAD
         <!-- Smart Wallet -->
+=======
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'smart_wallet')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('smartwallet')); ?>"
                class="<?php echo e(request()->routeIs('smartwallet') ? 'active' : ''); ?>"
@@ -59,10 +90,20 @@
                 <span class="label">Smart Wallet</span>
             </a>
         </li>
+<<<<<<< HEAD
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('smartwallet.memberRequest.index')); ?>"
                class="<?php echo e(request()->routeIs('smartwallet.memberRequest.index') ? 'active' : ''); ?>"
                role="menuitem" title="Smart Wallet">
+=======
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'smart_wallet_member_requests')): ?>
+        <li class="menu-item" role="none">
+            <a href="<?php echo e(route('smartwallet.memberRequest.index')); ?>"
+               class="<?php echo e(request()->routeIs('smartwallet.memberRequest.index') ? 'active' : ''); ?>"
+               role="menuitem" title="Smart Wallet Member Requests">
+>>>>>>> dev
 
                 <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -74,7 +115,13 @@
                 <span class="label">Smart Wallet Member Requests</span>
             </a>
         </li>
+<<<<<<< HEAD
 
+=======
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'member_activation')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('managereport.memberactive')); ?>"
                class="<?php echo e(request()->routeIs('managereport.memberactive') ? 'active' : ''); ?>"
@@ -89,8 +136,14 @@
                 <span class="label">Member Activation Requests</span>
             </a>
         </li>
+<<<<<<< HEAD
 
         <!-- Category -->
+=======
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'category')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('category')); ?>"
                class="<?php echo e(request()->routeIs('category') ? 'active' : ''); ?>"
@@ -103,8 +156,14 @@
                 <span class="label">Category</span>
             </a>
         </li>
+<<<<<<< HEAD
 
         <!-- Product -->
+=======
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'product')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('product')); ?>"
                class="<?php echo e(request()->routeIs('product') ? 'active' : ''); ?>"
@@ -119,8 +178,14 @@
                 <span class="label">Product</span>
             </a>
         </li>
+<<<<<<< HEAD
 
         <!-- Product Purchase -->
+=======
+        <?php endif; ?>
+
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'product_purchase')): ?>
+>>>>>>> dev
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('productpurchase.index')); ?>"
                class="<?php echo e(request()->routeIs('productpurchase.*') ? 'active' : ''); ?>"
@@ -135,7 +200,9 @@
                 <span class="label">Product Purchase</span>
             </a>
         </li>
+        <?php endif; ?>
 
+        <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'stp_schedule')): ?>
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('stpschedule.index')); ?>"
                class="<?php echo e(request()->routeIs('stpschedule.*') ? 'active' : ''); ?>"
@@ -150,7 +217,9 @@
                 <span class="label">STP Schedule</span>
             </a>
         </li>
-         <!-- Bonus -->
+        <?php endif; ?>
+
+        <?php if(\App\Support\AdminPanelAccess::can('bonus') || \App\Support\AdminPanelAccess::can('bonus_passive')): ?>
         <li class="menu-item has-submenu" role="none">
 
             <a href="javascript:void(0);" class="menu-link" role="menuitem" title="Bonus">
@@ -165,38 +234,32 @@
                 <span class="arrow-icon">&#8250;</span>
             </a>
 
-            <!-- Sub Menu -->
             <ul class="submenu" role="menu">
+                <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'bonus')): ?>
+                <li role="none">
+                    <a href="<?php echo e(route('bonus.index')); ?>" role="menuitem" title="Bonus">Bonus</a>
+                </li>
+                <?php endif; ?>
+                <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'bonus_passive')): ?>
                 <li role="none">
                     <a href="<?php echo e(route('adminpassivebonus')); ?>" role="menuitem" title="Passive Bonus">
                         Passive Bonus
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
 
         </li>
-        <li class="menu-item" role="none">
-            <a id="smartBoatChatLink" href="#"
-               role="menuitem" title="Smart Boat Chat">
-
-                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-                        stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    <circle cx="9" cy="7" r="4"
-                            stroke="currentColor" stroke-width="1.6"/>
-                    <polyline points="16 11 18 13 22 9"
-                            stroke="currentColor" stroke-width="1.6"
-                            stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-
-                <span class="label">Smart Boat Chat</span>
-            </a>
-        </li>
+        <?php endif; ?>
 
     </ul>
 
 </aside>
+<<<<<<< HEAD
 <?php echo $__env->make('smartBoatChat', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+=======
+
+>>>>>>> dev
 <script>
 document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
     menu.addEventListener('click', function() {

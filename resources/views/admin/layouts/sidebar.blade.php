@@ -12,11 +12,7 @@
 
     <ul class="menu" role="menu">
 
-<<<<<<< HEAD
-        <!-- Dashboard -->
-=======
         @if(\App\Support\AdminPanelAccess::can('dashboard') || \App\Support\AdminPanelAccess::can('chat'))
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('admin.index') }}"
                class="{{ request()->routeIs('admin.index') ? 'active' : '' }}"
@@ -30,10 +26,6 @@
                 <span class="label">Dashboard</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-        <!-- Manage Member -->
-=======
         @endif
 
         @if(!session('admin_is_staff'))
@@ -52,7 +44,6 @@
         @endif
 
         @adminCan('manage_member')
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('managereport') }}"
                class="{{ request()->routeIs('managereport') ? 'active' : '' }}"
@@ -68,13 +59,9 @@
                 <span class="label">Manage Member</span>
             </a>
         </li>
-<<<<<<< HEAD
-        <!-- Smart Wallet -->
-=======
         @endadminCan
 
         @adminCan('smart_wallet')
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('smartwallet') }}"
                class="{{ request()->routeIs('smartwallet') ? 'active' : '' }}"
@@ -90,12 +77,6 @@
                 <span class="label">Smart Wallet</span>
             </a>
         </li>
-<<<<<<< HEAD
-        <li class="menu-item" role="none">
-            <a href="{{ route('smartwallet.memberRequest.index') }}"
-               class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
-               role="menuitem" title="Smart Wallet">
-=======
         @endadminCan
 
         @adminCan('smart_wallet_member_requests')
@@ -103,7 +84,6 @@
             <a href="{{ route('smartwallet.memberRequest.index') }}"
                class="{{ request()->routeIs('smartwallet.memberRequest.index') ? 'active' : '' }}"
                role="menuitem" title="Smart Wallet Member Requests">
->>>>>>> dev
 
                 <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -115,13 +95,9 @@
                 <span class="label">Smart Wallet Member Requests</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-=======
         @endadminCan
 
         @adminCan('member_activation')
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('managereport.memberactive') }}"
                class="{{ request()->routeIs('managereport.memberactive') ? 'active' : '' }}"
@@ -136,14 +112,9 @@
                 <span class="label">Member Activation Requests</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-        <!-- Category -->
-=======
         @endadminCan
 
         @adminCan('category')
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('category') }}"
                class="{{ request()->routeIs('category') ? 'active' : '' }}"
@@ -156,14 +127,9 @@
                 <span class="label">Category</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-        <!-- Product -->
-=======
         @endadminCan
 
         @adminCan('product')
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('product') }}"
                class="{{ request()->routeIs('product') ? 'active' : '' }}"
@@ -178,14 +144,9 @@
                 <span class="label">Product</span>
             </a>
         </li>
-<<<<<<< HEAD
-
-        <!-- Product Purchase -->
-=======
         @endadminCan
 
         @adminCan('product_purchase')
->>>>>>> dev
         <li class="menu-item" role="none">
             <a href="{{ route('productpurchase.index') }}"
                class="{{ request()->routeIs('productpurchase.*') ? 'active' : '' }}"
@@ -255,11 +216,7 @@
     </ul>
 
 </aside>
-<<<<<<< HEAD
 @include('smartBoatChat')
-=======
-
->>>>>>> dev
 <script>
 document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
     menu.addEventListener('click', function() {
