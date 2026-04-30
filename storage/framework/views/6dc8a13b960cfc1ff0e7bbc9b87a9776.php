@@ -11,7 +11,9 @@ function openChatModal() {
     const el = document.getElementById('chatModal');
 
     if (!el) return;
-
+    if ($('#chatListModal').hasClass('show')) {
+        $('#chatListModal').modal('hide');
+    }
     const modal = bootstrap.Modal.getOrCreateInstance(el);
     modal.show();
 }
@@ -61,7 +63,16 @@ $(document).on('click', '.message-btn', function () {
     loadChatName();    
     
 });
+$(document).on('click', '#backToChatList', function () {
 
+    $('#chatModal').one('hidden.bs.modal', function () {
+        $('#chatSearch').val('');
+        $('#chatListModal').modal('show');        
+        loadChatList('');
+    });
+
+    $('#chatModal').modal('hide');
+});
 /**
  * SEND MESSAGE
  */

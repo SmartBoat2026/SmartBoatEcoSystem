@@ -96,7 +96,11 @@
                         <td><?php echo e(Str::limit($product->description, 40)); ?></td>
                         <td>
                             <?php if($product->image): ?>
+<<<<<<< HEAD
+                                <img src="<?php echo e(asset('public/storage/' . $product->image)); ?>" width="50" height="50"
+=======
                                 <img src="<?php echo e(asset('storage/' . $product->image)); ?>" width="50" height="50"
+>>>>>>> dev
                                      style="object-fit:cover; border-radius:4px;">
                             <?php else: ?>
                                 <span class="text-muted">No Image</span>

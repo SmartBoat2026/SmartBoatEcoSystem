@@ -123,11 +123,28 @@ Route::middleware('admin.auth')->group(function () {
         Route::get('/product/subcategories/{categoryId}',   [ProductController::class, 'getSubcategories'])->name('product.subcategories');
         Route::post('/product/bulk-delete',                 [ProductController::class, 'bulkDelete'])->name('product.bulkDelete');
 
-    // ── Bonus ─────────────────────────────────────────────────────────────────
-    Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
-    Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
-    Route::get('/admindirectbonus',                     [BonusController::class, 'adminDirectBonus'])->name('admindirectbonus');
+        
 
+        // ── Bonus ─────────────────────────────────────────────────────────────────
+        Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
+        Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
+        Route::get('/admindirectbonus',                     [BonusController::class, 'adminDirectBonus'])->name('admindirectbonus');
+
+        // ── Product Purchase ──────────────────────────────────────────────────────
+        Route::get('/productpurchase',                      [ProductPurchaseController::class, 'index'])->name('productpurchase.index');
+        Route::post('/productpurchase/store',               [ProductPurchaseController::class, 'store'])->name('productpurchase.store');
+        Route::get('/productpurchase/member',               [ProductPurchaseController::class, 'memberLookup'])->name('productpurchase.member');
+        Route::post('/productpurchase/bulk-delete',         [ProductPurchaseController::class, 'bulkDelete'])->name('productpurchase.bulkDelete');
+        Route::get('/productpurchase/member-wallet',        [ProductPurchaseController::class, 'memberWalletBalance'])->name('productpurchase.memberWallet');
+
+        // ── STP Schedules ─────────────────────────────────────────────────────────
+        Route::get('/stpschedules',                         [StpscheduleController::class, 'index'])->name('stpschedule.index');
+        Route::get('/stpschedule/search-member',            [StpscheduleController::class, 'searchMember'])->name('stpschedule.searchMember');
+        Route::post('/stpschedule/store',                   [StpscheduleController::class, 'store'])->name('stpschedule.store');
+        Route::post('/stpschedule/update/{id}',             [StpscheduleController::class, 'update'])->name('stpschedule.update');
+        Route::post('/stpschedule/delete/{id}',             [StpscheduleController::class, 'delete'])->name('stpschedule.delete');
+        Route::post('/stpschedule/toggle-status/{id}',      [StpscheduleController::class, 'toggleStatus'])->name('stpschedule.toggleStatus');
+        Route::post('/stpschedule/bulk-delete',             [StpscheduleController::class, 'bulkDelete'])->name('stpschedule.bulkDelete');
 
         // ── Additional admin routes can be added here ─────────────────────────────────
         Route::get('/smart-wallet/memberRequest', [SmartWalletMemberRequestController::class, 'memberRequest'])->name('smartwallet.memberRequest.index');
