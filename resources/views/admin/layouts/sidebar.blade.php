@@ -219,11 +219,28 @@
 
         </li>
         @endif
+        <li class="menu-item" role="none">
+            <a id="smartBoatChatLink" href="#"
+               role="menuitem" title="Smart Boat Chat">
+
+                <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <circle cx="9" cy="7" r="4"
+                            stroke="currentColor" stroke-width="1.6"/>
+                    <polyline points="16 11 18 13 22 9"
+                            stroke="currentColor" stroke-width="1.6"
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <span class="label">Smart Boat Chat</span>
+            </a>
+        </li>
 
     </ul>
 
 </aside>
-
+@include('smartBoatChat')
 <script>
 document.querySelectorAll('.has-submenu > .menu-link').forEach(function(menu) {
     menu.addEventListener('click', function() {

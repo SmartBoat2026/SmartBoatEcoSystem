@@ -51,7 +51,7 @@ class SmartWalletMemberRequestController extends Controller
                     $sender->save();
 
                     Transaction::create([
-                        'member_id'   => $member_id,
+                        'member_id'   => ManageReport::where('member_id', $member_id)->value('memberID'),
                         'added_by_id' => $admin_member_id,
                         'type'        => 'credit',
                         'amount'      => $amount,
@@ -115,7 +115,7 @@ class SmartWalletMemberRequestController extends Controller
                             </span>',
 
                 'qr_file' => $row->qr_file
-                    ? '<a href="'.asset('uploads/company_payment/'.$row->qr_file).'" target="_blank" class="btn btn-sm btn-light">
+                    ? '<a href="'.asset('public/uploads/company_payment/'.$row->qr_file).'" target="_blank" class="btn btn-sm btn-light">
                             <i class="bi '.(in_array(strtolower(pathinfo($row->qr_file, PATHINFO_EXTENSION)), ['jpg','jpeg','png'])
                             ? 'bi-image'
                             : 'bi-file-earmark-pdf').'"></i>

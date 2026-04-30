@@ -592,6 +592,12 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
+    <a id="smartBoatChatLink" href="#"
+       class="nav-link"
+       data-bs-title="Smart Boat Chat">
+        <i class="bi bi-chat-dots-fill"></i>
+        <span class="nav-label">Smart Boat Chat</span>
+    </a>
     <!-- Smart Wallet START -->
 
     <a href="#smartWalletDropdown"
@@ -607,13 +613,21 @@
     <div class="collapse sub-menu <?php echo e(request()->routeIs('member.smartwallet.*') ? 'show' : ''); ?>"
         id="smartWalletDropdown">
 
+        <!-- PAYMENT SUBMISSION -->
+        <a href="<?php echo e(route('member.smartwallet.companyPayment.index')); ?>"
+        class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : ''); ?>">
+
+            <i class="bi bi-building"></i>
+            <span class="nav-label">Company Payment Approval</span>
+        </a>
+
         <!-- USER TO USER -->
         <a href="#smartWalletUserToUserDropdown"
         class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.userToUser.*') ? 'active' : ''); ?>"
         data-bs-toggle="collapse">
 
             <i class="bi bi-wallet2"></i>
-            <span class="nav-label">USER TO USER TRANSFER</span>
+            <span class="nav-label">Peer-to-Peer Wallet Transfer</span>
             <i class="bi bi-chevron-down nav-arrow"></i>
         </a>
 
@@ -634,13 +648,50 @@
 
         </div>
 
-        <!-- PAYMENT SUBMISSION -->
-        <a href="<?php echo e(route('member.smartwallet.companyPayment.index')); ?>"
-        class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : ''); ?>">
+        
 
-            <i class="bi bi-building"></i>
-            <span class="nav-label">Payment Submission</span>
+        <!-- BUY/SELL -->
+        <a href="#smartWalletBuySellDropdown"
+        class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.buySell.*') ? 'active' : ''); ?>"
+        data-bs-toggle="collapse">
+
+            <i class="bi bi-currency-exchange"></i>
+            <span class="nav-label">Peer-to-Peer Wallet Buy/Sell</span>
+            <i class="bi bi-chevron-down nav-arrow"></i>
         </a>
+        <div class="collapse sub-menu <?php echo e(request()->routeIs('member.smartwallet.buySell.*') ? 'show' : ''); ?>"
+            id="smartWalletBuySellDropdown">
+
+            <a href="<?php echo e(route('member.smartwallet.buySell.selfSell')); ?>"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.buySell.selfSell') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Self Sell Details</span>
+            </a>
+
+            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Sent Request For Buy</span>
+            </a>
+
+            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Received Request For Buy</span>
+            </a>
+            <!-- <a href="<?php echo e(route('member.smartwallet.userToUser.receiver')); ?>"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Sent Request For Buy</span>
+            </a>
+
+            <a href="<?php echo e(route('member.smartwallet.userToUser.receiver')); ?>"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Received Request For Buy</span>
+            </a> -->
+
+        </div>
 
     </div>
 
@@ -699,6 +750,8 @@
     <?php echo $__env->yieldContent('content'); ?>
 
 </main>
+
+<?php echo $__env->make('smartBoatChat', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 
 <script src="<?php echo e(asset('admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
@@ -786,6 +839,8 @@
     });
     <?php endif; ?>
 })();
+
+
 </script>
 
 <?php echo $__env->yieldPushContent('scripts'); ?>

@@ -11,7 +11,9 @@ function openChatModal() {
     const el = document.getElementById('chatModal');
 
     if (!el) return;
-
+    if ($('#chatListModal').hasClass('show')) {
+        $('#chatListModal').modal('hide');
+    }
     const modal = bootstrap.Modal.getOrCreateInstance(el);
     modal.show();
 }

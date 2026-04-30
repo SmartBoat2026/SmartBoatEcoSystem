@@ -8,17 +8,38 @@
 
     
     <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+    <link href="<?php echo e(asset('admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
+=======
+<<<<<<< HEAD
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
+
+    
+    <link href="<?php echo e(asset('admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
+
+    
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+=======
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.4.2/css/buttons.dataTables.min.css">
+=======
     <link href="<?php echo e(asset('admin/assets/css/user/styles.css')); ?>" rel="stylesheet">
 
     
     <link href="<?php echo e(asset('admin/assets/css/admin/bootstrap-icons.css')); ?>" rel="stylesheet">
 
     
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
     <link href="<?php echo e(asset('admin/assets/css/admin/dataTables.bootstrap5.min.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('admin/assets/css/admin/buttons.dataTables.min.css')); ?>" rel="stylesheet">
 
     
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
     <link rel="stylesheet" href="<?php echo e(asset('admin/assets/toastr/toastr.min.css')); ?>">
+=======
+    <link rel="stylesheet" href="<?php echo e(asset('public/admin/assets/toastr/toastr.min.css')); ?>">
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
@@ -459,7 +480,15 @@
             .sb-main { margin: 0 !important; padding: 0 !important; }
             .card { box-shadow: none !important; border: 1px solid #dee2e6 !important; }
         }
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
 
+=======
+<<<<<<< HEAD
+        
+=======
+
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
         @media (max-width: 768px) {
             .sb-brand-sub {
                 display: none;
@@ -470,8 +499,18 @@
             .hideinmobile {
                 display: none;
             }
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
 
 
+=======
+<<<<<<< HEAD
+            
+            
+=======
+
+
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
         }
     </style>
 </head>
@@ -501,9 +540,21 @@
         </span>
         <?php endif; ?>
 
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
 
         <?php if(isset($smartWalletBalance)): ?>
         <span class="sb-member-badge" id="selfwalletBalanceForNavBar" style="
+=======
+<<<<<<< HEAD
+        
+        <?php if(isset($smartWalletBalance)): ?>
+        <span class="sb-member-badge" style="
+=======
+
+        <?php if(isset($smartWalletBalance)): ?>
+        <span class="sb-member-badge" id="selfwalletBalanceForNavBar" style="
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
             background: rgba(44,95,46,.35);
             border-color: rgba(77,214,156,.4);
             color: #4dd69c;">
@@ -599,6 +650,28 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">STP Schedules</span>
     </a>
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+    <!-- Smart Wallet START -->
+=======
+<<<<<<< HEAD
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
+
+    <a href="#smartWalletDropdown"
+    class="nav-link <?php echo e(request()->routeIs('member.smartwallet.*') ? 'active' : ''); ?>"
+    data-bs-toggle="collapse"
+    aria-expanded="<?php echo e(request()->routeIs('member.smartwallet.*') ? 'true' : 'false'); ?>">
+
+        <i class="bi bi-wallet-fill"></i>
+        <span class="nav-label">Smart Wallet</span>
+        <i class="bi bi-chevron-down nav-arrow"></i>
+    </a>
+
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+    <div class="collapse sub-menu <?php echo e(request()->routeIs('member.smartwallet.*') ? 'show' : ''); ?>"
+        id="smartWalletDropdown">
+
+=======
+=======
     <!-- Smart Wallet START -->
 
     <a href="#smartWalletDropdown"
@@ -614,13 +687,26 @@
     <div class="collapse sub-menu <?php echo e(request()->routeIs('member.smartwallet.*') ? 'show' : ''); ?>"
         id="smartWalletDropdown">
 
+        <!-- PAYMENT SUBMISSION -->
+        <a href="<?php echo e(route('member.smartwallet.companyPayment.index')); ?>"
+        class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : ''); ?>">
+
+            <i class="bi bi-building"></i>
+            <span class="nav-label">Company Payment Approval</span>
+        </a>
+
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
         <!-- USER TO USER -->
         <a href="#smartWalletUserToUserDropdown"
         class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.userToUser.*') ? 'active' : ''); ?>"
         data-bs-toggle="collapse">
 
             <i class="bi bi-wallet2"></i>
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
             <span class="nav-label">USER TO USER TRANSFER</span>
+=======
+            <span class="nav-label">Peer-to-Peer Wallet Transfer</span>
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
             <i class="bi bi-chevron-down nav-arrow"></i>
         </a>
 
@@ -641,6 +727,7 @@
 
         </div>
 
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
         <!-- PAYMENT SUBMISSION -->
         <a href="<?php echo e(route('member.smartwallet.companyPayment.index')); ?>"
         class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.companyPayment.index') ? 'active' : ''); ?>">
@@ -648,6 +735,52 @@
             <i class="bi bi-building"></i>
             <span class="nav-label">Payment Submission</span>
         </a>
+=======
+        
+
+        <!-- BUY/SELL -->
+        <a href="#smartWalletBuySellDropdown"
+        class="nav-link ps-4 <?php echo e(request()->routeIs('member.smartwallet.buySell.*') ? 'active' : ''); ?>"
+        data-bs-toggle="collapse">
+
+            <i class="bi bi-currency-exchange"></i>
+            <span class="nav-label">Peer-to-Peer Wallet Buy/Sell</span>
+            <i class="bi bi-chevron-down nav-arrow"></i>
+        </a>
+        <div class="collapse sub-menu <?php echo e(request()->routeIs('member.smartwallet.buySell.*') ? 'show' : ''); ?>"
+            id="smartWalletBuySellDropdown">
+
+            <a href="<?php echo e(route('member.smartwallet.buySell.selfSell')); ?>"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.buySell.selfSell') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Self Sell Details</span>
+            </a>
+
+            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Sent Request For Buy</span>
+            </a>
+
+            <a href="" onclick="alert('Development in progress. Will be updated soon!')"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Received Request For Buy</span>
+            </a>
+            <!-- <a href="<?php echo e(route('member.smartwallet.userToUser.receiver')); ?>"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Sent Request For Buy</span>
+            </a>
+
+            <a href="<?php echo e(route('member.smartwallet.userToUser.receiver')); ?>"
+            class="nav-link ps-5 <?php echo e(request()->routeIs('member.smartwallet.userToUser.receiver') ? 'active' : ''); ?>">
+                <i class="bi bi-person"></i>
+                <span class="nav-label">Received Request For Buy</span>
+            </a> -->
+
+        </div>
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
 
     </div>
 
@@ -658,6 +791,10 @@
         <i class="bi bi-calendar2-check-fill"></i>
         <span class="nav-label">Chat Box</span>
     </a> -->
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+=======
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
 </nav>
 
 
@@ -708,6 +845,7 @@
 </main>
 
 
+<<<<<<< HEAD
 <script src="<?php echo e(asset('admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
 <script src="<?php echo e(asset('admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
 
@@ -721,6 +859,7 @@
 <script src="<?php echo e(asset('admin/assets/js/admin/vfs_fonts.js')); ?>"></script>
 
 
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
 <script src="<?php echo e(asset('admin/assets/js/admin/dataTables.buttons.min.js')); ?>"></script>
 <script src="<?php echo e(asset('admin/assets/js/admin/buttons.html5.min.js')); ?>"></script>
 <script src="<?php echo e(asset('admin/assets/js/admin/buttons.print.min.js')); ?>"></script>
@@ -733,6 +872,36 @@
 
 
 <script src="<?php echo e(asset('admin/assets/js/sweetalert2.min.js')); ?>"></script>
+=======
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+=======
+<script src="<?php echo e(asset('public/admin/assets/js/jquery-3.6.0.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/bootstrap.bundle.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/js/admin/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/dataTables.bootstrap5.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/js/admin/jszip.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/pdfmake.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/vfs_fonts.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/js/admin/dataTables.buttons.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/buttons.html5.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/admin/assets/js/admin/buttons.print.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/js/admin/sweetalert2@11.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/toastr/toastr.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('public/admin/assets/js/sweetalert2.min.js')); ?>"></script>
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
 
 <script>
 (function () {
@@ -783,12 +952,23 @@
     // Approval modal
     <?php if(isset($status) && $status == 2): ?>
     document.addEventListener('DOMContentLoaded', function () {
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+=======
+<<<<<<< HEAD
+        new bootstrap.Modal(document.getElementById('approvalModal'), {
+            backdrop: 'static', keyboard: false
+=======
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
         // new bootstrap.Modal(document.getElementById('approvalModal'), {
         //     backdrop: 'static', keyboard: false
         // }).show();
         bootstrap.Modal.getOrCreateInstance(document.getElementById('approvalModal'), {
             backdrop: 'static',
             keyboard: false
+<<<<<<< HEAD:storage/framework/views/129c0dc62c19be2770976ade3bab3e54.php
+=======
+>>>>>>> dev
+>>>>>>> upstream/Dev:storage/framework/views/918ffa769e062919f418cb12104942ac.php
         }).show();
     });
     <?php endif; ?>

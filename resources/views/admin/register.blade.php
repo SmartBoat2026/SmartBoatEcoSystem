@@ -848,6 +848,13 @@ async function fetchSponsorResults(q) {
         '<div class="sp-name">' + nameHL + '</div>' +
         '<div class="sp-meta">' +
           '<span class="sp-id">' + idHL + '</span>' +
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          ' &nbsp;·&nbsp; ' + phoneHL +
+=======
+>>>>>>> dev
+>>>>>>> upstream/Dev
           (m.email ? ' &nbsp;·&nbsp; ' + emailHL : '') +
         '</div>';
       div.addEventListener('mousedown', function (e) {
