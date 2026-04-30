@@ -18,6 +18,7 @@ return [
         'stp_schedule' => 'STP Schedule',
         'bonus' => 'Bonus',
         'bonus_passive' => 'Passive Bonus',
+        'bonus_direct' => 'Direct Bonus',
         'chat' => 'Chat',
     ],
 
@@ -35,6 +36,7 @@ return [
         'stp_schedule' => 'stpschedule.index',
         'bonus' => 'bonus.index',
         'bonus_passive' => 'adminpassivebonus',
+        'bonus_direct' => 'admindirectbonus',
         'chat' => 'admin.index',
     ],
 
@@ -96,6 +98,7 @@ return [
 
         'bonus.index' => 'bonus',
         'adminpassivebonus' => 'bonus_passive',
+        'admindirectbonus' => 'bonus_direct',
 
         'chat.load.name' => 'chat',
         'chat.load.history' => 'chat',

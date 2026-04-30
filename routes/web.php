@@ -66,14 +66,16 @@ Route::get('/sponsor/check-referral-verification',     [RegistrationController::
 // ════════════════════════════════════════════════════════════════════════════════
 Route::middleware('admin.auth')->group(function () {
 
-    // Logout
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     
     // Route::get('/admin/no-access', function () {
     //     return view('admin.errors.no-access');
     // })->name('admin.no-access');
 
-    // Sub Admin Access
+    Route::get('/admin/no-access', function () {
+        return view('admin.errors.no-access');
+    })->name('admin.no-access');
+
     Route::middleware('admin.super')->prefix('admin/staff')->name('admin.staff.')->group(function () {
         Route::get('/', [StaffManageController::class, 'index'])->name('index');
         Route::get('/create', [StaffManageController::class, 'create'])->name('create');
@@ -121,25 +123,10 @@ Route::middleware('admin.auth')->group(function () {
         Route::get('/product/subcategories/{categoryId}',   [ProductController::class, 'getSubcategories'])->name('product.subcategories');
         Route::post('/product/bulk-delete',                 [ProductController::class, 'bulkDelete'])->name('product.bulkDelete');
 
-        // ── Product Purchase ──────────────────────────────────────────────────────
-        Route::get('/productpurchase',                      [ProductPurchaseController::class, 'index'])->name('productpurchase.index');
-        Route::post('/productpurchase/store',               [ProductPurchaseController::class, 'store'])->name('productpurchase.store');
-        Route::get('/productpurchase/member',               [ProductPurchaseController::class, 'memberLookup'])->name('productpurchase.member');
-        Route::post('/productpurchase/bulk-delete',         [ProductPurchaseController::class, 'bulkDelete'])->name('productpurchase.bulkDelete');
-        Route::get('/productpurchase/member-wallet',        [ProductPurchaseController::class, 'memberWalletBalance'])->name('productpurchase.memberWallet');
-
-        // ── STP Schedules ─────────────────────────────────────────────────────────
-        Route::get('/stpschedules',                         [StpscheduleController::class, 'index'])->name('stpschedule.index');
-        Route::get('/stpschedule/search-member',            [StpscheduleController::class, 'searchMember'])->name('stpschedule.searchMember');
-        Route::post('/stpschedule/store',                   [StpscheduleController::class, 'store'])->name('stpschedule.store');
-        Route::post('/stpschedule/update/{id}',             [StpscheduleController::class, 'update'])->name('stpschedule.update');
-        Route::post('/stpschedule/delete/{id}',             [StpscheduleController::class, 'delete'])->name('stpschedule.delete');
-        Route::post('/stpschedule/toggle-status/{id}',      [StpscheduleController::class, 'toggleStatus'])->name('stpschedule.toggleStatus');
-        Route::post('/stpschedule/bulk-delete',             [StpscheduleController::class, 'bulkDelete'])->name('stpschedule.bulkDelete');
-
-        // ── Bonus ─────────────────────────────────────────────────────────────────
-        Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
-        Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
+    // ── Bonus ─────────────────────────────────────────────────────────────────
+    Route::get('/bonus',                                [BonusController::class, 'index'])->name('bonus.index');
+    Route::get('/adminpassivebonus',                    [AdminpassivebonusController::class, 'passivebonus'])->name('adminpassivebonus');
+    Route::get('/admindirectbonus',                     [BonusController::class, 'adminDirectBonus'])->name('admindirectbonus');
 
 
         // ── Additional admin routes can be added here ─────────────────────────────────
@@ -191,6 +178,7 @@ Route::middleware('member.auth')->prefix('member')->name('member.')->group(funct
 
     // Passive Bonus
     Route::get('/passivebonus',                         [PassivebonusController::class, 'passivebonus'])->name('passivebonus');
+    Route::get('/directbonus',                          [BonusController::class, 'memberDirectBonus'])->name('directbonus');
 
     // ── Product Purchase ──────────────────────────────────────────────────────
     Route::get('/productpurchase/purchaseList/{pagename}', [MemberProductPurchaseController::class, 'purchaseList'])->name('productpurchase.purchaseList');

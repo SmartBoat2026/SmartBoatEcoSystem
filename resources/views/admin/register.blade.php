@@ -65,17 +65,6 @@ textarea { resize: vertical; min-height: 60px; }
   color: #8ba3c4; margin-top: 4px;
 }
 
-/* ── phone row ── */
-.phone-row { display: flex; gap: 8px; }
-.phone-row select { width: 165px; flex-shrink: 0; }
-.phone-row input  { flex: 1; }
-.phone-hint {
-  font-size: .75rem; color: #8ba3c4;
-  margin-top: 4px; display: block;
-}
-.phone-hint.error { color: #ff5c5c; }
-.phone-hint.ok    { color: #00c853; }
-
 /* ── sponsor section ── */
 #sponsorInputWrap { display: none; }
 
@@ -412,11 +401,11 @@ button[type=submit]:disabled { background: #1a3a7a; cursor: not-allowed; opacity
       </div>
     </div>
 
-    {{-- ══ 2. SPONSOR SEARCH (live autocomplete — Name / Phone / Email / MemberID / SponsorID) ══ --}}
+    {{-- ══ 2. SPONSOR SEARCH (live autocomplete — Name / Email / MemberID / SponsorID) ══ --}}
     <div class="field-wrap" id="sponsorInputWrap">
       <label class="field-label">
         Search Sponsor <span style="color:#ff5c5c">*</span>
-        <span style="color:#5a7a9a;font-weight:400;font-size:.74rem"> — name, phone, email or ID</span>
+        <span style="color:#5a7a9a;font-weight:400;font-size:.74rem"> — name, email or ID</span>
       </label>
 
       <div class="sponsor-input-row">
@@ -436,10 +425,6 @@ button[type=submit]:disabled { background: #1a3a7a; cursor: not-allowed; opacity
         </span>
         <span id="sc_found_content" style="display:none">
           <b>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> <span id="sc_name"></span><br>
-<<<<<<< HEAD
-          <b>Mobile&nbsp;&nbsp;&nbsp;&nbsp;:</b> <span id="sc_phone"></span><br>
-=======
->>>>>>> dev
           <b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> <span id="sc_email"></span><br>
           <b>Member ID&nbsp;:</b> <span class="sc-mid" id="sc_memberid"></span><br>
           <b>Sponsor ID&nbsp;:</b> <span id="sc_sponsorid"></span>
@@ -461,55 +446,7 @@ button[type=submit]:disabled { background: #1a3a7a; cursor: not-allowed; opacity
       <div class="err-msg" id="err_name">Full name is required (min 3 characters).</div>
     </div>
 
-    {{-- ══ 4. PHONE WITH COUNTRY CODE ══ --}}
-    <div class="field-wrap">
-      <label class="field-label">Phone Number <span style="color:#ff5c5c">*</span></label>
-        <select name="country_code" id="countryCodeSelect">
-          <option value="" data-name=""> Select Country</option>
-          <option value="+91"  data-len="10" data-name="India">🇮🇳 +91 India</option>
-          <option value="+1"   data-len="10" data-name="USA/Canada">🇺🇸 +1 USA</option>
-          <option value="+44"  data-len="10" data-name="UK">🇬🇧 +44 UK</option>
-          <option value="+880" data-len="10" data-name="Bangladesh">🇧🇩 +880 Bangladesh</option>
-          <option value="+92"  data-len="10" data-name="Pakistan">🇵🇰 +92 Pakistan</option>
-          <option value="+971" data-len="9"  data-name="UAE">🇦🇪 +971 UAE</option>
-          <option value="+966" data-len="9"  data-name="Saudi Arabia">🇸🇦 +966 Saudi Arabia</option>
-          <option value="+60"  data-len="10" data-name="Malaysia">🇲🇾 +60 Malaysia</option>
-          <option value="+65"  data-len="8"  data-name="Singapore">🇸🇬 +65 Singapore</option>
-          <option value="+61"  data-len="9"  data-name="Australia">🇦🇺 +61 Australia</option>
-          <option value="+81"  data-len="10" data-name="Japan">🇯🇵 +81 Japan</option>
-          <option value="+86"  data-len="11" data-name="China">🇨🇳 +86 China</option>
-          <option value="+7"   data-len="10" data-name="Russia">🇷🇺 +7 Russia</option>
-          <option value="+49"  data-len="11" data-name="Germany">🇩🇪 +49 Germany</option>
-          <option value="+33"  data-len="9"  data-name="France">🇫🇷 +33 France</option>
-          <option value="+39"  data-len="10" data-name="Italy">🇮🇹 +39 Italy</option>
-          <option value="+34"  data-len="9"  data-name="Spain">🇪🇸 +34 Spain</option>
-          <option value="+55"  data-len="11" data-name="Brazil">🇧🇷 +55 Brazil</option>
-          <option value="+27"  data-len="9"  data-name="South Africa">🇿🇦 +27 South Africa</option>
-          <option value="+234" data-len="10" data-name="Nigeria">🇳🇬 +234 Nigeria</option>
-          <option value="+254" data-len="9"  data-name="Kenya">🇰🇪 +254 Kenya</option>
-          <option value="+20"  data-len="10" data-name="Egypt">🇪🇬 +20 Egypt</option>
-          <option value="+98"  data-len="10" data-name="Iran">🇮🇷 +98 Iran</option>
-          <option value="+62"  data-len="10" data-name="Indonesia">🇮🇩 +62 Indonesia</option>
-          <option value="+63"  data-len="10" data-name="Philippines">🇵🇭 +63 Philippines</option>
-          <option value="+84"  data-len="10" data-name="Vietnam">🇻🇳 +84 Vietnam</option>
-          <option value="+66"  data-len="9"  data-name="Thailand">🇹🇭 +66 Thailand</option>
-          <option value="+94"  data-len="9"  data-name="Sri Lanka">🇱🇰 +94 Sri Lanka</option>
-          <option value="+977" data-len="10" data-name="Nepal">🇳🇵 +977 Nepal</option>
-          <option value="+95"  data-len="9"  data-name="Myanmar">🇲🇲 +95 Myanmar</option>
-        </select>
-
-      <div class="err-msg" id="err_country">Please select country.</div>
-    </div>
-
-    {{-- ══ Phone No ══ --}}
-    <div class="field-wrap">
-      <label class="field-label">Phone No <span style="color:#5a7a9a; font-weight:400">*</span></label>
-      <input type="tel" name="phone" id="fieldPhone" placeholder="Phone number" maxlength="15" autocomplete="off">
-      <span class="phone-hint" id="phoneHint"></span>
-      <div class="err-msg" id="err_phone"></div>
-    </div>
-
-    {{-- ══ 5. EMAIL ══ --}}
+    {{-- ══ 4. EMAIL ══ --}}
     <div class="field-wrap">
       <label class="field-label">Email <span style="color:#5a7a9a; font-weight:400">(Optional)</span></label>
       <input type="email" name="email" id="fieldEmail" placeholder="Email address" autocomplete="off">
@@ -758,58 +695,6 @@ document.getElementById('termsModal').addEventListener('click', function(e) {
 });
 
 /* ══════════════════════════════════════════════
-   PHONE LENGTH MAP  (data-len from <option>)
-══════════════════════════════════════════════ */
-const ccSelect  = document.getElementById('countryCodeSelect');
-const phoneInp  = document.getElementById('fieldPhone');
-const phoneHint = document.getElementById('phoneHint');
-const errPhone  = document.getElementById('err_phone');
-
-function getExpectedLen() {
-  const opt = ccSelect.options[ccSelect.selectedIndex];
-  return parseInt(opt.dataset.len || '10', 10);
-}
-function getCountryName() {
-  const opt = ccSelect.options[ccSelect.selectedIndex];
-  return opt.dataset.name || '';
-}
-
-function validatePhone(showErr) {
-  const raw    = phoneInp.value.replace(/\D/g, '');   // digits only
-  const expLen = getExpectedLen();
-  const cname  = getCountryName();
-
-  phoneHint.className = 'phone-hint';
-  phoneHint.textContent = `${cname} numbers must be ${expLen} digits.`;
-
-  if (raw.length === 0) {
-    phoneInp.classList.remove('is-error','is-ok');
-    if (showErr) { errPhone.textContent='Phone number is required.'; errPhone.classList.add('show'); }
-    return false;
-  }
-  if (raw.length !== expLen) {
-    phoneInp.classList.add('is-error'); phoneInp.classList.remove('is-ok');
-    phoneHint.classList.add('error');
-    if (showErr) { errPhone.textContent=`Must be exactly ${expLen} digits for ${cname}.`; errPhone.classList.add('show'); }
-    return false;
-  }
-  phoneInp.classList.add('is-ok'); phoneInp.classList.remove('is-error');
-  phoneHint.classList.add('ok');
-  errPhone.classList.remove('show');
-  return true;
-}
-
-ccSelect.addEventListener('change', () => validatePhone(false));
-phoneInp.addEventListener('input', () => { validatePhone(false); });
-phoneInp.addEventListener('keypress', e => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
-phoneInp.addEventListener('blur', () => validatePhone(true));
-
-/* show hint on load */
-window.addEventListener('DOMContentLoaded', () => {
-  phoneHint.textContent = `${getCountryName()} numbers must be ${getExpectedLen()} digits.`;
-});
-
-/* ══════════════════════════════════════════════
    SPONSOR TYPE TOGGLE
 ══════════════════════════════════════════════ */
 const sponsorType       = document.getElementById('sponsorType');
@@ -874,7 +759,7 @@ clearSponsorBtn.addEventListener('click', function () {
 
 /* ══════════════════════════════════════════════
    SPONSOR AUTOCOMPLETE — SEARCH BY NAME /
-   PHONE / EMAIL / MEMBER ID / SPONSOR ID
+   EMAIL / MEMBER ID / SPONSOR ID
 ══════════════════════════════════════════════ */
 
 /* Highlight matched substring */
@@ -958,16 +843,18 @@ async function fetchSponsorResults(q) {
       div.className   = 'sp-item';
       const nameHL    = hlText(m.name,     q);
       const idHL      = hlText(m.memberID, q);
-      const phoneHL   = hlText(m.phone,    q);
       const emailHL   = hlText(m.email || '', q);
       div.innerHTML   =
         '<div class="sp-name">' + nameHL + '</div>' +
         '<div class="sp-meta">' +
           '<span class="sp-id">' + idHL + '</span>' +
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
           ' &nbsp;·&nbsp; ' + phoneHL +
 =======
 >>>>>>> dev
+>>>>>>> upstream/Dev
           (m.email ? ' &nbsp;·&nbsp; ' + emailHL : '') +
         '</div>';
       div.addEventListener('mousedown', function (e) {
@@ -1003,7 +890,6 @@ function selectSponsor(m) {
   document.getElementById('sc_not_found').style.display     = 'none';
   document.getElementById('sc_found_content').style.display = 'inline';
   document.getElementById('sc_name').textContent      = m.name;
-  document.getElementById('sc_phone').textContent     = m.phone;
   document.getElementById('sc_email').textContent     = m.email || '—';
   document.getElementById('sc_memberid').textContent  = m.memberID;
   document.getElementById('sc_sponsorid').textContent = m.sponser_id || '—';
@@ -1055,18 +941,6 @@ function validateRegForm() {
     document.getElementById('fieldName').classList.remove('is-error');
     hideErr('err_name');
   }
-
-  /* country */
-  if (!document.getElementById('countryCodeSelect').value) {
-    document.getElementById('countryCodeSelect').classList.add('is-error');
-    showErr('err_country'); ok = false;
-  } else {
-    document.getElementById('countryCodeSelect').classList.remove('is-error');
-    hideErr('err_country');
-  }
-
-  /* phone */
-  if (!validatePhone(true)) ok = false;
 
   /* email (optional but if filled must be valid) */
   const emailVal = document.getElementById('fieldEmail').value.trim();

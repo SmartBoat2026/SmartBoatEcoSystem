@@ -88,4 +88,29 @@ class BonusController extends Controller
 
         return view('admin.bonus.index', compact('bonuses'));
     }
+
+    /** Admin: all direct bonus rows. */
+    public function adminDirectBonus()
+    {
+        $bonuses = DB::table('bonus')
+            ->where('bonus_type', 'Direct')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return view('admin.admindirectbonus', compact('bonuses'));
+    }
+
+    /** Member panel: direct bonus for logged-in sponsor (bonus.member_id). */
+    public function memberDirectBonus()
+    {
+        $memberID = session('member_memberID');
+
+        $bonuses = DB::table('bonus')
+            ->where('member_id', $memberID)
+            ->where('bonus_type', 'Direct')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return view('member.directbonus', compact('bonuses'));
+    }
 }

@@ -585,6 +585,13 @@
         <span class="nav-label">Passive Bonus</span>
     </a>
 
+    <a href="{{ route('member.directbonus') }}"
+       class="nav-link {{ request()->routeIs('member.directbonus') ? 'active' : '' }}"
+       data-bs-title="Direct Bonus">
+        <i class="bi bi-gift"></i>
+        <span class="nav-label">Direct Bonus</span>
+    </a>
+
     <a href="{{ route('member.memberstpschedules.index') }}"
        class="nav-link {{ request()->routeIs('member.memberstpschedules*') ? 'active' : '' }}"
        data-bs-title="STP Schedules">
