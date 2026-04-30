@@ -5,6 +5,8 @@
             
             <div class="modal-header" style="background:#075e54;color:#fff;padding:10px 15px;">
                 <div style="display:flex;align-items:center;gap:10px;">
+                    <span  id="backToChatList" ><i class="bi bi-arrow-left"></i></span>
+                    
 
                     <div class="chat-user-avatar" style="width:35px;height:35px;border-radius:50%;background:#fff;color:#075e54;
             display:flex;align-items:center;justify-content:center;font-weight:bold;"></div>
@@ -13,6 +15,9 @@
                         <h6 class="chat-user-name" style="margin:0;font-size:14px;">
                             User
                         </h6>
+                        <small class="chat-user-member-id" style="font-size:10px;color:#ddd;">
+                            ID: 12345
+                        </small>
                     </div>
 
                 </div>

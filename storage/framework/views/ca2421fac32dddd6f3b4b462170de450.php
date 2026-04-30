@@ -41,8 +41,12 @@
 
 </main>
 
+<<<<<<< HEAD
+
+=======
 <?php echo $__env->make('chatbox', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php echo $__env->make('chat-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+>>>>>>> dev
 
 <?php $__env->startPush('scripts'); ?>
 
