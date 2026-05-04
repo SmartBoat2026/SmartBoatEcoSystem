@@ -566,7 +566,11 @@ $(document).ready(function () {
                                             ? '<span class="badge text-warning text-dark">Closed Request</span>'
                                             : row.status == 4
                                                 ? '<span class="badge text-danger">Closed Sell</span>'
-                                                : '<span class="badge text-secondary">Unknown</span>'
+                                                : row.status == 5
+                                                    ? '<span class="badge text-warning text-dark">Payment Transferred</span>'
+                                                    : row.status == 6
+                                                        ? '<span class="badge text-success">Payment Received</span>'                                                        
+                                                        : '<span class="badge text-secondary">Unknown</span>'
                                 }
                             </td>
 
