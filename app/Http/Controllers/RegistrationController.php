@@ -11,16 +11,6 @@ use App\Models\Admin;
 
 class RegistrationController extends Controller
 {
-    private const PHONE_LENGTHS = [
-        '+91'  => 10, '+1'   => 10, '+44'  => 10, '+880' => 10,
-        '+92'  => 10, '+971' => 9,  '+966' => 9,  '+60'  => 10,
-        '+65'  => 8,  '+61'  => 9,  '+81'  => 10, '+86'  => 11,
-        '+7'   => 10, '+49'  => 11, '+33'  => 9,  '+39'  => 10,
-        '+34'  => 9,  '+55'  => 11, '+27'  => 9,  '+234' => 10,
-        '+254' => 9,  '+20'  => 10, '+98'  => 10, '+62'  => 10,
-        '+63'  => 10, '+84'  => 10, '+66'  => 9,  '+94'  => 9,
-        '+977' => 10, '+95'  => 9,
-    ];
 
     /* ── Default/Admin sponsor assigned when user has no sponsor ── */
     private const DEFAULT_SPONSOR_ID   = 'SB0783633087';
@@ -42,7 +32,6 @@ class RegistrationController extends Controller
         return response()->json([
             'found'      => true,
             'name'       => $member->name,
-            'phone'      => $member->phone,
             'email'      => $member->email,
             'memberID'   => $member->memberID,
             'sponser_id' => $member->sponser_id,
@@ -53,8 +42,6 @@ class RegistrationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'         => 'required|string|min:3|max:100',
-            'phone'        => 'required|string|max:20',
-            'country_code' => 'required|string',
             'email'        => 'nullable|email|max:150',
             'date_of_birth'=> 'required|string',
             'gender'       => 'required|string|in:Male,Female,Other',
@@ -62,8 +49,6 @@ class RegistrationController extends Controller
         ], [
             'name.required'          => 'Full name is required.',
             'name.min'               => 'Name must be at least 3 characters.',
-            'phone.required'         => 'Phone number is required.',
-            'country_code.required'  => 'Country code is required.',
             'email.email'            => 'Please enter a valid email address.',
             'date_of_birth.required' => 'Age group is required.',
             'gender.required'        => 'Gender is required.',
@@ -72,17 +57,6 @@ class RegistrationController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
-        }
-
-        $countryCode = trim($request->country_code);
-        $phoneRaw    = preg_replace('/\D/', '', trim($request->phone));
-        $expectedLen = self::PHONE_LENGTHS[$countryCode] ?? null;
-
-        if ($expectedLen !== null && strlen($phoneRaw) !== $expectedLen) {
-            return response()->json([
-                'success' => false,
-                'errors'  => ['phone' => ["Phone number must be exactly {$expectedLen} digits for {$countryCode}."]],
-            ], 422);
         }
 
         if ($request->sponsor_type === 'has_sponsor') {
@@ -127,8 +101,8 @@ class RegistrationController extends Controller
         Registration::create([
             'memberID'                        => $memberID,
             'name'                            => trim($request->name),
-            'phone'                           => $phoneRaw,
-            'country_code'                    => $countryCode,
+            'phone'                           => '',
+            'country_code'                    => '',
             'email'                           => trim($request->email ?? ''),
             'age'                             => trim($request->date_of_birth ?? ''),
             'gender'                          => trim($request->gender ?? ''),
@@ -179,12 +153,11 @@ class RegistrationController extends Controller
 
         $results = Registration::where(function ($query) use ($q) {
                 $query->where('name',        'LIKE', "%{$q}%")
-                    ->orWhere('phone',     'LIKE', "%{$q}%")
                     ->orWhere('email',     'LIKE', "%{$q}%")
                     ->orWhere('memberID',  'LIKE', "%{$q}%")
                     ->orWhere('sponser_id','LIKE', "%{$q}%");
             })
-            ->select('memberID', 'name', 'phone', 'email', 'sponser_id')
+            ->select('memberID', 'name', 'email', 'sponser_id')
             ->limit(8)
             ->get();
 

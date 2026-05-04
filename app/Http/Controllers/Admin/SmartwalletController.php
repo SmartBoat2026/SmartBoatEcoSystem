@@ -46,7 +46,7 @@ class SmartwalletController extends Controller
         // ── Insert Transaction Record ─────────────────────────────────────
         Transaction::create([
             'member_id'   => $request->sponser_id,
-            'added_by_id' => session('admin_id') ?? 1,  // ← use real admin session
+            'added_by_id' => \App\Support\AdminPanelAccess::actorId(),
             'amount'      => $request->amount,
             'action'      => 'Smart Wallet Balance',
             'type'        => 'Credit',
