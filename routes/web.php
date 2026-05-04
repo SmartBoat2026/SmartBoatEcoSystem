@@ -45,7 +45,7 @@ Route::get('/clear-cache', function () {
     Artisan::call('view:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
-    return "Cache Cleared ✅";
+    return "Cache Cleared Successfully!";
 });
 
 // ─── Login / Logout ───────────────────────────────────────────────────────────
