@@ -587,6 +587,13 @@
         <span class="nav-label">Passive Bonus</span>
     </a>
 
+    <a href="<?php echo e(route('member.directbonus')); ?>"
+       class="nav-link <?php echo e(request()->routeIs('member.directbonus') ? 'active' : ''); ?>"
+       data-bs-title="Direct Bonus">
+        <i class="bi bi-gift"></i>
+        <span class="nav-label">Direct Bonus</span>
+    </a>
+
     <a href="<?php echo e(route('member.memberstpschedules.index')); ?>"
        class="nav-link <?php echo e(request()->routeIs('member.memberstpschedules*') ? 'active' : ''); ?>"
        data-bs-title="STP Schedules">
