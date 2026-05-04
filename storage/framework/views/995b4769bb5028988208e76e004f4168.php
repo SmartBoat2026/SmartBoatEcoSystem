@@ -13,6 +13,8 @@
     <ul class="menu" role="menu">
 
         <?php if(\App\Support\AdminPanelAccess::can('dashboard') || \App\Support\AdminPanelAccess::can('chat')): ?>
+        <!-- Dashboard -->
+
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('admin.index')); ?>"
                class="<?php echo e(request()->routeIs('admin.index') ? 'active' : ''); ?>"
@@ -28,6 +30,8 @@
         </li>
         <?php endif; ?>
 
+
+        <!-- Manage Member -->
         <?php if(!session('admin_is_staff')): ?>
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('admin.staff.index')); ?>"
@@ -44,6 +48,7 @@
         <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'manage_member')): ?>
+
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('managereport')); ?>"
                class="<?php echo e(request()->routeIs('managereport') ? 'active' : ''); ?>"
@@ -62,6 +67,7 @@
         <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'smart_wallet')): ?>
+        <!-- Smart Wallet -->
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('smartwallet')); ?>"
                class="<?php echo e(request()->routeIs('smartwallet') ? 'active' : ''); ?>"
@@ -84,6 +90,10 @@
             <a href="<?php echo e(route('smartwallet.memberRequest.index')); ?>"
                class="<?php echo e(request()->routeIs('smartwallet.memberRequest.index') ? 'active' : ''); ?>"
                role="menuitem" title="Smart Wallet Member Requests">
+        <li class="menu-item" role="none">
+            <a href="<?php echo e(route('smartwallet.memberRequest.index')); ?>"
+               class="<?php echo e(request()->routeIs('smartwallet.memberRequest.index') ? 'active' : ''); ?>"
+               role="menuitem" title="Smart Wallet">
 
                 <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -98,6 +108,7 @@
         <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'member_activation')): ?>
+
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('managereport.memberactive')); ?>"
                class="<?php echo e(request()->routeIs('managereport.memberactive') ? 'active' : ''); ?>"
@@ -115,6 +126,8 @@
         <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'category')): ?>
+
+        <!-- Category -->
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('category')); ?>"
                class="<?php echo e(request()->routeIs('category') ? 'active' : ''); ?>"
@@ -130,6 +143,8 @@
         <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'product')): ?>
+
+        <!-- Product -->
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('product')); ?>"
                class="<?php echo e(request()->routeIs('product') ? 'active' : ''); ?>"
@@ -147,6 +162,8 @@
         <?php endif; ?>
 
         <?php if (\Illuminate\Support\Facades\Blade::check('adminCan', 'product_purchase')): ?>
+
+        <!-- Product Purchase -->
         <li class="menu-item" role="none">
             <a href="<?php echo e(route('productpurchase.index')); ?>"
                class="<?php echo e(request()->routeIs('productpurchase.*') ? 'active' : ''); ?>"
