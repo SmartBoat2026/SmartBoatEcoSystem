@@ -506,9 +506,22 @@
         <span class="sb-member-badge" id="selfwalletBalanceForNavBar" style="
             background: rgba(44,95,46,.35);
             border-color: rgba(77,214,156,.4);
-            color: #4dd69c;">
+            color: #4dd69c;"  onclick="goToTransactionTab()">
             <i class="bi bi-wallet2 me-1"></i>
             ₹{{ number_format($smartWalletBalance, 2) }}
+        </span>
+        @endif
+
+        @if(isset($lockedWalletBalance))
+        <span class="sb-member-badge" id="lockedWalletBalanceForNavBar" style="
+            background: rgba(255, 0, 0, 0.15);
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            color: #ff4d4d;
+            text-decoration: line-through;
+            font-weight: 600;" onclick="goToLockWalletTab()">
+            
+            <i class="bi bi-lock-fill me-1"></i>
+            ₹{{ number_format($lockedWalletBalance, 2) }}
         </span>
         @endif
 
@@ -535,7 +548,7 @@
        class="nav-link {{ request()->routeIs('member.dashboard') ? 'active' : '' }}"
        data-bs-title="Dashboard">
         <i class="bi bi-speedometer2"></i>
-        <span class="nav-label">Dashboard xyz</span>
+        <span class="nav-label">Dashboard</span>
     </a>
 
     <a href="{{ route('member.profile') }}"
@@ -831,6 +844,29 @@
     });
     @endif
 })();
+
+
+function goToLockWalletTab() {
+    if (typeof switchTab === 'function') {
+        switchTab('lockwallet');
+        document.getElementById('panel-lockwallet').scrollIntoView({
+            behavior: 'smooth'
+        });
+    } else {
+        window.location.href = "{{ route('member.profile') }}#lockwallet";
+    }
+}
+function goToTransactionTab() {
+    if (typeof switchTab === 'function') {
+        switchTab('transaction');
+
+        document.getElementById('panel-transaction').scrollIntoView({
+            behavior: 'smooth'
+        });
+    } else {
+        window.location.href = "{{ route('member.profile') }}#transaction";
+    }
+}
 
 
 </script>

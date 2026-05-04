@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;   // ← ADD THIS LINE
 use App\Models\ManageReport;
 use App\Models\Transaction;
+use App\Models\MemberPaymentDetail;
+use App\Models\LockWalletBalance;
 
 class MemberController extends Controller
 {
@@ -58,8 +60,16 @@ class MemberController extends Controller
             ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
 
         $smartWalletBalance = $creditTotal - $debitTotal;
+        $lockedWalletBalance = LockWalletBalance::where('member_id', $member->member_id)
+                                        ->where('status', 1)
+                                        ->sum('amount');
 
-        return view('member.profile', compact('member', 'smartWalletBalance', 'transactions'));
+         // Fetch ALL payment records (not just first)
+         $memberPayments = MemberPaymentDetail::where('member_id', $member->memberID)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('member.profile', compact('member', 'smartWalletBalance', 'lockedWalletBalance', 'transactions', 'memberPayments'));
     }
 
     // ─── Member Logout ────────────────────────────────────────────────────────

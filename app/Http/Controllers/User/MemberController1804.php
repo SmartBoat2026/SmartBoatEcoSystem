@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ManageReport;
 use App\Models\Transaction;
-use App\Models\MemberPaymentDetail;  // ← ADD THIS
+use App\Models\MemberPaymentDetail; 
+use App\Models\LockWalletBalance;
 
 class MemberController extends Controller
 {
@@ -57,6 +58,9 @@ class MemberController extends Controller
         ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
 
     $smartWalletBalance = $creditTotal - $debitTotal;
+    $lockedWalletBalance = LockWalletBalance::where('member_id', $member->member_id)
+                                        ->where('status', 1)
+                                        ->sum('amount');
 
     // ← Uses session member_id directly, same as store()
     $memberPayment = MemberPaymentDetail::where('member_id', $memberId)->first();
@@ -64,6 +68,7 @@ class MemberController extends Controller
     return view('member.profile', compact(
         'member',
         'smartWalletBalance',
+        'lockedWalletBalance',
         'transactions',
         'memberPayment'
     ));

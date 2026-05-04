@@ -9,7 +9,11 @@
                 </button>
                 <a href="<?php echo e(route('admin.index')); ?>" class="navbar-brand">
                     <div class="logo" aria-hidden="true">
+<<<<<<< HEAD
                         
+=======
+                        
+>>>>>>> dev
                     </div>
                     <div class="brand-text fw-bold fs-5 text-dark">
                         SmartBoatEcosystem

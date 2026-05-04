@@ -8,6 +8,7 @@ use App\Models\ProductPurchase;
 use App\Models\ProductPurchaseList;
 use App\Models\ManageReport;
 use App\Models\Transaction;
+use App\Models\LockWalletBalance;
 
 class MemberProductPurchaseController extends Controller
 {
@@ -39,19 +40,23 @@ class MemberProductPurchaseController extends Controller
         }
         $purchases = $query->orderBy('id', 'desc')->paginate(50);
 
-        // ✅ Fetch wallet balance using 'memberID' (camelCase — matches ManageReport table)
+        //  Fetch wallet balance using 'memberID' (camelCase — matches ManageReport table)
         $smartWalletBalance = 0;
+        $lockedWalletBalance=0;
         $sessionMemberId = session('member_memberID');
         if ($sessionMemberId) {
             $smartWalletBalance = ManageReport::where('memberID', $sessionMemberId)
                                     ->value('smart_wallet_balance') ?? 0;
+            $lockedWalletBalance = LockWalletBalance::where('member_id', session('member_id'))
+                                        ->where('status', 1)
+                                        ->sum('amount');
         }
 
         return view('member.productpurchase', compact(
             'products',
             'productsForJs',
             'purchases',
-            'smartWalletBalance'
+            'smartWalletBalance','lockedWalletBalance'
         ));
     }  
 

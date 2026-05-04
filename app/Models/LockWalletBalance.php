@@ -23,7 +23,8 @@ class LockWalletBalance extends Model
         'action',
         'type',
         'status',
-        'created_at'
+        'created_at',
+        'transaction_id', // ← NEW FIELD
     ];
 
     // Casts (optional but recommended)

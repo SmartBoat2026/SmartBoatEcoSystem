@@ -191,13 +191,14 @@ class UserToUsersController extends Controller
             // update sender wallet (deduct)
             $user->smart_wallet_balance = $user->smart_wallet_balance - $requestAmount;
             $user->save();
+            $receiver = ManageReport::where('memberID', $receiverMemberId)->first();
             Transaction::create([
                 'member_id'    => $senderMemberId,
-                'added_by_id'  => $user->member_id,
+                'added_by_id'  => $sender_member_id,
                 'amount'       => $requestAmount,
                 'debit'        => $requestAmount,
                 'credit'       => 0,
-                'action'       => 'Smart Wallet Balance Sent',
+                'action'       => 'Smart Wallet Balance Sent to ' . ($receiver->name ?? 'Unknown Member') . ' (' . ($receiver->memberID ?? 'N/A') . ')',
                 'type'         => 'Debit',
                 'status'       => 1,
                 'created_at'   => now(),
@@ -211,11 +212,11 @@ class UserToUsersController extends Controller
                 $receiver->save();
                 Transaction::create([
                     'member_id'    => $receiverMemberId,
-                    'added_by_id'  => $user->member_id,
+                    'added_by_id'  => $sender_member_id,
                     'amount'       => $requestAmount,
                     'debit'        => 0,
                     'credit'       => $requestAmount,
-                    'action'       => 'Samart Wallet Balance Received',
+                    'action'       => 'Smart Wallet Balance Received from ' . ($user->name ?? 'Unknown Member') . ' (' . ($user->memberID ?? 'N/A') . ')',
                     'type'         => 'Credit',
                     'status'       => 1,
                     'created_at'   => now(),

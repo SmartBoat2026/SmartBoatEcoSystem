@@ -160,6 +160,9 @@ $(document).ready(function () {
                         $('#selfwalletBalanceForNavBar').html(
                             '<i class="bi bi-wallet2 me-1"></i> ₹' + res.selfwalletBalance
                         );
+                        $('#lockedWalletBalanceForNavBar').html(
+                            '<i class="bi bi-lock-fill me-1"></i> ₹' + res.lockedWalletBalance
+                        );
                         $('#receiveRfbHistoryTable').DataTable().ajax.reload();
                     },
                     error: function () {

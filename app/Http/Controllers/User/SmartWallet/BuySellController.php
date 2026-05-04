@@ -789,14 +789,14 @@ class BuySellController extends Controller
                 'no_of_sellers' => '<span class="badge" style="background:#eeedfe;color:#3c3489;">
                                 '.$row->rfb->no_of_sellers.'
                             </span>',
-                'status' => $this->formatStatusForReceiveRfb($row->rfb->status),
+                'status' => $this->formatStatusForReceiveRfb($row->status),
                 'actions' => '<button class="btn btn-sm btn-info message-btn"
                                 data-sender="'.$row->seller_member_id.'"
                                 data-receiver="'.$row->member_id.'"
                                 data-id="'.$row->id.'">
                                 <i class="bi bi-chat-dots"></i>
                             </button>'.
-                        ($row->rfb->status == 1 
+                        ($row->rfb->status == 1 && $row->status == 1
                             ? '<button type="button" class="btn btn-sm btn-outline-success accept-btn" 
                                     title="Accept" data-rfbseller-id="'.$row->id.'">
                                     <i class="bi bi-check-circle"></i>
@@ -804,7 +804,7 @@ class BuySellController extends Controller
                             : ''
                         )
                         .
-                        ($row->rfb->status == 5 
+                        ($row->rfb->status == 5 && $row->status == 5
                             ? '<button type="button" class="btn btn-sm btn-outline-primary paymentReceive-btn" 
                                     title="Payment Received" data-rfbseller-id="'.$row->id.'">
                                     <i class="bi bi-cash"></i>
@@ -812,7 +812,7 @@ class BuySellController extends Controller
                             : ''
                         )
                         .(
-                            in_array($row->rfb->status, [5, 6])
+                            in_array($row->rfb->status, [5, 6]) && in_array($row->status, [5, 6])
                             ? '
                                 <button type="button" class="btn btn-sm btn-outline-success view-payment-btn" 
                                     title="View Payment" data-rfbseller-id="'.$row->id.'">
@@ -840,6 +840,8 @@ class BuySellController extends Controller
                 return '<span class="badge bg-success">Request Accepted</span>';
             case 3:
                 return '<span class="badge bg-danger">Closed Request</span>';
+            case 4:
+                return '<span class="badge bg-danger">Closed Sell by Seller</span>';
             case 5:
                 return '<span class="badge bg-primary">Payment Transfered</span>';
             case 6:
@@ -922,23 +924,29 @@ class BuySellController extends Controller
                 }
             }
             Transaction::create([
-                'member_id'    => $receiver->memberID,
+                'member_id'    => $seller->memberID,
                 'added_by_id'  => $seller_member_id,
                 'amount'       => $rfb->amount,
                 'debit'        => $rfb->amount,
                 'credit'       => 0,
-                'action'       => 'Smart Wallet Balance Sent',
+                'action'       => 'Requested Smart Wallet Balance Sent to '.($receiver->name.($receiver->memberID ? " ({$receiver->memberID})" : '')),
                 'type'         => 'Debit',
                 'status'       => 1,
                 'created_at'   => now(),
             ]);
+            do {
+                $transactionId = 'LWB-' . $rfb->member_id . '-' . now()->format('YmdHis') . '-' . rand(100,999);
+            } while (LockWalletBalance::where('transaction_id', $transactionId)->exists());
+
             LockWalletBalance::create([
+                'transaction_id' => $transactionId,
+
                 'member_id'    => $rfb->member_id,
                 'added_by_id'  => $seller_member_id,
                 'amount'       => $rfb->amount,
                 'debit'        => $rfb->amount,
                 'credit'       => 0,
-                'action'       => 'Smart Wallet Balance Transfer ',
+                'action'       => 'Requested Smart Wallet Balance Transfer By ' . $seller->name.($seller->memberID ? " ({$seller->memberID})" : ''),
                 'type'         => 'Credit',
                 'status'       => 1,
                 'created_at'   => now(),
@@ -946,10 +954,11 @@ class BuySellController extends Controller
 
 
             DB::commit();
-
+            $lockedWalletBalance = LockWalletBalance::where('member_id', $seller_member_id)->where('status', 1)->sum('amount');
             return response()->json([
                 'message' => 'Request accepted successfully',
                 'selfwalletBalance' => number_format($seller->smart_wallet_balance, 2),
+                'lockedWalletBalance' => number_format($lockedWalletBalance, 2)
             ]);
 
         } catch (\Exception $e) {
@@ -985,7 +994,7 @@ class BuySellController extends Controller
                 'amount'       => $rfb->amount,
                 'debit'        => 0,
                 'credit'       => $rfb->amount,
-                'action'       => 'Smart Wallet Balance Sent By Seller',
+                'action'       => 'Requested Smart Wallet Balance Sent By ' . ($rfbSeller->seller->name ?? 'Unknown Seller') . ' ('.($rfbSeller->seller->memberID ?? 'N/A').')',
                 'type'         => 'Credit',
                 'status'       => 1,
                 'created_at'   => now(),

@@ -159,6 +159,9 @@
     <button class="tab-btn" onclick="switchTab('transaction')" id="tab-transaction">
         <i class="bi bi-clock-history"></i> Transaction Details
     </button>
+    <button class="tab-btn" onclick="switchTab('lockwallet')" id="tab-lockwallet">
+        <i class="bi bi-lock"></i> Lock Wallet Balance
+    </button>
 </div>
 
 
@@ -173,6 +176,7 @@
                 <span class="psb">Smart Points: <?php echo e(number_format($member->smart_point, 4)); ?></span>
                 <span class="psb">Smart Qty: <?php echo e($member->smart_quanity ?: '0.0000'); ?></span>
                 <span class="psb green">₹<?php echo e(number_format($smartWalletBalance ?? 0, 2)); ?> Wallet</span>
+                <span class="psb " style="background:#fee2e2;color:#991b1b;">₹<?php echo e(number_format($lockedWalletBalance ?? 0, 2)); ?> Locked</span>
             </div>
         </div>
     </div>
@@ -194,6 +198,10 @@
         <div class="info-box">
             <label>Smart Wallet Balance</label>
             <span class="text-success">₹<?php echo e(number_format($smartWalletBalance ?? 0, 2)); ?></span>
+        </div>
+        <div class="info-box">
+            <label>Locked Wallet Balance</label>
+            <span class="text-danger">₹<?php echo e(number_format($lockedWalletBalance ?? 0, 2)); ?></span>
         </div>
     </div>
 
@@ -268,7 +276,7 @@
                         <td><?php echo e(strtoupper($pay->upi_app ?? '-')); ?></td>
                         <td>
                             <?php if($pay->qr_code): ?>
-                                <img src="<?php echo e(asset('public/storage/'.$pay->qr_code)); ?>"
+                                <img src="<?php echo e(asset('storage/'.$pay->qr_code)); ?>"
                                      style="width:36px;height:36px;object-fit:contain;border:1px solid #e9ecef;border-radius:5px;">
                             <?php else: ?>
                                 <span style="color:#adb5bd;font-size:11px;">No QR</span>
@@ -335,6 +343,65 @@
                     <?php $__empty_1 = true; $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $txn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr>
                         <td style="color:#6c757d;"><?php echo e($i + 1); ?></td>
+                        <td><?php echo e($txn->action); ?></td>
+                        <td style="font-weight:600;">
+                            <?php if(strtolower($txn->type) === 'credit'): ?>
+                                <span class="text-success">+₹<?php echo e(number_format($txn->amount, 2)); ?></span>
+                            <?php else: ?>
+                                <span class="text-danger">-₹<?php echo e(number_format($txn->amount, 2)); ?></span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if(strtolower($txn->type) === 'credit'): ?>
+                                <span class="badge-credit">Credit</span>
+                            <?php else: ?>
+                                <span class="badge-debit">Debit</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if($txn->status == 1): ?>
+                                <span class="badge-success-status">Success</span>
+                            <?php else: ?>
+                                <span style="background:#f3f4f6;color:#6b7280;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;">Pending</span>
+                            <?php endif; ?>
+                        </td>
+                        <td style="color:#6c757d;white-space:nowrap;">
+                            <?php echo e(\Carbon\Carbon::parse($txn->created_at)->format('d M Y, h:i A')); ?>
+
+                        </td>
+                    </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="bi bi-inbox" style="font-size:36px;opacity:.3;display:block;margin-bottom:10px;"></i>
+                                <p>No transactions found for <strong><?php echo e($member->memberID); ?></strong></p>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="tab-panel" id="panel-lockwallet">
+    <div class="section-card">
+        <h6><i class="bi bi-clock-history me-1"></i> Lock Wallet History</h6>
+        <p class="sub">All lock wallet transactions linked to your account (<?php echo e($member->memberID); ?>)</p>
+        <div style="overflow-x:auto;">
+            <table class="txn-table" id="txnTable">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Transaction ID</th><th>Action</th><th>Amount</th><th>Type</th><th>Status</th><th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $__empty_1 = true; $__currentLoopData = $lockwalletTransactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $txn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <tr>
+                        <td style="color:#6c757d;"><?php echo e($i + 1); ?></td>
+                        <td><strong><?php echo e($txn->transaction_id); ?></strong></td>
                         <td><?php echo e($txn->action); ?></td>
                         <td style="font-weight:600;">
                             <?php if(strtolower($txn->type) === 'credit'): ?>
@@ -708,13 +775,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof $ !== 'undefined' && $.fn.DataTable && hasTxn) {
         $('#txnTable').DataTable({
             pageLength: 10,
-            order: [[5, 'desc']],
+            // order: [[5, 'desc']],
             dom: 'Bfrtip',
             buttons: ['excel', 'pdf', 'print'],
             language: { search: 'Search transactions:', lengthMenu: 'Show _MENU_ entries' }
         });
     }
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.hash === '#lockwallet') {
+        switchTab('lockwallet');
+    }
+    if (window.location.hash === '#transaction') {
+        switchTab('transaction');
+    }
+});
+
 </script>
 
 <?php $__env->stopSection(); ?>

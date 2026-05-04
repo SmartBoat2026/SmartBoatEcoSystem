@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\ManageReport;
 use App\Models\Transaction;
 use App\Models\MemberPaymentDetail;
+use App\Models\LockWalletBalance;
 
 class MemberController extends Controller
 {
@@ -93,7 +94,10 @@ class MemberController extends Controller
         ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
 
     $smartWalletBalance = $creditTotal - $debitTotal;
+    $lockedWalletBalance = LockWalletBalance::where('member_id', $member->member_id)->where('status', 1)->sum('amount');
+    $lockwalletTransactions = LockWalletBalance::where('member_id', $member->member_id)->where('status', 1)->orderBy('created_at', 'desc')->get();
 
+       
     // Fetch ALL payment records (not just first)
     $memberPayments = MemberPaymentDetail::where('member_id', $memberId)
         ->orderBy('id', 'desc')
@@ -102,8 +106,9 @@ class MemberController extends Controller
     return view('member.profile', compact(
         'member',
         'smartWalletBalance',
+        'lockedWalletBalance',
         'transactions',
-        'memberPayments'   // <-- changed from $memberPayment to $memberPayments
+        'memberPayments','lockwalletTransactions'   // <-- changed from $memberPayment to $memberPayments
     ));
 }
 

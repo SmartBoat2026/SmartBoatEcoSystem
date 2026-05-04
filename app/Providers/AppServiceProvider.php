@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Blade;
 use App\Support\AdminPanelAccess;
+use App\Models\ManageReport;
+use App\Models\LockWalletBalance;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,8 +31,12 @@ class AppServiceProvider extends ServiceProvider
                 $balance = DB::table('manage_reports')
                     ->where('member_id', session('member_id'))
                     ->value('smart_wallet_balance') ?? 0;
+                $lockedBalance = LockWalletBalance::where('member_id', session('member_id'))
+                                        ->where('status', 1)
+                                        ->sum('amount');
 
                 $view->with('smartWalletBalance', $balance);
+                $view->with('lockedWalletBalance', $lockedBalance);
             }
         });
     }

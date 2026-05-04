@@ -161,6 +161,9 @@
     <button class="tab-btn" onclick="switchTab('transaction')" id="tab-transaction">
         <i class="bi bi-clock-history"></i> Transaction Details
     </button>
+    <button class="tab-btn" onclick="switchTab('lockwallet')" id="tab-lockwallet">
+        <i class="bi bi-lock"></i> Lock Wallet Balance
+    </button>
 </div>
 
 {{-- ══════════════════ TAB 1 — PROFILE ══════════════════ --}}
@@ -175,6 +178,7 @@
                 <span class="psb">Smart Points: {{ number_format($member->smart_point, 4) }}</span>
                 <span class="psb">Smart Qty: {{ $member->smart_quanity ?: '0.0000' }}</span>
                 <span class="psb green">₹{{ number_format($smartWalletBalance ?? 0, 2) }} Wallet</span>
+                <span class="psb " style="background:#fee2e2;color:#991b1b;">₹{{ number_format($lockedWalletBalance ?? 0, 2) }} Locked</span>
             </div>
         </div>
     </div>
@@ -196,6 +200,10 @@
         <div class="info-box">
             <label>Smart Wallet Balance</label>
             <span class="text-success">₹{{ number_format($smartWalletBalance ?? 0, 2) }}</span>
+        </div>
+        <div class="info-box">
+            <label>Locked Wallet Balance</label>
+            <span class="text-danger">₹{{ number_format($lockedWalletBalance ?? 0, 2) }}</span>
         </div>
     </div>
 
@@ -337,6 +345,64 @@
                     @forelse($transactions as $i => $txn)
                     <tr>
                         <td style="color:#6c757d;">{{ $i + 1 }}</td>
+                        <td>{{ $txn->action }}</td>
+                        <td style="font-weight:600;">
+                            @if(strtolower($txn->type) === 'credit')
+                                <span class="text-success">+₹{{ number_format($txn->amount, 2) }}</span>
+                            @else
+                                <span class="text-danger">-₹{{ number_format($txn->amount, 2) }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if(strtolower($txn->type) === 'credit')
+                                <span class="badge-credit">Credit</span>
+                            @else
+                                <span class="badge-debit">Debit</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($txn->status == 1)
+                                <span class="badge-success-status">Success</span>
+                            @else
+                                <span style="background:#f3f4f6;color:#6b7280;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;">Pending</span>
+                            @endif
+                        </td>
+                        <td style="color:#6c757d;white-space:nowrap;">
+                            {{ \Carbon\Carbon::parse($txn->created_at)->format('d M Y, h:i A') }}
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="bi bi-inbox" style="font-size:36px;opacity:.3;display:block;margin-bottom:10px;"></i>
+                                <p>No transactions found for <strong>{{ $member->memberID }}</strong></p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{-- ══════════════════ TAB 4 — Lock Wallet Balance ══════════════════ --}}
+<div class="tab-panel" id="panel-lockwallet">
+    <div class="section-card">
+        <h6><i class="bi bi-clock-history me-1"></i> Lock Wallet History</h6>
+        <p class="sub">All lock wallet transactions linked to your account ({{ $member->memberID }})</p>
+        <div style="overflow-x:auto;">
+            <table class="txn-table" id="txnTable">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Transaction ID</th><th>Action</th><th>Amount</th><th>Type</th><th>Status</th><th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($lockwalletTransactions as $i => $txn)
+                    <tr>
+                        <td style="color:#6c757d;">{{ $i + 1 }}</td>
+                        <td><strong>{{ $txn->transaction_id }}</strong></td>
                         <td>{{ $txn->action }}</td>
                         <td style="font-weight:600;">
                             @if(strtolower($txn->type) === 'credit')
@@ -709,13 +775,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof $ !== 'undefined' && $.fn.DataTable && hasTxn) {
         $('#txnTable').DataTable({
             pageLength: 10,
-            order: [[5, 'desc']],
+            // order: [[5, 'desc']],
             dom: 'Bfrtip',
             buttons: ['excel', 'pdf', 'print'],
             language: { search: 'Search transactions:', lengthMenu: 'Show _MENU_ entries' }
         });
     }
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.hash === '#lockwallet') {
+        switchTab('lockwallet');
+    }
+    if (window.location.hash === '#transaction') {
+        switchTab('transaction');
+    }
+});
+
 </script>
 
 @endsection

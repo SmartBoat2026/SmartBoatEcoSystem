@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;   // ← ADD THIS LINE
 use App\Models\ManageReport;
 use App\Models\Transaction;
+use App\Models\LockWalletBalance;
 
 class MemberController extends Controller
 {
@@ -42,8 +43,7 @@ class MemberController extends Controller
             return redirect('/login')->with('status', 'Session expired. Please login again.');
         }
 
-        $transactions = Transaction::where('member_id', $member->memberID)
-            ->orWhere('added_by_id', $member->member_id)
+        $transactions = Transaction::where('member_id', $member->memberID)->where('status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -58,8 +58,10 @@ class MemberController extends Controller
             ->sum(DB::raw('CAST(amount AS DECIMAL(10,2))'));
 
         $smartWalletBalance = $creditTotal - $debitTotal;
+        $lockedWalletBalance = LockWalletBalance::where('member_id', $member->member_id)->where('status', 1)->sum('amount');
+        $lockwalletTransactions = LockWalletBalance::where('member_id', $member->member_id)->where('status', 1)->orderBy('created_at', 'desc')->get();
 
-        return view('member.profile', compact('member', 'smartWalletBalance', 'transactions'));
+        return view('member.profile', compact('member', 'smartWalletBalance', 'lockedWalletBalance', 'transactions', 'lockwalletTransactions'));
     }
 
     // ─── Member Logout ────────────────────────────────────────────────────────
