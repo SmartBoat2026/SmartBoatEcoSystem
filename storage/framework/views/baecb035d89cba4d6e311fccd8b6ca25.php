@@ -7,6 +7,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo e(asset('admin/assets/images/favicon.ico')); ?>">
+    <link rel="shortcut icon" href="<?php echo e(asset('public/admin/assets/images/favicon.ico')); ?>">
 
     <!-- CSS -->
     <link href="<?php echo e(asset('admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet">
